@@ -1,0 +1,67 @@
+<nav>
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="bg_shadow"></div>
+            <div class = "sidebar_inner">
+                <div class = "menu_close">
+                    <i class="far fa-window-close"></i>
+                </div>
+                <div class="reactor_info">
+                        <p class ="reactor_name">BioProcess TEA Calculator</p>
+                        <hr>
+                </div>
+                 <ul class="sidebar_menu">
+
+
+                     <% if (user){%>
+                     <li>
+                            <a href="/profile">
+                                <div class="icon"><i class="far fa-user"></i></i></div>
+                                <div class="title">Profile</div>
+                            </a>
+                     </li>
+                     <%}%>
+
+                     <li>
+                            <a href="/tutorials_user">
+                                <div class="icon"><i class="fas fa-chalkboard-teacher"></i></i></div>
+                                <div class="title">Tutorials</div>
+                            </a>
+                     </li>
+                      <li>
+                            <a href="/blog/blogs">
+                                <div class="icon"><i class="fab fa-microblog"></i></div>
+                                <div class="title">Discussion</div>
+                            </a>
+                     </li>
+                     <li>
+                          <a href="/calculator/tea_log">
+                              <div class="icon"><i class="fas fa-list-ol"></i></div>
+                              <div class="title">TEA History</div>
+                        </a>
+                     </li>
+                     <br>
+                     <hr>
+                     <li>
+                        <a href="/calculator">
+                            <div class="icon"><i class="fas fa-calculator"></i></div>
+                            <div class="title">Calculator</div>
+                      </a>
+                   </li>
+ 
+                 </ul>
+                 <div class="logout_btn">
+                    <a href="/auth/logout" class="btn">Logout</a>
+                 </div>
+            </div>
+         </div>
+    </div>
+        <div class="top_navbar">
+            <div class="hamburger">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </div>
+             <div class="user_tn">
+                 <a href="/profile">
+                       <div class="icon"><img src="<%= user.thumbnail %>" width="40" height="40"></div>
+                  </a>
+            </div>

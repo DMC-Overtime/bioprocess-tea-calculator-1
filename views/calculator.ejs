@@ -1,0 +1,550 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name ="viewport" content = "width=device-width, initial-scale=1.0">
+    <title>BioProcess TEA </title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/bca1a6b04a.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".hamburger").click(function(){
+                $(".wrapper").addClass("active")
+            });
+            $(".menu_close").click(function(){
+                $(".wrapper").removeClass("active")
+            });
+        });
+    </script>
+</head>
+
+<body>
+<nav>
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="bg_shadow"></div>
+            <div class = "sidebar_inner">
+                <div class = "menu_close">
+                    <i class="far fa-window-close"></i>
+                </div>
+                <div class="reactor_info">
+                        <p class ="reactor_name">BioProcess TEA Calculator</p>
+                        <hr>
+                </div>
+                 <ul class="sidebar_menu">
+
+
+                     <li>
+                            <a href="/profile">
+                                <div class="icon"><i class="far fa-user"></i></i></div>
+                                <div class="title">Profile</div>
+                            </a>
+                     </li>
+
+
+                     <li>
+                            <a href="/tutorials_user">
+                                <div class="icon"><i class="fas fa-chalkboard-teacher"></i></i></div>
+                                <div class="title">Tutorials</div>
+                            </a>
+                     </li>
+                      <li>
+                            <a href="/blog/blogs">
+                                <div class="icon"><i class="fab fa-microblog"></i></i></div>
+                                <div class="title">Discussion</div>
+                            </a>
+                     </li>
+                     <li>
+                          <a href="/calculator/tea_log">
+                              <div class="icon"><i class="fas fa-list-ol"></i></div>
+                              <div class="title">TEA History</div>
+                        </a>
+                     </li>
+                     <br>
+                     <hr>
+                     <li>
+                        <a href="/calculator">
+                            <div class="icon"><i class="fas fa-calculator"></i></div>
+                            <div class="title">Calculator</div>
+                      </a>
+                      </li>
+                      <hr>
+
+                           <li class="nav-item">
+                                <a>
+                                  <img src="/molecule2.svg" height="40", width="40">
+                                  <div class="title">Chemical Inputs</div>
+                                </a>
+                                <div class="slidecontainer">
+                                    <div class ="title"></div>
+                                    <div class ="chemicalInput">
+                                    <form action="/action_page.php">
+                                      <label for="Name" style="color:#2176DA">Name: </label>
+                                      <input type="text"  id="ChemicalName"  maxlength="18" size="20" placeholder="1,3 Propanediol">
+                                      <br><br>
+                                      <label for="C" style="color:#2176DA">C: </label>
+                                      <input id="C" type="number" value="3" min="0" max ="100">
+                                      <br><br>
+                                      <label for="H" style="color:#2176DA">H: </label>
+                                      <input id="H" type="number" value="8" min="0" max ="100">
+                                      <br><br>
+                                      <label for="O" style="color:#2176DA">O: </label>
+                                      <input id="O" type="number" value="2" min="0" max ="100">
+                                      <br><br>
+                                      <label for="N" style="color:#2176DA">N: </label>
+                                      <input id="N" type="number" value="0" min="0" max ="100">
+                                      <br><br>
+                                    </form>
+                                    </div>
+                                    </div>
+                             </li>
+
+
+ <!-- Financial Inputs-->
+                         <li class="nav-item">
+                            <a>
+                              <div class="icon"><i class="fas fa-dollar-sign"></i></div>
+                              <div class="title">Financial Inputs</div>
+                            </a>
+                                  <div class="slidecontainer">
+                                     <div class ="title"></div>
+                                     <input type="range" min="1" max="100" value="30" step="1" class="slider" id="myRange6">
+                                      <div class ="title"> Margin: <span id="demo6"> </span> %</div>
+                                  </div>
+                                   <div class="slidecontainer">
+                                      <input type="range" min="1" max="25" value="20" step="1" class="slider" id="myRange7">
+                                      <div class ="title"> Payback Period: <span id="demo7"> </span> Years</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="40" value="20" step="1" class="slider" id="myRange8">
+                                    <div class ="title">Discount Rate: <span id="demo8"> </span> %</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="50" value="21" step="1" class="slider" id="myRange9">
+                                       <div class ="title"> Tax Rate: <span id="demo9"> </span> %</div>
+                                  </div>
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="100" value="60" step="1" class="slider" id="myRange10">
+                                      <div class ="title"> % Debt Financed: <span id="demo10"> </span> %</div>
+                                  </div>
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="20" value="8" step="1" class="slider" id="myRange11">
+                                    <div class ="title">Debt Interest Rate: <span id="demo11"> </span> %</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="22" value="15" step="1" class="slider" id="myRange12">
+                                       <div class ="title"> Loan Term: <span id="demo12"> </span> Years</div>
+                                  </div>
+                          </li>
+
+<!-- Plant Level Inputs-->
+                         <li class="nav-item">
+                            <a>
+                              <div class="icon"><i class="fas fa-fw fa-wrench"></i></div>
+                              <div class="title">Plant Level Inputs</div>
+                            </a>
+                                  <div class="slidecontainer">
+                                     <div class ="title"></div>
+                                     <input type="range" min="1" max="100" value="55" step="1" class="slider" id="myRange13">
+                                      <div class ="title"> Capacity: <span id="demo13"> </span> kta</div>
+                                  </div>
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="100" value="90" step="1" class="slider" id="myRange15">
+                                    <div class ="title">Annual Uptime: <span id="demo15"> </span> %</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="100" value="95" step="1" class="slider" id="myRange16">
+                                       <div class ="title"> Batches "On Spec": <span id="demo16"> </span> %</div>
+                                  </div>
+                                  <div class="slidecontainer">
+                                        <div class ="title"></div>
+                                        &nbsp&nbsp&nbsp;<input type="radio" color="#2176DA" id="200000L" name="reactorsize" value="200000">
+                                        <label class ="radiolabel" for="200000L" >200</label>
+                                        <input type="radio" color="#2176DA" id="500000L" name="reactorsize" value="500000">
+                                        <label class ="radiolabel" for="500000L" >500</label>
+                                        <input type="radio" color="#2176DA" id="1000000L" name="reactorsize" value="1000000" checked="">
+                                        <label class ="radiolabel" for="1000000L" active>1,000</label>
+                                        <div class ="title"> Main Fermenter Size: <span id="demo16"> </span> x1000L</div>
+                                  </div>
+
+                          </li>
+
+<!-- Raw Materials -->
+                         <li class="nav-item">
+                            <a>
+                              <div class="icon"><i class="fas fa-cube"></i></div>
+                              <div class="title">Raw Materials</div>
+                            </a>
+                                  <div class="slidecontainer">
+                                     <div class ="title"></div>
+                                     <input type="range" min=".1" max=".70" value=".14" step=".01" class="slider" id="myRange17">
+                                      <div class ="title"> Glucose: $<span id="demo17"> </span>/lb</div>
+                                  </div>
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="0.40" value="0.12" step="0.01" class="slider" id="myRange18">
+                                      <div class ="title"> Ammonia: $ <span id="demo18"> </span> /lb</div>
+                                  </div>
+                                   <div class="slidecontainer">
+                                      <input type="range" min="10" max="200" value="94" step="1" class="slider" id="myRange19">
+                                       <div class ="title"> Sulfuric Acid: $<span id="demo19"> </span> /ton</div>
+                                  </div>
+
+                                 <div class="slidecontainer">
+                                      <input type="range"min="0" max="10" value="3.10" step ="0.1" class="slider" id="myRange20">
+                                    <div class ="title">Natural Gas: $ <span id="demo20"> </span> /MMBtu</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="0.30" value="0.11" step ="0.01" class="slider" id="myRange21">
+                                       <div class ="title"> Electricity: $<span id="demo21"> </span> /KWh</div>
+                                  </div>
+                                  <div class="slidecontainer">
+                                      <input type="range" min="1" max="1200" value="603" step ="1"  class="slider" id="myRange22">
+                                       <div class ="title"> CEPCI: <span id="demo22"> </span></div>
+                                  </div>
+                          </li>
+<!-- Fermentation Inputs-->
+                         <li class="nav-item">
+                            <a>
+                              <div class="icon"><i class="fas fa-bacterium"></i></i></div>
+                              <div class="title">Fermentation Inputs</div>
+                            </a>
+                                  <div class="slidecontainer">
+                                     <div class ="title"></div>
+                                     <input type="range" min="1" max="20" value="3" step="1" class="slider" id="myRange0">
+                                      <div class ="title"> Ave. Volumteric Rate: <span id="demo0"> </span>g/L-hr</div>
+                                  </div>
+                                   <div class="slidecontainer">
+                                      <input type="range" min="10" max="400" value="300" step="1" class="slider" id="myRange1">
+                                      <div class ="title"> Titer: <span id="demo1"> </span> g/L</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="98" value="90" step="1" class="slider" id="myRange2">
+                                    <div class ="title">Yield: <span id="demo2"> </span> % of Theoretical</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="40" value="20" step="1" class="slider" id="myRange3">
+                                       <div class ="title"> Turnaround Time: <span id="demo3"> </span> hours</div>
+                                  </div>
+
+                                 <div class="slidecontainer">
+                                      <input type="range" min="0" max="100" value="15" step="1" class="slider" id="myRange4">
+                                    <div class ="title">Media Cost: $<span id="demo4"> </span>/1000L</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="25" max="40" value="37" step="1" class="slider" id="myRange5">
+                                       <div class ="title"> Temperature: <span id="demo5"> </span> &degCelsius</div>
+                                  </div>
+                          </li>
+
+
+<!-- DSP Inputs-->
+                         <li class="nav-item">
+                            <a>
+                              <div class="icon"><i class="fas fa-flask"></i></div>
+                              <div class="title">DSP Assumptions</div>
+                            </a>
+
+                                   <div class="slidecontainer">
+                                   <div class ="title"></div>
+                                      <input type="range" min="1" max="100" value="95" step="1" class="slider" id="myRange14">
+                                      <div class ="title"> Overall DSP Yield: <span id="demo14"> </span> %</div>
+                                  </div>
+
+                                  <div class="slidecontainer">
+                                     <input type="range" min="1" max="99" value="25" step="1" class="slider" id="myRange23">
+                                      <div class ="title"> % of Total OPEX: <span id="demo23"> </span>%</div>
+                                  </div>
+                                   <div class="slidecontainer">
+                                      <input type="range" min="1" max="100" value="55" step="1" class="slider" id="myRange24">
+                                      <div class ="title"> % of Total CAPEX: <span id="demo24"> </span> %</div>
+                                  </div>
+                          </li>
+
+                         <li class="nav-item">
+                             <div class="logout_btn">
+                                <a href="/auth/logout" class="btn">Logout</a>
+                             </div>
+                        </li>
+                 </ul>
+
+            </div>
+         </div>
+    </div>
+        <div class="top_navbar">
+            <div class="hamburger">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </div>
+             <div class="user_tn">
+                 <a href="/profile">
+                       <div class="icon"><img src="<%= user.thumbnail %>" width="40" height="40"></div>
+                  </a>
+            </div>
+
+        <div class = "logo">
+        <a href="#">Calculator</a>
+        </div>
+        </div>
+        <div class = "main_container">
+        <div class="content">
+
+    <header><h2>&nbsp <span id="ChemicalName1"></span> TEA Details  <span id="TEST"></span><br></h2>
+    <div class ="break"><br></div>
+
+        <div class ="item">
+                <h3>Financial Results</h3>
+                    <p><br></p>
+                <div class = "output">
+                MSP: $<span id="MSP"></span>&nbsp/kg,
+                &nbsp&nbsp&nbsp&nbsp OPEX: $<span id="OPEX"></span>&nbsp/kg,
+                &nbsp&nbsp&nbsp&nbsp CAPEX: $<span id="CAPEX"></span>&nbsp/kg,
+                &nbsp&nbsp&nbsp&nbsp TCI: $<span id="TCI"></span>&nbspMillion</div>
+                <div class = "output">
+                NPV: $<span id="NPV"></span>&nbspMillion,
+                &nbsp&nbsp&nbsp&nbsp ROI: <span id="ROI"></span>&nbsp%,
+                &nbsp&nbsp&nbsp&nbsp IRR: $<span id="IRR"></span>&nbspMillion</div>
+        </div>
+        <div class ="break"><br></div>
+
+
+        <div class ="item">
+                <h3>Cumulative Cash Flow</h3>
+                    <p><br></p>
+                    <div class = "output">
+                    <canvas id="myProFormaChart"></canvas>
+                    </div>
+        </div>
+        <div class ="break"><br></div>
+
+        <div class ="item">
+                <h3>Chemistry</h3>
+                    <p><br></p>
+                <div class = "output">
+                Product : <span id="ChemicalName2"></span>,
+                &nbsp&nbsp&nbsp&nbsp Molecular Weight: <span id="MW"></span>&nbsp(g/mole),
+                &nbsp&nbsp&nbsp&nbsp Theoretical Yield: <span id="theorYield"></span>&nbsp(g Product/g Glucose)</div>
+        </div>
+        <div class ="break"><br></div>
+
+
+        <div class ="item">
+                <h3>Conversion: &nbsp&nbsp&nbsp <span id="A"></span> C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + <span id="B"></span> NH<sub>3</sub> + <span id="D"></span> O<sub>2</sub> &rarr;  <span id="E"></span> C<sub><span id="Cnumber"></span></sub>H<sub><span id="Hnumber"></span></sub>O<sub><span id="Onumber"></span></sub>N<sub><span id="Nnumber"></span></sub> + <span id="F"></span> H<sub>2</sub>O + <span id="G"></span> CO<sub>2</sub></h3><br>
+                <p>* If NaN appears, the product as entered cannot be balanced. </p>
+        </div>
+        <div class ="break"><br></div>
+
+        <div class ="item">
+                <h3>Process Results</h3>
+                    <p><br></p>
+                <div class = "output">
+                Optimal Annual Capacity: <span id="plantCapacity"></span>&nbsp(kta)
+                </div>
+                <div class = "output">
+                Rate: <span id="Rate"></span>&nbsp(g/L-hr),
+                &nbsp&nbsp&nbsp&nbsp Titer: <span id="Titer"></span>&nbsp(g/L),
+                &nbsp&nbsp&nbsp&nbsp Fermentation Yield: <span id="fermYield"></span>&nbsp(g Product/g Glucose)</div>
+                <div class = "output">
+                Final Biomass Level: <span id="finalBiomass"></span>&nbsp(gCDW/L),
+                &nbsp&nbsp&nbsp&nbsp Specific Rate: <span id="specificRate"></span>&nbsp(g/gCDW-hr),
+                &nbsp&nbsp&nbsp&nbsp Fermentation Time: <span id="fermTime"></span>&nbsp(hrs)</div>
+                <div class = "output">
+                DSP Yield: <span id="dspYield"></span>&nbsp (g Purified Product /g Produced via Fermentation)</div>
+                <div class = "output">
+                Overall Yield: <span id="overallYield"></span>&nbsp (g Purified Product /g Glucose)</div>
+        </div>
+        <div class ="break"><br></div>
+
+        <div class ="item">
+                <h3>Fermentation Time Course</h3>
+                    <p><br></p>
+                <div class = "output">
+                <canvas id="myFermChart"></canvas>
+                </div>
+        </div>
+        <div class ="break"><br></div>
+
+
+        <div class ="item2">
+                <h3>OPEX Breakdown</h3>
+                <div class=output">
+                <canvas id="myOpexPieChart"></canvas>
+                </div>
+        </div>
+
+        <div class ="item2">
+                <h3>CAPEX Breakdown</h3>
+                <div class="output" >
+                <canvas id="myCapexPieChart"></canvas>
+                </div>
+        </div>
+        <div class ="break"><br></div>
+
+        <div class ="break"><br></div>
+
+
+    </div>
+
+<br>
+</div>
+<br>
+              <br>
+            <div class="form">
+            <form action="/calculator/tea_log" method="POST">
+            <input type="hidden" id="uid" value="<%= user %>" name="uid" required><br><br>
+            <input type="hidden" class="blogtitle" id="title" name="title" value ='' required><br><br>
+            <input type="hidden" class="blogsubject" id="snippet" name="snippet" value ='' required><br><br>
+            <input type="hidden" class="blogsubject" id="body" name="body" value ='' required><br><br>
+            <div class ="submit"> <button class="submit-btn">Save TEA</button></div>
+            </form>
+
+
+
+<%- include('./partials/nav2.ejs') %>
+
+<!--Scripts-->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="http://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <script src="/js/balanceEquation.js"></script>
+  <script src="/js/UpdateChemistry.js"></script>
+  <script src="/js/calculateLoanPayments.js"></script>
+  <script src="/js/FermentationTimeCourse.js"></script>
+  <script src="/js/FermChart.js"></script>
+  <script src="/js/fermUpdater.js"></script>
+  <script src="/js/getVesselSize.js"></script>
+  <script src="/js/updateVesselSize.js"></script>
+  <script src="/js/BioprocessOpexCapex.js"></script>
+  <script src="/js/compute_loan_payments.js"></script>
+  <script src="/js/BOO_DCF.js"></script>
+  <script src="/js/ProFormaChart.js"></script>
+  <script src="/js/OpexPieChart.js"></script>
+  <script src="/js/OpexTornadoChart.js"></script>
+  <script src="/js/OpexTornadoChartUpdater.js"></script>
+  <script src="/js/CapexPieChart.js"></script>
+  <script src="/js/CapexPieChartUpdater.js"></script>
+  <script src="/js/CapexTornadoChart.js"></script>
+  <script src="/js/CapexTornadoChartUpdater.js"></script>
+  <!-- Dynamic Scripts for Process Inputs-->
+
+
+<script>
+<!--Initialize Inner HTML Values for 1,3, PDO Base Model-->
+  document.getElementById("ChemicalName1").innerHTML = '1,3 Propanediol';
+  document.getElementById("MSP").innerHTML = 1.50;
+  document.getElementById("OPEX").innerHTML = 1.01;
+  document.getElementById("CAPEX").innerHTML = 1.05;
+  document.getElementById("NPV").innerHTML = 120;
+  document.getElementById("IRR").innerHTML = 25;
+  document.getElementById("TCI").innerHTML = 82;
+  document.getElementById("ChemicalName2").innerHTML = '1,3 Propanediol';
+  document.getElementById("MW").innerHTML = 76.09;
+  document.getElementById("theorYield").innerHTML = 0.634;
+  document.getElementById("Cnumber").innerHTML = 3;
+  document.getElementById("Hnumber").innerHTML = 8;
+  document.getElementById("Onumber").innerHTML = 2;
+  document.getElementById("Nnumber").innerHTML = 0;
+  document.getElementById("dspYield").innerHTML = 0.95;
+  document.getElementById("plantCapacity").innerHTML = 15;
+  document.getElementById("A").innerHTML = 1; // Glucose coefficient
+  document.getElementById("B").innerHTML = 0; // NH3 coefficient
+  document.getElementById("D").innerHTML = 0; // O2 coefficient ( C is already used)
+  document.getElementById("E").innerHTML = 1.5; // Product coefficient ( C is already used)
+  document.getElementById("F").innerHTML = 0; // Water coefficient ( C is already used)
+  document.getElementById("G").innerHTML = 1.5; // CO2 coefficient ( C is already used)
+  UpdateChemistry();
+  Input = [3,300,90,20,15,37,30,20,20,21,60,8,15,55,95,90,95,0.14,0.12,94,3.10,0.11,603,25,55];
+  theorYieldGlu=parseFloat(document.getElementById("theorYield").innerHTML);
+  updateVesselSize();
+  fermUpdater(Input,theorYieldGlu);
+  time =[];
+  netCashFlow =[];
+  time = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+  netCashFlow = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+  var myProFormaChart = ProFormaChart(time,netCashFlow);
+  //var myOpexPieChart = OpexPieChart(bioprocessOutputs);
+ // OpexPieChartUpdater();
+ //// OpexTornadoChartUpdater();
+ // CapexPieChartUpdater();
+ // CapexTornadoChartUpdater();
+
+</script>
+
+<script>
+     UpdateChemistry();
+</script>
+
+<script>
+     updateVesselSize();
+</script>
+
+<script>
+  slider = [];
+  pageInput =[];
+  LowInput =[];
+  HighInput=[];
+  for(let i=0; i< 25; i++){
+    slider[i] = document.getElementById("myRange"+i);
+    pageInput[i] = document.getElementById("demo"+i);
+    pageInput[i].innerHTML = slider[i].value;
+    slider[i].oninput = function() {
+      pageInput[i].innerHTML = this.value;
+      Input[i]= parseFloat(pageInput[i].innerHTML);
+      UpdateChemistry();
+      vesselSize = updateVesselSize();
+      theorYieldGlu=parseFloat(document.getElementById("theorYield").innerHTML);
+      MWValue = parseFloat(document.getElementById("MW").innerHTML);
+      prodCoeff=parseFloat(document.getElementById("E").innerHTML);
+      ammoniaCoeff=parseFloat(document.getElementById("B").innerHTML);
+      o2Coeff =parseFloat(document.getElementById("B").innerHTML);
+      productYieldCoefficientNH3 = (MWValue*prodCoeff)/(ammoniaCoeff*17.031);
+      productYieldCoefficientO2 = (MWValue*prodCoeff)/(o2Coeff*32);
+      fermUpdater(Input,theorYieldGlu);
+      bioprocessOutputs = BioprocessOpexCapex(Input,theorYieldGlu,productYieldCoefficientNH3,productYieldCoefficientO2,vesselSize);
+
+      // bioprocessOutputs = [annualOpex, opexperkg,totaCapitalInvestment, capexperkg, plantCapacity];
+      // Output Bioprocess Results to Page
+        document.getElementById("OPEX").innerHTML = bioprocessOutputs.opexperkg.toFixed(2);
+        document.getElementById("CAPEX").innerHTML = bioprocessOutputs.capexperkg.toFixed(2);
+        document.getElementById("TCI").innerHTML = (bioprocessOutputs.totaCapitalInvestment/1000000).toFixed(2);
+        document.getElementById("plantCapacity").innerHTML = (bioprocessOutputs.plantCapacity/1000000).toFixed(2);;
+        DCFOutput= BOO_DCF(Input,bioprocessOutputs);
+        document.getElementById("MSP").innerHTML = (DCFOutput.MSP).toFixed(2);
+        document.getElementById("NPV").innerHTML = (DCFOutput.NPV/1000000).toFixed(2);
+        document.getElementById("ROI").innerHTML = ((DCFOutput.ROI)*100).toFixed(2);
+        document.getElementById("IRR").innerHTML = 'TBD';
+        time = DCFOutput.time;
+        cumCashFlow = DCFOutput.cumCashFlow;
+        var myProFormaChart = ProFormaChart(time,cumCashFlow);
+        var myOpexPieChart = OpexPieChart(bioprocessOutputs);
+        var myCapexPieChart = CapexPieChart(bioprocessOutputs);
+
+      //Fill in Hidden Form for Submission
+
+        //document.getElementById("form").value = Input[0] ;
+       // document.getElementById("form").value = Input[0] ;
+       // document.getElementById("snippet").value = Input[1];
+       // document.getElementById("body").value = Input[2];
+       // document.getElementById("form").value = Input[3] ;
+       // document.getElementById("snippet").value = Input[4];
+       // document.getElementById("body").value = Input[5];
+       // document.getElementById("form").value = Input[6] ;
+       // document.getElementById("snippet").value = Input[7];
+      //  document.getElementById("body").value = Input[8];
+
+
+
+     }
+  }
+</script>
+
+</body>
+</html>

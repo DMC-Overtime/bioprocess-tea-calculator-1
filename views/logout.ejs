@@ -1,0 +1,19 @@
+<html lang="en">
+<%- include('../partials/header.ejs') %>
+<body>
+<%- include('../partials/nav1_user.ejs') %>
+<h1> <%= title %>  </h1>
+<ul>
+<li><a href="/oauth/logout">Logout</a><li>
+<li><a href="/oauth/login">Login</a><li>
+<li><a href="/main">Main</a><li>
+</ul>
+<header>
+<h1> Login using... </h1>
+</header>
+<main>
+<a class="google-btn" href="/oauth/google">Google+</a>
+</main>
+<%- include('../partials/footer.ejs') %>
+</body>
+</html>

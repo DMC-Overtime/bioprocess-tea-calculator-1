@@ -1,0 +1,44 @@
+<html lang="en">
+<%- include('./partials/header.ejs') %>
+<body>
+<%- include('./partials/nav1_user_calc.ejs') %>
+
+        <div class = "logo">
+        <a href="#">TEA Details</a>
+        </div>
+        </div>
+        <div class = "main_container">
+        <div class="content">
+
+    <header><h2>&nbsp TEA Details<br></h2>
+    <div class ="break"><br></div>
+    <div class ="item">
+
+    <div class ="item">
+    <button class="submit-btn">Export Data</button>
+    <div class="process content">
+    <h2><%=pid.id %></h2>
+    <div class="process details">
+    <p><%=pid.strain %></p>
+    </div>
+    <a class="delete" data-doc="<%= pid._id %>">delete</a>
+    </div>
+
+    </div>
+
+<br>
+</div>
+<br>
+<%- include('./partials/nav2.ejs') %>
+ <script>
+    const trashcan = documents.querySelector('a.delete');
+    trashcan.addEventListener('click',(e) => {
+        const endpoint = `/processes/$(trashcan.dataset.doc)`;
+        fetch(endpoint,{
+        method: 'DELETE'
+        }).then((response) => response.json()).then((data)) => window.location.href=data.redirect).catch(err => console.log(err));
+    })
+ </script>
+
+</body>
+</html>

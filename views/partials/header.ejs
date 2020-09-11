@@ -1,0 +1,29 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name ="viewport" content = "width=device-width, initial-scale=1.0">
+    <title>BioProcess TEA </title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/bca1a6b04a.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".sidebar_menu li").click(function(){
+                if ($(this).hasClass("active")) {
+                    $(this).removeClass("active");
+                }
+                else {
+                    $(".sidebar_menu li").removeClass("active");
+                    $(this).addClass("active");
+                }
+            });
+            $(".hamburger").click(function(){
+                $(".wrapper").addClass("active")
+            });
+            $(".menu_close").click(function(){
+                $(".wrapper").removeClass("active")
+            });
+        });
+    </script>
+
+
+</head>

@@ -1,0 +1,641 @@
+<nav>
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="bg_shadow"></div>
+            <div class = "sidebar_inner">
+                <div class = "menu_close">
+                    <i class="far fa-window-close"></i>
+                </div>
+                <div class="reactor_info">
+                        <p class ="reactor_name">BioProcess TEA Calculator</p>
+                        <hr>
+                </div>
+                 <ul class="sidebar_menu">
+
+
+                     <% if (user){%>
+                     <li>
+                            <a href="/profile">
+                                <div class="icon"><i class="far fa-user"></i></i></div>
+                                <div class="title">Profile</div>
+                            </a>
+                     </li>
+                     <%}%>
+
+                     <li>
+                            <a href="/tutorials_user">
+                                <div class="icon"><i class="fas fa-chalkboard-teacher"></i></i></div>
+                                <div class="title">Tutorials</div>
+                            </a>
+                     </li>
+                     <li>
+                          <a href="/calculator/tea_log">
+                              <div class="icon"><i class="fas fa-list-ol"></i></div>
+                              <div class="title">TEA History</div>
+                        </a>
+                     </li>
+                     <br>
+                     <hr>
+                     <li>
+                        <a href="/calculator">
+                            <div class="icon"><i class="fas fa-calculator"></i></div>
+                            <div class="title">Calculator</div>
+                      </a>
+                      </li>
+                      <hr>
+
+                           <li class="nav-item">
+                                <a>
+                                  <img src="/molecule2.svg" height="40", width="40">
+                                  <div class="title">Chemical Inputs</div>
+                                </a>
+                                <div class="slidecontainer">
+                                    <div class ="title"></div>
+                                    <div class ="chemicalInput">
+                                    <form action="/action_page.php">
+                                      <label for="Name" style="color:#2176DA">Name: </label>
+                                      <input type="text"  id="ChemicalName" name="ChemicalName" maxlength="18" size="20" placeholder="1,3 Propanediol">
+                                      <br><br>
+                                      <label for="C" style="color:#2176DA">C: </label>
+                                      <input id="C" type="number" value="3" min="1" max ="100">
+                                      <br><br>
+                                      <label for="H" style="color:#2176DA">H: </label>
+                                      <input id="H" type="number" value="8" min="1" max ="100">
+                                      <br><br>
+                                      <label for="O" style="color:#2176DA">O: </label>
+                                      <input id="O" type="number" value="2" min="1" max ="100">
+                                      <br><br>
+                                      <label for="N" style="color:#2176DA">N: </label>
+                                      <input id="N" type="number" value="0" min="1" max ="100">
+                                      <br><br>
+                                    </form>
+                                    </div>
+                                    </div>
+                             </li>
+
+
+ <!-- Plant Level Inputs-->
+                         <li class="nav-item">
+                            <a>
+                              <div class="icon"><i class="fas fa-dollar-sign"></i></div>
+                              <div class="title">Financial Inputs</div>
+                            </a>
+                                  <div class="slidecontainer">
+                                     <div class ="title"></div>
+                                     <input type="range" min="1" max="100" value="30" step="1" class="slider" id="myRange4">
+                                      <div class ="title"> Margin: <span id="demo4"> </span> %</div>
+                                  </div>
+                                   <div class="slidecontainer">
+                                      <input type="range" min="1" max="25" value="20" step="1" class="slider" id="myRange5">
+                                      <div class ="title"> Payback Period: <span id="demo5"> </span> Years</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="40" value="20" step="1" class="slider" id="myRange6">
+                                    <div class ="title">Discount Rate: <span id="demo6"> </span> %</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="50" value="21" step="1" class="slider" id="myRange7">
+                                       <div class ="title"> Tax Rate: <span id="demo7"> </span> %</div>
+                                  </div>
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="100" value="60" step="1" class="slider" id="myRange8">
+                                      <div class ="title"> % Debt Financed: <span id="demo8"> </span> %</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max=20" value="8" step="1" class="slider" id="myRange9">
+                                    <div class ="title">Debt Interest Rate: <span id="demo9"> </span> %</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="22" value="15" step="1" class="slider" id="myRange10">
+                                       <div class ="title"> Loan Term: <span id="demo10"> </span> Years</div>
+                                  </div>
+                          </li>
+
+<!-- Plant Level Inputs-->
+                         <li class="nav-item">
+                            <a>
+                              <div class="icon"><i class="fas fa-fw fa-wrench"></i></div>
+                              <div class="title">Plant Level Inputs</div>
+                            </a>
+                                  <div class="slidecontainer">
+                                     <div class ="title"></div>
+                                     <input type="range" min="1" max="50" value="15" step="1" class="slider" id="sliderRange11">
+                                      <div class ="title"> Capacity: <span id="demo11"> </span> kta</div>
+                                  </div>
+                                   <div class="slidecontainer">
+                                      <input type="range" min="1" max="100" value="97" step="1" class="slider" id="sliderRange12">
+                                      <div class ="title"> Overall DSP Yield: <span id="demo12"> </span> %</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="100" value="90" step="1" class="slider" id="sliderRange13">
+                                    <div class ="title">Annual Uptime: <span id="demo13"> </span> %</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="100" value="95" step="1" class="slider" id="sliderRange14">
+                                       <div class ="title"> Batches "On Spec": <span id="demo14"> </span> %</div>
+                                  </div>
+                          </li>
+
+<!-- Raw Materials -->
+                         <li class="nav-item">
+                            <a>
+                              <div class="icon"><i class="fas fa-cube"></i></div>
+                              <div class="title">Raw Materials</div>
+                            </a>
+                                  <div class="slidecontainer">
+                                     <div class ="title"></div>
+                                     <input type="range" min="1" max="50" value="15" step="1" class="slider" id="sliderRange11">
+                                      <div class ="title"> Glucose: $<span id="demo11"> </span>/lb</div>
+                                  </div>
+                                   <div class="slidecontainer">
+                                      <input type="range" min="1" max="100" value="97" step="1" class="slider" id="sliderRange12">
+                                      <div class ="title"> Ammonia: $ <span id="demo12"> </span> /lb</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="100" value="90" step="1" class="slider" id="sliderRange13">
+                                    <div class ="title">Water: $ <span id="demo13"> </span> /L</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="100" value="95" step="1" class="slider" id="sliderRange14">
+                                       <div class ="title"> Sulfuric Acid: $<span id="demo14"> </span> /ton</div>
+                                  </div>
+
+                                 <div class="slidecontainer">
+                                      <input type="range" min="0" max="100" value="90" step="1" class="slider" id="sliderRange13">
+                                    <div class ="title">Natural Gas: $ <span id="demo13"> </span> /MMBtu</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="100" value="95" step="1" class="slider" id="sliderRange14">
+                                       <div class ="title"> Electricity: $<span id="demo14"> </span> /KWh</div>
+                                  </div>
+                          </li>
+<!-- Fermentation Inputs-->
+                         <li class="nav-item">
+                            <a>
+                              <div class="icon"><i class="fas fa-bacterium"></i></i></div>
+                              <div class="title">Fermentation Inputs</div>
+                            </a>
+                                  <div class="slidecontainer">
+                                     <div class ="title"></div>
+                                     <input type="range" min="1" max="20" value="3" step="1" class="slider" id="myRange1">
+                                      <div class ="title"> Ave. Volumteric Rate: <span id="demo1"> </span>g/L-hr</div>
+                                  </div>
+                                   <div class="slidecontainer">
+                                      <input type="range" min="10" max="400" value="300" step="1" class="slider" id="myRange2">
+                                      <div class ="title"> Titer: <span id="demo2"> </span> g/L</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="100" value="90" step="1" class="slider" id="myRange3">
+                                    <div class ="title">Yield: <span id="demo3"> </span> % of Theoretical</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="40" value="20" step="1" class="slider" id="myRange4">
+                                       <div class ="title"> Turnaround Time:<span id="demo4"> </span> hours</div>
+                                  </div>
+
+                                 <div class="slidecontainer">
+                                      <input type="range" min="0" max="100" value="90" step="1" class="slider" id="myRange5">
+                                    <div class ="title">Media Cost: <span id="demo5"> </span>$/L</div>
+                                  </div>
+
+                                   <div class="slidecontainer">
+                                      <input type="range" min="0" max="100" value="95" step="1" class="slider" id="sliderRange14">
+                                       <div class ="title"> Temperature:<span id="demo14"> </span> &degCelsius</div>
+                                  </div>
+                          </li>
+
+
+<!-- DSP Inputs-->
+                         <li class="nav-item">
+                            <a>
+                              <div class="icon"><i class="fas fa-flask"></i></div>
+                              <div class="title">DSP Assumptions</div>
+                            </a>
+                                  <div class="slidecontainer">
+                                     <div class ="title"></div>
+                                     <input type="range" min="1" max="100" value="35" step="1" class="slider" id="sliderRange11">
+                                      <div class ="title"> % of Total OPEX: <span id="demo11"> </span>%</div>
+                                  </div>
+                                   <div class="slidecontainer">
+                                      <input type="range" min="1" max="100" value="50" step="1" class="slider" id="sliderRange12">
+                                      <div class ="title"> % of Total CAPEX:: <span id="demo12"> </span> %</div>
+                                  </div>
+                          </li>
+
+
+                 </ul>
+                 <div class="logout_btn">
+                    <a href="/auth/logout" class="btn">Logout</a>
+                 </div>
+            </div>
+         </div>
+    </div>
+        <div class="top_navbar">
+            <div class="hamburger">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </div>
+             <div class="user_tn">
+                 <a href="/profile">
+                       <div class="icon"><img src="<%= user.thumbnail %>" width="40" height="40"></div>
+                  </a>
+            </div>
+
+
+
+  <!--Scripts-->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link href="http://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="stylesheet">
+  <script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js" ></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+ <!-- Dynamic Scripts for Chemical Inputs-->
+  <script>
+
+  <!-- Initiate Initial Values -->
+  document.getElementById("chemicalName1").innerHTML = '1,3-Propanediol';
+  document.getElementById("chemicalName2").innerHTML = '1,3-Propanediol';
+  var textInput1 = document.getElementById("chemicalName");
+  textInput1.onkeyup= function() {
+  document.getElementById("chemicalName1").innerHTML = textInput1.value;
+  document.getElementById("chemicalName2").innerHTML = textInput1.value;
+}
+ </script>
+
+
+   <!-- Dynamic Scripts for Process Inputs-->
+
+ <script>
+
+  <!-- Initiate Initial Values -->
+ // document.getElementById("chemicalName1").innerHTML = '1,3-Propanediol';
+ // document.getElementById("chemicalName2").innerHTML = '1,3-Propanediol';
+  document.getElementById("MSP").innerHTML = 1.50;
+  document.getElementById("OPEX").innerHTML = 1.01;
+  document.getElementById("CAPEX").innerHTML = 1.05;
+  document.getElementById("NPV").innerHTML = 120;
+  document.getElementById("IRR").innerHTML = 25;
+  document.getElementById("TCI").innerHTML = 82;
+
+  <!-- Initiate Initial Values -->
+
+  var testCalc =1;
+  var slider1 = document.getElementById("myRange1");
+  var output1 = document.getElementById("demo1");
+  output1.innerHTML = slider1.value;
+  var margin = Number(slider1.value);
+  slider1.oninput = function() {
+    output1.innerHTML = this.value;
+    testCalc = Number(slider1.value) + Number(slider2.value);
+    document.getElementById("MSP").innerHTML = testCalc;
+    Chart2.data.datasets[0].data[0] = Number(slider1.value);
+    Chart2.data.datasets[0].data[7] = testCalc;
+    Chart2.update();
+}
+  var slider2 = document.getElementById("myRange2");
+  var output2 = document.getElementById("demo2");
+  output2.innerHTML = slider2.value;
+  var paybackPeriod = Number(slider2.value);
+  slider2.oninput = function() {
+    output2.innerHTML = this.value;
+    testCalc = Number(slider1.value) + Number(slider2.value);
+    document.getElementById("OPEX").innerHTML = testCalc;
+    Chart2.data.datasets[0].data[1] = Number(slider2.value);
+    Chart2.data.datasets[0].data[7] = testCalc;
+    Chart2.update();
+  }
+
+  var slider3 = document.getElementById("myRange3");
+  var output3 = document.getElementById("demo3");
+  output3.innerHTML = slider3.value;
+  var discountRate= Number(slider3.value);
+  slider3.oninput = function() {
+    output3.innerHTML = this.value;
+    testCalc = Number(slider3.value) + Number(slider2.value);
+    document.getElementById("CAPEX").innerHTML = testCalc;
+    Chart2.data.datasets[0].data[1] = Number(slider2.value);
+    Chart2.data.datasets[0].data[7] = testCalc;
+    Chart2.update();
+  }
+  </script>
+
+  <script>
+  var slider4 = document.getElementById("myRange4");
+  var output4 = document.getElementById("demo4");
+  output4.innerHTML = slider4.value;
+  var taxRate = Number(slider4.value);
+  slider4.oninput = function() {
+    output4.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider5 = document.getElementById("myRange5");
+  var output5 = document.getElementById("demo5");
+  output5.innerHTML = slider5.value;
+  var percentFinanced = Number(slider5.value);
+  slider5.oninput = function() {
+    output5.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider6 = document.getElementById("myRange6");
+  var output6 = document.getElementById("demo6");
+  output6.innerHTML = slider6.value;
+  var debtInterest = Number(slider6.value);
+  slider6.oninput = function() {
+    output6.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider7 = document.getElementById("myRange7");
+  var output7 = document.getElementById("demo7");
+  output7.innerHTML = slider7.value;
+  var loanTerm = Number(slider7.value);
+  slider7.oninput = function() {
+    output7.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider8 = document.getElementById("myRange8");
+  var output8 = document.getElementById("demo8");
+  output8.innerHTML = slider8.value;
+  slider8.oninput = function() {
+    output8.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider9 = document.getElementById("myRange9");
+  var output9 = document.getElementById("demo9");
+  output9.innerHTML = slider9.value;
+  slider9.oninput = function() {
+    output9.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider10 = document.getElementById("myRange10");
+  var output10 = document.getElementById("demo10");
+  output10.innerHTML = slider10.value;
+  slider10.oninput = function() {
+    output10.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider11 = document.getElementById("myRange11");
+  var output11 = document.getElementById("demo11");
+  output11.innerHTML = slider11.value;
+  slider11.oninput = function() {
+    output11.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider12 = document.getElementById("myRange12");
+  var output12 = document.getElementById("demo12");
+  output12.innerHTML = slider12.value;
+  slider12.oninput = function() {
+    output12.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider13 = document.getElementById("myRange13");
+  var output13 = document.getElementById("demo13");
+  output13.innerHTML = slider13.value;
+  slider13.oninput = function() {
+    output13.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider14 = document.getElementById("myRange14");
+  var output14 = document.getElementById("demo14");
+  output14.innerHTML = slider14.value;
+  slider14.oninput = function() {
+    output14.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider15 = document.getElementById("myRange15");
+  var output15 = document.getElementById("demo15");
+  output15.innerHTML = slider15.value;
+  slider15.oninput = function() {
+    output15.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider16 = document.getElementById("myRange16");
+  var output16 = document.getElementById("demo16");
+  output16.innerHTML = slider16.value;
+  slider16.oninput = function() {
+    output16.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider17 = document.getElementById("myRange17");
+  var output17 = document.getElementById("demo17");
+  output17.innerHTML = slider17.value;
+  slider17.oninput = function() {
+    output17.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider18 = document.getElementById("myRange18");
+  var output18 = document.getElementById("demo18");
+  output18.innerHTML = slider18.value;
+  slider18.oninput = function() {
+    output18.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider19 = document.getElementById("myRange19");
+  var output19 = document.getElementById("demo19");
+  output19.innerHTML = slider19.value;
+  slider19.oninput = function() {
+    output19.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider20 = document.getElementById("myRange20");
+  var output20 = document.getElementById("demo20");
+  output20.innerHTML = slider20.value;
+  slider20.oninput = function() {
+    output20.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider21 = document.getElementById("myRange21");
+  var output21 = document.getElementById("demo21");
+  output21.innerHTML = slider21.value;
+  slider21.oninput = function() {
+    output21.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider22 = document.getElementById("myRange22");
+  var output22 = document.getElementById("demo22");
+  output22.innerHTML = slider22.value;
+  slider22.oninput = function() {
+    output22.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider23 = document.getElementById("myRange23");
+  var output23 = document.getElementById("demo23");
+  output23.innerHTML = slider23.value;
+  slider23.oninput = function() {
+  output23.innerHTML = this.value;
+  }
+  </script>
+
+  <script>
+  var slider24 = document.getElementById("myRange24");
+  var output24 = document.getElementById("demo24");
+  output24.innerHTML = slider24.value;
+  slider24.oninput = function() {
+  output24.innerHTML = this.value;
+  }
+
+  </script>
+
+  <script>
+  var slider25 = document.getElementById("myRange25");
+  var output25 = document.getElementById("demo25");
+  output25.innerHTML = slider25.value;
+  slider25.oninput = function() {
+  output25.innerHTML = this.value;
+  }
+  </script>
+
+<!-- Custom Sripts -->
+<script>
+</script>
+
+<!-- Chart Scripts -->
+<script>
+     let myChart = document.getElementById('myChart').getContext('2d');
+    // global options
+    //Chart.defaults.global.defaultFontFamily='Lato';
+    //Chart.defaults.global.defaultFontSize=18;
+    //Chart.defaults.global.defaultFontColor='#777';
+
+     let Chart1 = new Chart(myChart, {
+        type:'line',
+        data:{
+            labels:['Margin','Payback Period','Discount Rate','Tax Rate','Percent Financed','Debt Interest Rate','Loan Term'],
+            datasets:[{
+            label:'Population',
+            data:[margin,paybackPeriod,discountRate,taxRate,percentFinanced,debtInterest,loanTerm],
+            backgroundColor:[
+            //'rgba(255, 99, 132, 0.6)',
+            //'rgba(54, 162, 235, 0.6)',
+            ],
+            borderWidth:1,
+            borderColor:'#777',
+            hoverBorderWidth:3,
+            hoverBorderColor:'#000'
+            }
+            {
+            //label:'Population',
+            data:[margin,paybackPeriod,discountRate,taxRate,percentFinanced,debtInterest,loanTerm],
+            backgroundColor:[
+            //'rgba(255, 99, 132, 0.6)',
+            //'rgba(54, 162, 235, 0.6)',
+            ],
+            borderWidth:1,
+            borderColor:'#777',
+            hoverBorderWidth:3,
+            hoverBorderColor:'#000'
+            }
+
+
+
+            ]
+        },
+        options:{
+            //title:{
+            //display:true,
+            //text:'Title_text',
+            //fontsize:25,
+            //},
+            legend:{
+                display:false,
+                //position:'bottom',
+            }
+        }
+     });
+
+ function updateChart(){
+    Chart1.data.datasets[0].data[0] = margin1;
+    Chart1.update();
+  };
+</script>
+
+<script>
+     let myChart2 = document.getElementById('myChart2').getContext('2d');
+    // global options
+    //Chart.defaults.global.defaultFontFamily='Lato';
+    //Chart.defaults.global.defaultFontSize=18;
+    //Chart.defaults.global.defaultFontColor='#777';
+
+     let Chart2 = new Chart(myChart2, {
+        type:'bar',
+        data:{
+            labels:['Margin','Payback Period','Discount Rate','Tax Rate','Percent Financed','Debt Interest Rate','Loan Term','Test Calc'],
+            datasets:[{
+            //label:'Population',
+            data:[margin,paybackPeriod,discountRate,taxRate,percentFinanced,debtInterest,loanTerm,testCalc],
+            backgroundColor:[
+            //'rgba(255, 99, 132, 0.6)',
+            //'rgba(54, 162, 235, 0.6)',
+            ],
+            borderWidth:1,
+            borderColor:'#777',
+            hoverBorderWidth:3,
+            hoverBorderColor:'#000'
+            }]
+        },
+        options:{
+            //title:{
+            //display:true,
+            //text:'Title_text',
+            //fontsize:25,
+            //},
+            legend:{
+                display:false,
+                //position:'bottom',
+            }
+        }
+     });
+
+ function updateChart(){
+    Chart2.data.datasets[0].data[0] = 40;
+    Chart2.update();
+  };
+</script>

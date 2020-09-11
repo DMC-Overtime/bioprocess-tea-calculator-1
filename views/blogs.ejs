@@ -1,0 +1,39 @@
+<html lang="en">
+<%- include('./partials/header.ejs') %>
+<body>
+<%- include('./partials/nav1_user.ejs') %>
+
+        <div class = "logo">
+        <a href="#">Discussion</a>
+        </div>
+        </div>
+        <div class = "main_container">
+        <div class="content">
+
+    <header><a  href="/blog/newblog/"> <h3 class="submit-btn">&nbsp Contribute &nbsp<br></h3></a>
+    <div class ="break"><br></div>
+
+
+        <div class ="break"><br></div>
+
+        <% if (blogs.length >0){ %>
+        <% blogs.forEach(blog => { %>
+        <div class ="blog_item">
+        <a class="single" href="/blog/blogs/<%=blog._id %>">
+        <h3><%= blog.title %></h3>
+        <p class="snippet"><%= blog.snippet %></p></a>
+        </div>
+        <div class ="break"><br></div>
+        <% }) %>
+        <%} else { %>
+        <p> THese are no posts to display.... </p>
+        </div>
+        <% } %>
+
+
+<br>
+</div>
+<br>
+<%- include('./partials/nav2.ejs') %>
+</body>
+</html>

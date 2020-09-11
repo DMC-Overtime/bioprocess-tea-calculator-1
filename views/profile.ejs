@@ -1,0 +1,32 @@
+<html lang="en">
+<%- include('./partials/header.ejs') %>
+<body>
+<%- include('./partials/nav1_user.ejs') %>
+
+        <div class = "logo">
+        <a href="#">Profile</a>
+        </div>
+        </div>
+        <div class = "main_container">
+        <div class="content">
+
+    <header><h2>&nbsp Welcome <%= user.username %> <br></h2>
+    <div class ="break"><br></div>
+    <div>
+        <img src="<%= user.thumbnail %>" width="200" height="200">
+    </div>
+    <div class ="break"><br></div>
+    <div class ="item">
+    <h3> Username : <%= user.username %></h3>
+    <h3> Email : <%= user.email%></h3>
+    <h3> First Name : <%= user.firstName%></h3>
+    <h3> Last Name : <%= user.lastName%></h3>
+    </div>
+
+
+<br>
+</div>
+<br>
+<%- include('./partials/nav2.ejs') %>
+</body>
+</html>
