@@ -65,4 +65,6 @@
     fermentationOutput.overallYield = overallYield;
     fermentationOutput.fermTime = totalFermentationTime;
     return fermentationOutput;
-    };
+
+
+    }
