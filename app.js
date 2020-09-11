@@ -28,7 +28,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Connect to MongoDB & Listen to Port
-mongoose.connect(keys.mongodb.dbURI,{useNewUrlParser: true, useUnifiedTopology: true}).then((result) => app.listen(8080)).catch((err) => console.log(err));
+mongoose.connect(keys.mongodb.dbURI,{useNewUrlParser: true, useUnifiedTopology: true}).then((result) => app.listen(PORT || 8000))).catch((err) => console.log(err));
 
 //Middleware static files
 app.use(express.static('public'));
