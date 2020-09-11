@@ -1,4 +1,5 @@
      function fermUpdater(Input,theorYieldGlu) {
+
      var fermentationOutput = FermentationTimecourse(Input,theorYieldGlu);
      var myFermChart = FermChart(fermentationOutput);
      document.getElementById("Rate").innerHTML = parseFloat(Input[0]).toFixed(2);
