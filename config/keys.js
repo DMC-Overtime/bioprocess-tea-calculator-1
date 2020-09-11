@@ -3,8 +3,8 @@
 
 module.exports ={
     google:{
-    clientID:'187300875259-ggmqf6pn06crho61enm34ii4vmaf7gi4.apps.googleusercontent.com',
-    clientSecret:'raJ1lLs-9saaQzgyemPQNo6C'
+    clientID:'187300875259-lbllv021gd80kobe24rqm015tlefcpv5.apps.googleusercontent.com',
+    clientSecret:'i3tei5MM4bt_IfP2cZNqTKh5'
     },
     mongodb:{
         dbURI:'mongodb+srv://mdl:jmpa7137@cluster1.ryjim.gcp.mongodb.net/BioProcessTEACalculator?retryWrites=true&w=majority'
