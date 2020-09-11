@@ -1,4 +1,3 @@
-
      function fermUpdater(Input,theorYieldGlu) {
      var fermentationOutput = FermentationTimecourse(Input,theorYieldGlu);
      var myFermChart = FermChart(fermentationOutput);
