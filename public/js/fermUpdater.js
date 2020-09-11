@@ -13,7 +13,7 @@
      document.getElementById("overallYield").innerHTML = ((dspyield.value/100)*(parseFloat(fermentationOutput.overallYield))).toFixed(2);
      }
 
-       function FermentationTimecourse(Input,theorYield){
+    function FermentationTimecourse(Input,theorYield){
 
     averageVolumetricRate =Input[0];
     finalTiter=Input[1];
