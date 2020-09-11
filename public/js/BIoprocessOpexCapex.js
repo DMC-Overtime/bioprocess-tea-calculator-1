@@ -1,4 +1,4 @@
-function BioprocessOpexCapex(Input,theorYield,productYieldCoefficientNH3,productYieldCoefficientO2,vesselSize){
+function bioprocessopexcapex(Input,theorYield,productYieldCoefficientNH3,productYieldCoefficientO2,vesselSize){
 
 //Inputs from User Input
 // Input = [0-rate, 1-titer, 2-%yield, 3-turnaroundTime, 4-media, 5-temp

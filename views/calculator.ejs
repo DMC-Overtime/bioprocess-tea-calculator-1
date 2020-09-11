@@ -501,7 +501,7 @@
       productYieldCoefficientNH3 = (MWValue*prodCoeff)/(ammoniaCoeff*17.031);
       productYieldCoefficientO2 = (MWValue*prodCoeff)/(o2Coeff*32);
       fermUpdater(Input,theorYieldGlu);
-      var bioprocessOutputs = BioprocessOpexCapex(Input,theorYieldGlu,productYieldCoefficientNH3,productYieldCoefficientO2,vesselSize);
+      bioprocessOutputs = bioprocessopexcapex(Input,theorYieldGlu,productYieldCoefficientNH3,productYieldCoefficientO2,vesselSize);
 
       // bioprocessOutputs = [annualOpex, opexperkg,totaCapitalInvestment, capexperkg, plantCapacity];
       // Output Bioprocess Results to Page
