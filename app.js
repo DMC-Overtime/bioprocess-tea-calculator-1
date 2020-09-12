@@ -31,7 +31,14 @@ app.use(passport.session());
 mongoose.connect(keys.mongodb.dbURI,{useNewUrlParser: true, useUnifiedTopology: true}).then((result) => app.listen(process.env.PORT || 8000)).catch((err) => console.log(err));
 
 //Middleware static files
-app.use(express.static('public'));
+//app.use(express.static('public'));
+
+if ('public'.slice(-6) === '/build') { // For production
+  app.use(express.static('public'))
+} else { // For development
+  app.use(express.static('public'))
+}
+
 app.use(express.urlencoded({ extended: true}));
 
 //Morgan logging Middleware
