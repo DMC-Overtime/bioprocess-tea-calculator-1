@@ -55,16 +55,13 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
      if (myFermChart) {
           myFermChart.destroy();
      }
-    var myFermChart = FermChart(bioprocessOutputs);
+     var myFermChart = FermChart(bioprocessOutputs);
 
      document.getElementById("fermYield").innerHTML = (parseFloat(bioprocessOutputs.overallFermYield)).toFixed(3);
      document.getElementById("specificRate").innerHTML = parseFloat(bioprocessOutputs.specificRate).toFixed(2);
      document.getElementById("finalBiomass").innerHTML = parseFloat(bioprocessOutputs.finalBiomass).toFixed(2);
      document.getElementById("fermTime").innerHTML = parseFloat(bioprocessOutputs.fermTime).toFixed(0);
      document.getElementById("overallYield").innerHTML = ((Input[29]/100)*(parseFloat(bioprocessOutputs.overallFermYield))).toFixed(2);
-
-
-
      document.getElementById("OPEX").innerHTML = bioprocessOutputs.opexperkg.toFixed(2);
      document.getElementById("CAPEX").innerHTML = bioprocessOutputs.capexperkg.toFixed(2);
      document.getElementById("TCI").innerHTML = (bioprocessOutputs.totaCapitalInvestment/1000000).toFixed(2);
@@ -84,18 +81,19 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
           document.getElementById("IRR").innerHTML = 'TBD';
           time = DCFOutput.time;
           cumCashFlow = DCFOutput.cumCashFlow;
-            if (myProFormaChart) {
+
+              if(myProFormaChart){
                myProFormaChart.destroy();
-            }
-          var myProFormaChart = ProFormaChart(time,cumCashFlow);
-            if (myOpexPieChart) {
-               myOpexPieChart.destroy();
-            }
-          var myOpexPieChart = OpexPieChart(bioprocessOutputs);
-            if (myCapexPieChart) {
-               myCapexPieChart.destroy();
-            }
-          var myCapexPieChart = CapexPieChart(bioprocessOutputs);
+               }
+              var myProFormaChart = ProFormaChart(time,cumCashFlow);
+              if(myOpexPieChart){
+                myOpexPieChart.destroy();
+               }
+              var myOpexPieChart = OpexPieChart(bioprocessOutputs);
+               if(myCapexPieChart){
+                myCapexPieChart.destroy();
+               }
+              var myCapexPieChart = CapexPieChart(bioprocessOutputs);
 
 
 }
