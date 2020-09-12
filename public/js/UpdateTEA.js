@@ -78,7 +78,7 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
 
           document.getElementById("NPV").innerHTML = (DCFOutput.NPV/1000000).toFixed(2);
           document.getElementById("ROI").innerHTML = ((DCFOutput.ROI)*100).toFixed(2);
-          document.getElementById("IRR").innerHTML = 'TBD';
+          document.getElementById("IRR").innerHTML = ((DCFOutput.IRR)*100).toFixed(2);
           time = DCFOutput.time;
           cumCashFlow = DCFOutput.cumCashFlow;
 

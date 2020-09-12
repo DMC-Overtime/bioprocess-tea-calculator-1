@@ -244,33 +244,9 @@ function BOO_DCF(Input,bioprocessOutputs){
     }
 
     // IRR
-    irr = discountRate;
-    //npv_test= npv;
-   // if (npv_test<0) {
-   //     while (npv_test<0) {
-            // iterative calculate new npv
-     //       for(let projectYear=0; projectYear<paybackPeriod; projectYear++){
-     //         npv_test = npv_test +(netCashFlow[projectYear]/ Math.pow(irr/100 + 1, projectYear + 1));
-     //        }
-      //       if (npv_test>=0){
-       //      break;
-      //       } else {
-       //         irr = irr-0.01;
-       //      }
-       // }
-   // }else if(npv_test>0) {
-       //     while (npv_test>0) {
-     //       // iterative calculate new npv
-      //      for(let projectYear=0; projectYear<paybackPeriod; projectYear++){
-      //        npv_test = npv_test + (netCashFlow[projectYear]/ Math.pow(irr/100 + 1, projectYear + 1));
-     //        }
-     //        if (npv_test>=0){
-     //        break;
-      ///       } else {
-       //         irr = irr+0.01;
-       //      }
-       // }
-   // }
+    IRR = calcIRR(netCashFlow,-1.00);
+
+
 
       // Define Time to account for 0 index
     time = [];
@@ -282,7 +258,7 @@ function BOO_DCF(Input,bioprocessOutputs){
     var DCFOutput = new Object();
         DCFOutput.ROI = ROI;
         DCFOutput.NPV = npv;
-        DCFOutput.IRR = irr;
+        DCFOutput.IRR = IRR;
         DCFOutput.time = time;
         DCFOutput.revenue = annualRevenue;
         DCFOutput.COGS = OPEX;
