@@ -1,20 +1,24 @@
 function BOO_DCF(Input,bioprocessOutputs){
 
 //Inputs from User Input
-// Input = [0-rate, 1-titer, 2-%yield, 3-turnaroundTime, 4-media, 5-temp
-//          6-margin, 7-paybanckperiod, 8-discount rate, 9-taxrate, 10-debt financed, 11-debt interest rate,
-//          12-loan term, 13-capacity(kta), 14- overall DSP yield, 15-annual uptime %, 16-batch on spec, 17-glucose
-//          18-ammonia, 19-sulfuric acid, 20-natgas, 21-electricity, 22-CEPCI, 23-DSP Opex %, 24-DSP Capex % ]
+// Input    0-productName,                1-productFormula      2-productMW,              3-theorYield,           4-productYieldCoefficientNH3,
+//          5-productYieldCoefficientO2,  6-vesselSize,         7-sellingPrice,           8-margin,               9-paybackPeriod,
+//          10-discountRate,              11-taxRate,           12-percentDebtFinanced,   13-DebtInterestRate,    14-LoanTerm,
+//          15-plantCapacity,             16-annualUptime,      17-batchOnSpec,           18-glucoseCost,         19-ammoniaCost,
+//          20-naturalGasCost,            21-electricityCost    22-CEPCI,                 23-aveVolumtericRate,   24-Titer,
+//          25-Yield,                     26-turnaroundTime,    27-mediaCost              28-Temperature,         29-overallDSPYield,
+//          30-dspPercentofOpex,          31-dspPercentofCapex ];
+
 
 
     //Inputs from User Input
-       margin = Input[6]/100;
-       paybackPeriod = Input[7];
-       discountRate  = Input[8]/100;
-       taxRate = Input[9]/100;
-       fractionDebtFinance  = Input[10]/100;
-       debtInterest  = Input[11]/100;
-       debtTerm = Input[12];
+       sellingPrice = Input[7];
+       paybackPeriod = Input[9];
+       discountRate  = Input[10]/100;
+       taxRate = Input[11]/100;
+       fractionDebtFinance  = Input[12]/100;
+       debtInterest  = Input[13]/100;
+       debtTerm = Input[14];
 
     //Inputs calculated from user inputs using BioprocessOpexCapex.js
     annualOpex = bioprocessOutputs.annualOpex;// $
@@ -22,10 +26,6 @@ function BOO_DCF(Input,bioprocessOutputs){
     totalInitialCapitalInvestment = bioprocessOutputs.totaCapitalInvestment;  // $
     capexperkg = bioprocessOutputs.capexperkg;  // $
     plantCapacity = bioprocessOutputs.plantCapacity ; // (kg)
-
-    // Selling Price
-
-     sellingPrice = opexperkg/(1-margin);
 
     // Advanced Financial Variables
     fractionEquityFinance = 1-fractionDebtFinance;
@@ -280,7 +280,6 @@ function BOO_DCF(Input,bioprocessOutputs){
 
 
     var DCFOutput = new Object();
-        DCFOutput.MSP = sellingPrice;
         DCFOutput.ROI = ROI;
         DCFOutput.NPV = npv;
         DCFOutput.IRR = irr;

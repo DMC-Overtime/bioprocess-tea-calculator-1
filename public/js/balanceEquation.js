@@ -1,55 +1,53 @@
-function balanceEquation(carbon,hydrogen,oxygen,nitrogen, MWvalue){
+function balanceEquation(chemical){
 
+// Balances the following Equation 1 Glucose + oxygenCoeff * O2 + ammoniaCoeff* NH3 --> prodCoeff * Product + waterCoeff* H2O + co2Coeff * CO2
+// where Product  =  C(carbon)H(hydrogen)O(oxygen)N(nitrogen)
 
     MWfeedstock = 180.156; // glucose
-    carbon_value = Number(carbon.value);
-    hydrogen_value = Number(hydrogen.value);
-    oxygen_value = Number(oxygen.value);
-    nitrogen_value = Number(nitrogen.value);
 
 
-  
 //Calculate Stoichiometry and theoretic Yield
-  H2CO2_ratio =  0.5*(hydrogen_value/carbon_value)-1*(oxygen_value/carbon_value)-1.5*(nitrogen_value/carbon_value)+2;
 
-    if (H2CO2_ratio == 2) {
+    if (chemical.H2CO2ratio == 2) {
         equationType = "neutral";
         //1 C6H12O6 +  X NH3  → Y  CaHbOcNd+ Z H2O
-        prodCoeff = 6/carbon_value;
-        ammoniaCoeff = 6*(nitrogen_value/carbon_value);
-        waterCoeff = 6-6*(oxygen_value/carbon_value);
+        prodCoeff = 6/chemical.carbon;
+        ammoniaCoeff = 6*(chemical.nitrogen/chemical.carbon);
+        waterCoeff = 6-6*(chemical.oxygen/chemical.carbon);
         co2Coeff =0 ;
         oxygenCoeff =0 ;
 
-    } else if (H2CO2_ratio > 2){
+    } else if (chemical.H2CO2ratio > 2){
         equationType = "reduced";
         //1 C6H12O6 +  W NH3 → X CaHbOcNd + Y H2O +  Z  CO2 
-        value1 = carbon_value + 0.25*hydrogen_value - 0.5*oxygen_value - 0.75*nitrogen_value;
+        value1 = chemical.carbon + 0.25*chemical.hydrogen - 0.5*chemical.oxygen - 0.75*chemical.nitrogen;
         prodCoeff = 6/value1;
-        ammoniaCoeff = nitrogen_value*prodCoeff;
-        waterCoeff = 6 + 1.5*nitrogen_value*prodCoeff - 0.5*hydrogen_value*prodCoeff;
-        co2Coeff = 0.25*hydrogen_value*prodCoeff - 0.5*oxygen_value*prodCoeff - 0.75*nitrogen_value*prodCoeff;
+        ammoniaCoeff = chemical.nitrogen*prodCoeff;
+        waterCoeff = 6 + 1.5*chemical.nitrogen*prodCoeff - 0.5*chemical.hydrogen*prodCoeff;
+        co2Coeff = 0.25*chemical.hydrogen*prodCoeff - 0.5*chemical.oxygen*prodCoeff - 0.75*chemical.nitrogen*prodCoeff;
         oxygenCoeff =0 ;
 
-    } else { //(H2CO2_ratio < 2)
+    } else { //(chemical.H2CO2ratio < 2)
         equationType = "oxidized";
-        prodCoeff = 6/carbon_value;
-        ammoniaCoeff = 6*(nitrogen_value/carbon_value);
-        waterCoeff = 6 + 9*(nitrogen_value/carbon_value) - 3*(hydrogen_value/carbon_value);
-        oxygenCoeff = 3*(oxygen_value/carbon_value) + 4.5*(nitrogen_value/carbon_value) -1.5*(hydrogen_value/carbon_value);
+        prodCoeff = 6/chemical.carbon;
+        ammoniaCoeff = 6*(chemical.nitrogen/chemical.carbon);
+        waterCoeff = 6 + 9*(chemical.nitrogen/chemical.carbon) - 3*(chemical.hydrogen/chemical.carbon);
+        oxygenCoeff = 3*(chemical.oxygen/chemical.carbon) + 4.5*(chemical.nitrogen/chemical.carbon) -1.5*(chemical.hydrogen/chemical.carbon);
         co2Coeff =0 ;
     }
 
-    theorYield = (MWvalue*prodCoeff/MWfeedstock).toFixed(3);
-    chemistryOutputs = [equationType,prodCoeff,ammoniaCoeff,oxygenCoeff,co2Coeff,waterCoeff, theorYield];
-    document.getElementById("A").innerHTML = 1 ; // Glucose coefficient
-    document.getElementById("B").innerHTML = chemistryOutputs[2].toFixed(2); // NH3 coefficient
-    document.getElementById("D").innerHTML = chemistryOutputs[3].toFixed(2); // O2 coefficient ( C is already used)
-    document.getElementById("E").innerHTML = chemistryOutputs[1].toFixed(2);  // Product coefficient ( C is already used)
-    document.getElementById("F").innerHTML = chemistryOutputs[5].toFixed(2); // Water coefficient ( C is already used)
-    document.getElementById("G").innerHTML = chemistryOutputs[4].toFixed(2); // CO2 coefficient ( C is already used)
-    document.getElementById("theorYield").innerHTML = theorYield;
-    return chemistryOutputs;
-    
-    
+    prodCoeff = prodCoeff.toFixed(2);
+    oxygenCoeff = oxygenCoeff.toFixed(2);
+    ammoniaCoeff = ammoniaCoeff.toFixed(2);
+    waterCoeff = waterCoeff .toFixed(2);
+    co2Coeff = co2Coeff.toFixed(2);
+    theorYield = (chemical.MW*prodCoeff/MWfeedstock).toFixed(3);
+    productYieldCoefficientNH3 = ((chemical.MW*prodCoeff)/(ammoniaCoeff*17.031)).toFixed(4);
+    productYieldCoefficientO2 = ((chemical.MW*prodCoeff)/(oxygenCoeff*32)).toFixed(4);
+
+     // Output
+     var myChemicalEquation = new chemicalEquation(prodCoeff,oxygenCoeff, ammoniaCoeff,waterCoeff,co2Coeff,theorYield,productYieldCoefficientNH3,productYieldCoefficientO2);
+
+     return myChemicalEquation;
+
 }
