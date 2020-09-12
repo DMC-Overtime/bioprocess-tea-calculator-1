@@ -444,10 +444,8 @@
   <script src="/js/balanceEquation.js"></script>
   <script src="/js/UpdateChemicalEquation.js"></script>
   <script src="/js/UpdateChemical.js"></script>
-  <script src="/js/UpdateVesselSize.js"></script>
   <script src="/js/calculateLoanPayments.js"></script>
   <script src="/js/FermChart.js"></script>
-  <script src="/js/bioprocessopexcapex.js"></script>
   <script src="/js/BOO_DCF.js"></script>
   <script src="/js/ProFormaChart.js"></script>
   <script src="/js/OpexPieChart.js"></script>
@@ -476,8 +474,18 @@ pageInput =[];
    }
 
 </script>
+<script>
+function UpdateVesselSize(){
+         var ele = document.getElementsByName('reactorsize');
 
-
+         for(i = 0; i < ele.length; i++) {
+             if(ele[i].checked){
+             vesselSize = parseFloat(ele[i].value);
+             }
+         }
+         return vesselSize;
+       }
+</script>
 
 
 
