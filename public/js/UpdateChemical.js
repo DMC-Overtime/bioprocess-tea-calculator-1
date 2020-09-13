@@ -35,7 +35,7 @@
     oxygen = document.getElementById("O");
     nitrogen = document.getElementById("N");
 
-    carbon.onclick = function(){
+    carbon.onchange = function(){
     document.getElementById("C").innerHTML = carbon.value;
     document.getElementById("Cnumber").innerHTML = carbon.value;
     myChemical.carbon = parseFloat(document.getElementById("C").value);
@@ -46,7 +46,7 @@
     myChemicalEquation = UpdateChemicalEquation(myChemical);
     }
 
-    hydrogen.onclick = function(){
+    hydrogen.onchange = function(){
     document.getElementById("H").innerHTML = hydrogen.value;
     document.getElementById("Hnumber").innerHTML = hydrogen.value;
     myChemical.hydrogen = parseFloat(document.getElementById("H").value);
@@ -57,7 +57,7 @@
     myChemicalEquation = UpdateChemicalEquation(myChemical);
     }
 
-    oxygen.onclick = function(){
+    oxygen.onchange = function(){
     document.getElementById("O").innerHTML = oxygen.value;
     document.getElementById("Onumber").innerHTML = oxygen.value;
     myChemical.oxygen = parseFloat(document.getElementById("O").value);
@@ -68,7 +68,7 @@
     myChemicalEquation = UpdateChemicalEquation(myChemical);
     }
 
-    nitrogen.onclick = function(){
+    nitrogen.onchange = function(){
     document.getElementById("N").innerHTML = nitrogen.value;
     document.getElementById("Nnumber").innerHTML = nitrogen.value;
     myChemical.nitrogen = parseFloat(document.getElementById("N").value);
