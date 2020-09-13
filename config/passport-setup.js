@@ -20,15 +20,14 @@ passport.use(
         clientID:keys.google.clientID,
         clientSecret:keys.google.clientSecret
     },(accessToken,refreshToken,profile,email,done) => {
-    // passport callback  function
-     console.log(email);
     //check is user already exists
-    User.findOne({googleId: profile.id}).then((currentUser) =>{
-     if(currentUser){
-        //already have user
-        console.log('user is:', currentUser);
-        done(null,currentUser);
-     } else{
+      User.findOne({googleId: email.id}).then((currentUser) =>{
+         if(currentUser){
+            //already have user
+            console.log('user is:', currentUser);
+            done(null,currentUser);
+      } else {
+       // create new User
         new User({
             username: email.displayName,
             googleId: email.id,
