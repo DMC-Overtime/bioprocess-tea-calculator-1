@@ -3,7 +3,7 @@
    const myChemical = new chemical();
 
    // Define Starting Chemical Product from Page Input
-    myChemical.name = '1,3 Propanediol'
+    myChemical.name = document.getElementById("ChemicalName").value;
     document.getElementById("ChemicalName1").innerHTML = myChemical.name;
     document.getElementById("ChemicalName2").innerHTML = myChemical.name;
     myChemical.carbon = parseFloat(document.getElementById("C").value);
@@ -26,6 +26,7 @@
    document.getElementById("ChemicalName1").innerHTML = textInput1.value;
    document.getElementById("ChemicalName2").innerHTML = textInput1.value;
    }
+
 
    // Update Chemical Product Info on User Input
 
