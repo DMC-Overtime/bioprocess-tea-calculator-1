@@ -146,17 +146,17 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
        document.getElementsByName('form_fermTime').innerHTML =parseFloat(bioprocessOutputs.fermTime).toFixed(0);
        document.getElementsByName('form_overallYield').innerHTML = ((Input[29]/100)*(parseFloat(bioprocessOutputs.overallFermYield))).toFixed(2);
 
-       document.getElementsByName('form_proFormaTime').innerHTML = serialize(DCFOutput.time);
-       document.getElementsByName('form_proFormaRevenue').innerHTML = serialize(DCFOutput.revenue);
-       document.getElementsByName('form_proFormaCOGS').innerHTML = serialize(DCFOutput.COGS);
-       document.getElementsByName('form_proFormaDepreciation').innerHTML = serialize( DCFOutput.totalDepreciation);
-       document.getElementsByName('form_proFormaEBITDA').innerHTML = serialize(DCFOutput.EBITDA);
-       document.getElementsByName('form_proFormaEBIT').innerHTML = serialize(DCFOutput.EBIT);
-       document.getElementsByName('form_proFormaInterest').innerHTML = serialize(DCFOutput.InterestPaid);
-       document.getElementsByName('form_proFormaTaxes').innerHTML = serialize(DCFOutput.taxes);
-       document.getElementsByName('form_proFormaNetIncome').innerHTML = serialize(DCFOutput.netIncome);
-       document.getElementsByName('form_proFormaNetCashFlow').innerHTML = serialize(DCFOutput.netCashFlow);
-       document.getElementsByName('form_proFormaCumCashFlow').innerHTML = serialize(DCFOutput.cumCashFlow);
+       //document.getElementsByName('form_proFormaTime').innerHTML = serialize(DCFOutput.time);
+     //  document.getElementsByName('form_proFormaRevenue').innerHTML = serialize(DCFOutput.revenue);
+      // document.getElementsByName('form_proFormaCOGS').innerHTML = serialize(DCFOutput.COGS);
+      // document.getElementsByName('form_proFormaDepreciation').innerHTML = serialize( DCFOutput.totalDepreciation);
+      // document.getElementsByName('form_proFormaEBITDA').innerHTML = serialize(DCFOutput.EBITDA);
+      // document.getElementsByName('form_proFormaEBIT').innerHTML = serialize(DCFOutput.EBIT);
+      // document.getElementsByName('form_proFormaInterest').innerHTML = serialize(DCFOutput.InterestPaid);
+      // document.getElementsByName('form_proFormaTaxes').innerHTML = serialize(DCFOutput.taxes);
+      // document.getElementsByName('form_proFormaNetIncome').innerHTML = serialize(DCFOutput.netIncome);
+      // document.getElementsByName('form_proFormaNetCashFlow').innerHTML = serialize(DCFOutput.netCashFlow);
+      // document.getElementsByName('form_proFormaCumCashFlow').innerHTML = serialize(DCFOutput.cumCashFlow);
 
 }
 
