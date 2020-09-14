@@ -65,6 +65,13 @@
                                 <div class="title">Tutorials</div>
                             </a>
                      </li>
+
+                     <li>
+                            <a href="/definitions_user">
+                                <div class="icon"><i class="fas fa-book-open"></i></div>
+                                <div class="title">Definitions</div>
+                            </a>
+                     </li>
                       <li>
                             <a href="/blog/blogs">
                                 <div class="icon"><i class="fab fa-microblog"></i></i></div>
@@ -100,16 +107,16 @@
                                       <input type="text"  id="ChemicalName"  maxlength="18" size="20" value="1,3 Propanediol">
                                       <br><br>
                                       <label for="C" style="color:#2176DA">C: </label>
-                                      <input id="C" type="number" value="3" min="0" max ="100">
+                                      <input id="C" type="number" value="3" min="0" max ="40000">
                                       <br><br>
                                       <label for="H" style="color:#2176DA">H: </label>
-                                      <input id="H" type="number" value="8" min="0" max ="100">
+                                      <input id="H" type="number" value="8" min="0" max ="40000">
                                       <br><br>
                                       <label for="O" style="color:#2176DA">O: </label>
-                                      <input id="O" type="number" value="2" min="0" max ="100">
+                                      <input id="O" type="number" value="2" min="0" max ="40000">
                                       <br><br>
                                       <label for="N" style="color:#2176DA">N: </label>
-                                      <input id="N" type="number" value="0" min="0" max ="100">
+                                      <input id="N" type="number" value="0" min="0" max ="40000">
                                       <br><br>
                                     </form>
                                     </div>
@@ -332,8 +339,9 @@
                 &nbsp&nbsp&nbsp&nbsp ROI: <span id="ROI"></span>&nbsp%,
                 &nbsp&nbsp&nbsp&nbsp IRR: <span id="IRR"></span>&nbsp%</div>
                 <div class = "output">
-                $<span id="MSP"></span>/kg Minimum Selling Price needed to achieve a <span id="Margin"></span>&nbsp% gross margin</div>
-        </div>
+                $<span id="MSP"></span>/kg Minimum Selling Price to achieve a <span id="Margin"></span>&nbsp% Margin upon initial ramp up</div>
+
+   </div>
         <div class ="break"><br></div>
 
 
@@ -417,14 +425,46 @@
 <br>
 </div>
 <br>
-              <br>
+
+            <br>
             <div class="form">
             <form action="/calculator/tea_log" method="POST">
             <input type="hidden" id="uid" value="<%= user %>" name="uid" required><br><br>
-            <input type="hidden" class="product" id="product" name="product" value ='' required><br><br>
-            <input type="hidden" class="blogsubject" id="snippet" name="snippet" value ='' required><br><br>
-            <input type="hidden" class="blogsubject" id="body" name="body" value ='' required><br><br>
-            <div class ="submit"> <button class="submit-btn">Save TEA</button></div>
+
+            <input type="hidden" class="form_product_name" id="form_product_name" name="form_product_name" value ='' required>
+            <input type="hidden" class="form_formula" id="form_formula" name="form_formula" value ='' required>
+            <input type="hidden" class="form_mw" id="form_mw" name="form_mw" value ='' required>
+            <input type="hidden" class="form_theorYield" id="form_theorYield" name="form_theorYield" value ='' required>
+            <input type="hidden" class="form_productYieldCoefficientNH3" id="form_productYieldCoefficientNH3" name="form_productYieldCoefficientNH3" value ='' required>
+            <input type="hidden" class="form_productYieldCoefficientO2" id="form_productYieldCoefficientO2" name="form_productYieldCoefficientO2" value ='' required>
+            <input type="hidden" class="form_form_vesselSize" id="form_form_vesselSize" name="form_form_vesselSize" value ='' required>
+            <input type="hidden" class="form_sellingPrice" id="form_sellingPrice" name="form_sellingPrice" value ='' required>
+            <input type="hidden" class="form_margin" id="form_margin" name="form_margin" value ='' required>
+            <input type="hidden" class="form_paybackPeriod" id="form_paybackPeriod" name="form_paybackPeriod" value ='' required>
+            <input type="hidden" class="form_discountRate" id="form_discountRate" name="form_discountRate" value ='' required>
+            <input type="hidden" class="form_taxRate" id="form_taxRate" name="form_taxRate" value ='' required>
+            <input type="hidden" class="form_percentDebtFinanced" id="form_percentDebtFinanced" name="form_percentDebtFinanced" value ='' required>
+            <input type="hidden" class="form_DebtInterestRate" id="form_DebtInterestRate" name="form_DebtInterestRate" value ='' required>
+            <input type="hidden" class="form_LoanTerm" id="form_LoanTerm" name="form_LoanTerm" value ='' required>
+            <input type="hidden" class="form_plantCapacity" id="form_plantCapacity" name="form_plantCapacity" value ='' required>
+            <input type="hidden" class="form_annualUptime" id="form_annualUptime" name="form_annualUptime" value ='' required>
+            <input type="hidden" class="form_batchOnSpec" id="form_batchOnSpec" name="form_batchOnSpec" value ='' required>
+            <input type="hidden" class="form_glucoseCost" id="form_glucoseCost" name="form_glucoseCost" value ='' required>
+            <input type="hidden" class="form_ammoniaCost" id="form_ammoniaCost" name="form_ammoniaCost" value ='' required>
+            <input type="hidden" class="form_naturalGasCost" id="form_naturalGasCost" name="form_naturalGasCost" value ='' required>
+            <input type="hidden" class="form_electricityCost" id="form_electricityCost" name="form_electricityCost" value ='' required>
+            <input type="hidden" class="form_CEPCI'" id="form_CEPCI'" name="form_CEPCI'" value ='' required>
+            <input type="hidden" class="form_aveVolumtericRate'" id="form_aveVolumtericRate'" name="form_aveVolumtericRate'" value ='' required>
+            <input type="hidden" class="form_Titer" id="form_Titer" name="form_Titer" value ='' required>
+            <input type="hidden" class="form_Yield'" id="form_Yield'" name="form_Yield'" value ='' required>
+            <input type="hidden" class="form_turnaroundTime" id="form_turnaroundTime" name="form_turnaroundTime" value ='' required>
+            <input type="hidden" class="form_mediaCost" id="form_mediaCost" name="form_mediaCost" value ='' required>
+            <input type="hidden" class="form_Temperature" id="form_Temperature" name="form_Temperature" value ='' required>
+            <input type="hidden" class="form_overallDSPYield" id="form_overallDSPYield" name="form_overallDSPYield" value ='' required>
+            <input type="hidden" class="form_dspPercentofOpex" id="form_dspPercentofOpex" name="form_dspPercentofOpex" value ='' required>
+            <input type="hidden" class="form_dspPercentofCapex" id="form_dspPercentofCapex" name="form_dspPercentofCapex" value ='' required>
+
+            <div class ="submit"> <a href="/calculator/tea_log" class="submit-btn">Export TEA</button></a></div>
             </form>
 
 
@@ -485,8 +525,6 @@ function UpdateVesselSize(){
          return vesselSize;
        }
 </script>
-
-
 
 
 

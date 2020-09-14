@@ -13,6 +13,7 @@ function BOO_DCF(Input,bioprocessOutputs){
 
     //Inputs from User Input
        sellingPrice = Input[7];
+       margin = Input[8]/100;
        paybackPeriod = Input[9];
        discountRate  = Input[10]/100;
        taxRate = Input[11]/100;
@@ -246,6 +247,18 @@ function BOO_DCF(Input,bioprocessOutputs){
     // IRR
     IRR = calcIRR(netCashFlow,-1.00);
 
+    // MSP assumes you want to hit the target margin in year 4 at full ramp
+    initialCostofProductionOnRampUp =  totalCapitalInvestment[4]+Opex[4]+annualLoanPayments[4];
+    // Margin = (netsales -COGS)/netsales, netsales = MSP*annualProduction
+    // netsales*margin = netsales-COGS
+    // netsales -netsales*margin = COGS
+    // netsales(1-margin) = COGS
+    // nesales = COGS/(1-margin)
+    //  MSP*annualProduction = COGS/(1-margin)
+    //MSP = COGS/((1-margin)*annualProduction)
+    MSP = initialCostofProductionOnRampUp/(annualProduction[4]*(1- margin));
+
+
 
 
       // Define Time to account for 0 index
@@ -257,6 +270,7 @@ function BOO_DCF(Input,bioprocessOutputs){
 
     var DCFOutput = new Object();
         DCFOutput.ROI = ROI;
+        DCFOutput.MSP = MSP;
         DCFOutput.NPV = npv;
         DCFOutput.IRR = IRR;
         DCFOutput.time = time;

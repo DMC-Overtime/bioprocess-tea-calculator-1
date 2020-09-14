@@ -47,7 +47,6 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
      document.getElementById("Rate").innerHTML = Input[23];
      document.getElementById("Titer").innerHTML = Input[24];
      document.getElementById("dspYield").innerHTML = Input[29]/100;
-     document.getElementById("Margin").innerHTML = Input[8];
 
 //Calculate Bioprocess Outputs & Associated Page Outputs
     bioprocessOutputs = bioprocessopexcapex(Input);
@@ -67,7 +66,6 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
      document.getElementById("TCI").innerHTML = (bioprocessOutputs.totaCapitalInvestment/1000000).toFixed(2);
      document.getElementById("plantCapacity").innerHTML = (bioprocessOutputs.plantCapacity/1000000).toFixed(2);
      MSP = (bioprocessOutputs.opexperkg/(1-(Input[8]/100))).toFixed(2);
-     document.getElementById("MSP").innerHTML = MSP;
 
 
 
@@ -79,6 +77,7 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
           document.getElementById("NPV").innerHTML = (DCFOutput.NPV/1000000).toFixed(2);
           document.getElementById("ROI").innerHTML = ((DCFOutput.ROI)*100).toFixed(2);
           document.getElementById("IRR").innerHTML = ((DCFOutput.IRR)*100).toFixed(2);
+          document.getElementById("MSP").innerHTML = ((DCFOutput.MSP)).toFixed(2);
           time = DCFOutput.time;
           cumCashFlow = DCFOutput.cumCashFlow;
 
@@ -95,6 +94,69 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
                }
               var myCapexPieChart = CapexPieChart(bioprocessOutputs);
 
+
+
+ // Pull Process Inputs into hidden submission Form
+       document.getElementsByName('form_product_name').innerHTML = Input[0];
+       document.getElementsByName('form_fromula').innerHTML = Input[1];
+       document.getElementsByName('form_mw').innerHTML = Input[2];
+       document.getElementsByName('form_theorYield').innerHTML = Input[3];
+       document.getElementsByName('form_productYieldCoefficientNH3').innerHTML = Input[4];
+       document.getElementsByName('form_productYieldCoefficientO2').innerHTML = Input[5];
+       document.getElementsByName('form_form_vesselSize').innerHTML = Input[6];
+       document.getElementsByName('form_sellingPrice').innerHTML = Input[7];
+       document.getElementsByName('form_margin').innerHTML = Input[8];
+       document.getElementsByName('form_paybackPeriod').innerHTML = Input[9];
+       document.getElementsByName('form_discountRate').innerHTML = Input[10];
+       document.getElementsByName('form_taxRate').innerHTML = Input[11];
+       document.getElementsByName('form_percentDebtFinanced').innerHTML = Input[12];
+       document.getElementsByName('form_DebtInterestRate').innerHTML = Input[13];
+       document.getElementsByName('form_LoanTerm').innerHTML = Input[14];
+       document.getElementsByName('form_plantCapacity').innerHTML = Input[15];
+       document.getElementsByName('form_annualUptime').innerHTML = Input[16];
+       document.getElementsByName('form_batchOnSpec').innerHTML = Input[17];
+       document.getElementsByName('form_glucoseCost').innerHTML = Input[18];
+       document.getElementsByName('form_ammoniaCost').innerHTML = Input[19];
+       document.getElementsByName('form_naturalGasCost').innerHTML = Input[20];
+       document.getElementsByName('form_electricityCost').innerHTML = Input[21];
+       document.getElementsByName('form_CEPCI').innerHTML = Input[22];
+       document.getElementsByName('form_aveVolumtericRate').innerHTML = Input[23];
+       document.getElementsByName('form_Titer').innerHTML = Input[24];
+       document.getElementsByName('form_Yield').innerHTML = Input[25];
+       document.getElementsByName('form_turnaroundTime').innerHTML = Input[26];
+       document.getElementsByName('form_mediaCost').innerHTML = Input[27];
+       document.getElementsByName('form_Temperature').innerHTML = Input[28];
+       document.getElementsByName('form_overallDSPYield').innerHTML = Input[29];
+       document.getElementsByName('form_dspPercentofOpex').innerHTML = Input[30];
+       document.getElementsByName('form_dspPercentofCapex').innerHTML = Input[31];
+
+ // Pull Process Inputs into hidden submission Form
+
+       document.getElementsByName('form_OPEX').innerHTML =bioprocessOutputs.opexperkg.toFixed(2);
+       document.getElementsByName('form_CAPEX').innerHTML = bioprocessOutputs.capexperkg.toFixed(2);
+       document.getElementsByName('form_TCI').innerHTML =  (bioprocessOutputs.totaCapitalInvestment/1000000).toFixed(2);
+       document.getElementsByName('form_NPV').innerHTML = DCFOutput.NPV;
+       document.getElementsByName('form_ROI').innerHTML = DCFOutput.ROI;
+       document.getElementsByName('form_IRR').innerHTML = DCFOutput.IRR;
+       document.getElementsByName('form_MSP').innerHTML = DCFOutput.MSP;
+       document.getElementsByName('form_optimalCapacity').innerHTML = (bioprocessOutputs.plantCapacity/1000000).toFixed(2);
+       document.getElementsByName('form_fermYield').innerHTML =  (parseFloat(bioprocessOutputs.overallFermYield)).toFixed(3);
+       document.getElementsByName('form_finalBiomass').innerHTML = parseFloat(bioprocessOutputs.finalBiomass).toFixed(2);
+       document.getElementsByName('form_spRate').innerHTML = parseFloat(bioprocessOutputs.specificRate).toFixed(2);
+       document.getElementsByName('form_fermTime').innerHTML =parseFloat(bioprocessOutputs.fermTime).toFixed(0);
+       document.getElementsByName('form_overallYield').innerHTML = ((Input[29]/100)*(parseFloat(bioprocessOutputs.overallFermYield))).toFixed(2);
+
+       document.getElementsByName('form_proFormaTime').innerHTML = serialize(DCFOutput.time);
+       document.getElementsByName('form_proFormaRevenue').innerHTML = serialize(DCFOutput.revenue);
+       document.getElementsByName('form_proFormaCOGS').innerHTML = serialize(DCFOutput.COGS);
+       document.getElementsByName('form_proFormaDepreciation').innerHTML = serialize( DCFOutput.totalDepreciation);
+       document.getElementsByName('form_proFormaEBITDA').innerHTML = serialize(DCFOutput.EBITDA);
+       document.getElementsByName('form_proFormaEBIT').innerHTML = serialize(DCFOutput.EBIT);
+       document.getElementsByName('form_proFormaInterest').innerHTML = serialize(DCFOutput.InterestPaid);
+       document.getElementsByName('form_proFormaTaxes').innerHTML = serialize(DCFOutput.taxes);
+       document.getElementsByName('form_proFormaNetIncome').innerHTML = serialize(DCFOutput.netIncome);
+       document.getElementsByName('form_proFormaNetCashFlow').innerHTML = serialize(DCFOutput.netCashFlow);
+       document.getElementsByName('form_proFormaCumCashFlow').innerHTML = serialize(DCFOutput.cumCashFlow);
 
 }
 

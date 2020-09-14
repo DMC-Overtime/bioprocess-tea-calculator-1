@@ -8,6 +8,7 @@ const profileRoutes = require('./routes/profileRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 const calculatorRoutes = require('./routes/calculatorRoutes');
 const tutorialRoutes = require('./routes/tutorialRoutes');
+const definitionRoutes = require('./routes/definitionRoutes');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 
@@ -22,6 +23,10 @@ app.use(cookieSession({
     maxAge: 24*60**60*1000,
     keys:[keys.session.cookieKey]
 }));
+
+//Enable & encrypt cookies
+app.locals.input ="82";
+app.locals.input ="82";
 
 //Initialize passport
 app.use(passport.initialize());
@@ -60,6 +65,9 @@ app.use('/calculator',calculatorRoutes);
 //User (Logged In Tutorial Routes)
 app.use('/tutorials_user',tutorialRoutes);
 
+//User (Logged In Definitions Routes)
+app.use('/definitions_user',definitionRoutes);
+
 //Main Routes
 app.get('/', (req,res) =>{
    res.render('main', {user: req.user, title: 'Main'});
@@ -73,6 +81,12 @@ app.get('/main',(req,res) =>{
 app.get('/tutorials_main',(req,res) =>{
       res.render('tutorials_main', {title: 'Tutorials'});
 });
+
+//Main Definitions Routes
+app.get('/definitions_main',(req,res) =>{
+      res.render('definitions_main', {title: 'Definitions'});
+});
+
 
 //Catch all
 app.use((req,res) =>{
