@@ -87,7 +87,7 @@
                      <br>
                      <hr>
                      <li>
-                        <a href="/calculator">
+                        <a href="/calculator/calculator">
                             <div class="icon"><i class="fas fa-calculator"></i></div>
                             <div class="title">Calculator</div>
                       </a>
@@ -160,7 +160,7 @@
                                       <div class ="title"> % Debt Financed: <span id="demo4"> </span> %</div>
                                   </div>
                                    <div class="slidecontainer">
-                                      <input type="range" min="0" max="20" value="8" step="1" class="slider" id="myRange5">
+                                      <input type="range" min="0.5" max="20" value="8" step=".5" class="slider" id="myRange5">
                                     <div class ="title">Debt Interest Rate: <span id="demo5"> </span> %</div>
                                   </div>
 
@@ -200,7 +200,7 @@
                                         <input type="radio" color="#2176DA" id="1000000L" name="reactorsize" value="1000000" checked="">
                                         <label class ="radiolabel" for="1000000L" active>1,000</label>
                                         <div class ="title"> Main Fermenter Size:  x1000L</div>
-                                        <form>
+                                        </form>
                                   </div>
 
                           </li>
@@ -257,12 +257,12 @@
                                   </div>
 
                                    <div class="slidecontainer">
-                                      <input type="range" min="0" max="40" value="20" step="1" class="slider" id="myRange18">
+                                      <input type="range" min="0" max="40" value="16" step="1" class="slider" id="myRange18">
                                        <div class ="title"> Turnaround Time: <span id="demo18"> </span> hours</div>
                                   </div>
 
                                  <div class="slidecontainer">
-                                      <input type="range" min="0" max="100" value="15" step="1" class="slider" id="myRange19">
+                                      <input type="range" min="0" max="100" value="5" step="1" class="slider" id="myRange19">
                                     <div class ="title">Media Cost: $<span id="demo19"> </span>/1000L</div>
                                   </div>
 
@@ -426,47 +426,66 @@
 </div>
 <br>
 
-            <br>
-            <div class="form">
-            <form action="/calculator/tea_log" method="POST">
-            <input type="hidden" id="uid" value="<%= user %>" name="uid" required><br><br>
-
-            <input type="hidden" class="form_product_name" id="form_product_name" name="form_product_name" value ='' required>
-            <input type="hidden" class="form_formula" id="form_formula" name="form_formula" value ='' required>
-            <input type="hidden" class="form_mw" id="form_mw" name="form_mw" value ='' required>
-            <input type="hidden" class="form_theorYield" id="form_theorYield" name="form_theorYield" value ='' required>
-            <input type="hidden" class="form_productYieldCoefficientNH3" id="form_productYieldCoefficientNH3" name="form_productYieldCoefficientNH3" value ='' required>
-            <input type="hidden" class="form_productYieldCoefficientO2" id="form_productYieldCoefficientO2" name="form_productYieldCoefficientO2" value ='' required>
-            <input type="hidden" class="form_form_vesselSize" id="form_form_vesselSize" name="form_form_vesselSize" value ='' required>
-            <input type="hidden" class="form_sellingPrice" id="form_sellingPrice" name="form_sellingPrice" value ='' required>
-            <input type="hidden" class="form_margin" id="form_margin" name="form_margin" value ='' required>
-            <input type="hidden" class="form_paybackPeriod" id="form_paybackPeriod" name="form_paybackPeriod" value ='' required>
-            <input type="hidden" class="form_discountRate" id="form_discountRate" name="form_discountRate" value ='' required>
-            <input type="hidden" class="form_taxRate" id="form_taxRate" name="form_taxRate" value ='' required>
-            <input type="hidden" class="form_percentDebtFinanced" id="form_percentDebtFinanced" name="form_percentDebtFinanced" value ='' required>
-            <input type="hidden" class="form_DebtInterestRate" id="form_DebtInterestRate" name="form_DebtInterestRate" value ='' required>
-            <input type="hidden" class="form_LoanTerm" id="form_LoanTerm" name="form_LoanTerm" value ='' required>
-            <input type="hidden" class="form_plantCapacity" id="form_plantCapacity" name="form_plantCapacity" value ='' required>
-            <input type="hidden" class="form_annualUptime" id="form_annualUptime" name="form_annualUptime" value ='' required>
-            <input type="hidden" class="form_batchOnSpec" id="form_batchOnSpec" name="form_batchOnSpec" value ='' required>
-            <input type="hidden" class="form_glucoseCost" id="form_glucoseCost" name="form_glucoseCost" value ='' required>
-            <input type="hidden" class="form_ammoniaCost" id="form_ammoniaCost" name="form_ammoniaCost" value ='' required>
-            <input type="hidden" class="form_naturalGasCost" id="form_naturalGasCost" name="form_naturalGasCost" value ='' required>
-            <input type="hidden" class="form_electricityCost" id="form_electricityCost" name="form_electricityCost" value ='' required>
-            <input type="hidden" class="form_CEPCI'" id="form_CEPCI'" name="form_CEPCI'" value ='' required>
-            <input type="hidden" class="form_aveVolumtericRate'" id="form_aveVolumtericRate'" name="form_aveVolumtericRate'" value ='' required>
-            <input type="hidden" class="form_Titer" id="form_Titer" name="form_Titer" value ='' required>
-            <input type="hidden" class="form_Yield'" id="form_Yield'" name="form_Yield'" value ='' required>
-            <input type="hidden" class="form_turnaroundTime" id="form_turnaroundTime" name="form_turnaroundTime" value ='' required>
-            <input type="hidden" class="form_mediaCost" id="form_mediaCost" name="form_mediaCost" value ='' required>
-            <input type="hidden" class="form_Temperature" id="form_Temperature" name="form_Temperature" value ='' required>
-            <input type="hidden" class="form_overallDSPYield" id="form_overallDSPYield" name="form_overallDSPYield" value ='' required>
-            <input type="hidden" class="form_dspPercentofOpex" id="form_dspPercentofOpex" name="form_dspPercentofOpex" value ='' required>
-            <input type="hidden" class="form_dspPercentofCapex" id="form_dspPercentofCapex" name="form_dspPercentofCapex" value ='' required>
-
-            <div class ="submit"> <a href="/calculator/tea_log" class="submit-btn">Export TEA</button></a></div>
+            <form method="POST" action="/calculator/tea_log">
+            <input type="hidden" id="uid" value="<%= user._id %>" name="uid" required>
+            <input type="hidden" id="productName"  name="productName"  required>
+            <input type="hidden" id="productFormula" name="productFormula" required>
+            <input type="hidden" id="productMW" name="productMW"  required>
+            <input type="hidden" id="productTheorYield" name="productTheorYield"  required>
+            <input type="hidden" id="productYieldCoefficientNH3" name="productYieldCoefficientNH3"  required>
+            <input type="hidden" id="productYieldCoefficientO2" name="productYieldCoefficientO2"  required>
+            <input type="hidden" id="productVesselSize" name="productVesselSize"  required>
+            <input type="hidden" id="productSellingPrice" name="productSellingPrice" required>
+            <input type="hidden" id="productMargin" name="productMargin"  required>
+            <input type="hidden" id="productPaybackPeriod" name="productPaybackPeriod"  required>
+            <input type="hidden" id="productDiscountRate" name="productDiscountRate"  required>
+            <input type="hidden" id="productTaxRate" name="productTaxRate" required>
+            <input type="hidden" id="productPercentDebtFinanced" name="productPercentDebtFinanced"  required>
+            <input type="hidden" id="productDebtInterestRate" name="productDebtInterestRate"  required>
+            <input type="hidden" id="productLoanTerm" name="productLoanTerm"  required>
+            <input type="hidden" id="productPlantCapacity" name="productPlantCapacity"  required>
+            <input type="hidden" id="productAnnualUptime" name="productAnnualUptime"  required>
+            <input type="hidden" id="productBatchOnSpec" name="productBatchOnSpec"  required>
+            <input type="hidden" id="productGlucoseCost" name="productGlucoseCost" required>
+            <input type="hidden" id="productAmmoniaCost" name="productAmmoniaCost" required>
+            <input type="hidden" id="productNaturalGasCost" name="productNaturalGasCost"  required>
+            <input type="hidden" id="productElectricityCost" name="productElectricityCost"  required>
+            <input type="hidden" id="productCEPCI" name="productCEPCI" required>
+            <input type="hidden" id="productAveVolumtericRate" name="productAveVolumtericRate"  required>
+            <input type="hidden" id="productTiter" name="productTiter" required>
+            <input type="hidden" id="productYield" name="productYield" required>
+            <input type="hidden" id="productTurnaroundTime" name="productTurnaroundTime"  required>
+            <input type="hidden" id="productMediaCost" name="productMediaCost" required>
+            <input type="hidden" id="productTemperature" name="productTemperature" required>
+            <input type="hidden" id="productOverallDSPYield" name="productOverallDSPYield"  required>
+            <input type="hidden" id="productDspPercentofOpex" name="productDspPercentofOpex"  required>
+            <input type="hidden" id="productDspPercentofCapex" name="productDspPercentofCapex"  required>
+            <input type="hidden" id="productOPEX" name="productOPEX" required>
+            <input type="hidden" id="productCAPEX" name="productCAPEX" required>
+            <input type="hidden" id="productTCI" name="productTCI" required>
+            <input type="hidden" id="productNPV" name="productNPV"  required>
+            <input type="hidden" id="productROI" name="productROI"  required>
+            <input type="hidden" id="productIRR" name="productIRR" required>
+            <input type="hidden" id="productMSP" name="productMSP" required>
+            <input type="hidden" id="productOptimalPlantCapacity" name="productOptimalPlantCapacity"  required>
+            <input type="hidden" id="productFermentationYield" name="productFermentationYield"  required>
+            <input type="hidden" id="productFinalBiomass" name="productFinalBiomass"  required>
+            <input type="hidden" id="productSpRate" name="productSpRate"  required>
+            <input type="hidden" id="productFermTime" name="productFermTime"  required>
+            <input type="hidden" id="productOverallYield" name="productOverallYield"  required>
+            <input type="hidden" id="productProFormaTime" name="productProFormaTime"  required>
+            <input type="hidden" id="productProFormaRevenue" name="productProFormaRevenue"  required>
+            <input type="hidden" id="productProFormaCOGS" name="productProFormaCOGS"  required>
+            <input type="hidden" id="productProFormaDepreciation" name="productProFormaDepreciation"  required>
+            <input type="hidden" id="productProFormaEBITDA" name="productProFormaEBITDA"  required>
+            <input type="hidden" id="productProFormaEBIT" name="productProFormaEBIT"  required>
+            <input type="hidden" id="productProFormaInterest" name="productProFormaInterest"  required>
+            <input type="hidden" id="productProFormaTaxes" name="productProFormaTaxes"  required>
+            <input type="hidden" id="productProFormaNetIncome" name="productProFormaNetIncome"  required>
+            <input type="hidden" id="productProFormaNetCashFlow" name="productProFormaNetCashFlow"  required>
+            <input type="hidden" id="productProFormaCumCashFlow" name="productProFormaCumCashFlow"  required>
+            <button class="submit">Save TEA</button>
             </form>
-
 
 
 <%- include('./partials/nav2.ejs') %>

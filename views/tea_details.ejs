@@ -13,17 +13,29 @@
     <header><h2>&nbsp TEA Details<br></h2>
     <div class ="break"><br></div>
     <div class ="item">
-
-    <div class ="item">
-    <button class="submit-btn">Export Data</button>
-    <div class="process content">
-    <h2><%=pid.id %></h2>
-    <div class="process details">
-    <p><%=pid.strain %></p>
-    </div>
-    <a class="delete" data-doc="<%= pid._id %>">delete</a>
-    </div>
-
+    <h2><%=tea.productName%> </h2>
+    <h3> Created At: <%=tea.createdAt %> </h3>
+    <p><br></p>
+    <p>Product: <%=tea.productName %>, <%=tea.productFormula %>, Theoretical Yield:  <%=tea.productTheorYield %>g/g glucose </p>
+    <p><br></p>
+    <p> MSP: $<%=tea.productMSP %>/kg @ a Margin of <%=tea.productMargin %>%</p>
+    <p> OPEX: $<%=tea.productOPEX %>/kg </p>
+    <p> CAPEX: $<%=tea.productCAPEX %>/kg </p>
+    <p><br></p>
+    <p> Key Input Metrics: </p>
+        <li>Rate: <%=tea.productAveVolumtericRate %>g/L-hr </li>
+        <li>Titer: <%=tea.productTiter %> g/L</li>
+        <li>Ferm. Yield: <%=tea.productYield %> % of theoretical</li>
+        <li>DSP Yield: <%=tea.productOverallDSPYield %> %</li>
+    <p><br></p>
+    <p>Financials for a Selling Price of $<%=tea.productSellingPrice %>/kg :</p>
+        <li>      NPV: $<%=(tea.productNPV/1000000).toFixed(2) %>M</li>
+        <li>      IRR: <%=tea.productIRR %>%</li>
+        <li>      ROI: <%=tea.productROI %>%</li>
+        <li>      Total Capital Investment: $<%=tea.productTCI %>M</li>
+        <li>      Optimal Capacity: <%=tea.productOptimalPlantCapacity %> kta</li>
+    <p><br></p>
+    <button class="submit-btn">Export Complete Results</button>
     </div>
 
 <br>

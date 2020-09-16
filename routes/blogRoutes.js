@@ -13,6 +13,10 @@ const authCheck = (req,res,next) => {
     }
 };
 
+blogRouter.get('/newblog', authCheck, (req,res) =>{
+     res.render('newblog', {user: req.user});
+});
+
 blogRouter.get('/blogs', authCheck, (req,res) =>{
     Blog.find().sort({createdAt:-1})
     .then((results) =>{
@@ -21,11 +25,6 @@ blogRouter.get('/blogs', authCheck, (req,res) =>{
     .catch((err) =>{
         console.log(err);
     })
-});
-
-
-blogRouter.get('/newblog', authCheck, (req,res) =>{
-     res.render('newblog', {user: req.user});
 });
 
 blogRouter.get('/blogs/:id', authCheck, (req,res) =>{

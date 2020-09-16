@@ -49,7 +49,6 @@ app.use(express.urlencoded({ extended: true}));
 //Morgan logging Middleware
 app.use(morgan('dev'));
 
-
 //auth Routes
 app.use('/auth',authRoutes);
 

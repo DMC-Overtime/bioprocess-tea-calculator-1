@@ -13,25 +13,22 @@ const authCheck = (req,res,next) => {
     }
 };
 
-calculatorRouter.get('/', authCheck, (req,res) =>{
-    res.render('calculator',{user: req.user, title: 'Calculator'});
+calculatorRouter.get('/calculator', authCheck, (req,res) =>{
+         res.render('calculator', {user: req.user});
 });
 
-calculatorRouter.post('/', authCheck,(req,res) =>{
- const tea = new Tea(req.body);
- tea.save().then((result) => {res.redirect('/tea_log');}).catch((err) => {console.log(err);});
-})
 
-calculatorRouter.get('/tea_log', authCheck,(req,res) =>{
-      res.render('tea_log', {user: req.user,title: 'TEA History'});
+calculatorRouter.get('/tea_log', authCheck, (req,res) =>{
+    Tea.find().sort({createdAt:-1})
+    .then((results) =>{
+     res.render('tea_log', {user: req.user, teas:results});
+    })
+    .catch((err) =>{
+        console.log(err);
+    })
 });
 
-calculatorRouter.get('/', authCheck,(req,res) =>{
-    Tea.find().sort({createdAt:-1}).then((result) => {res.render('tea_log', {title: "TEA History", teas: result})}).catch((err) => {console.log(err);});
-})
-
-
-calculatorRouter.get('/:id', authCheck, (req,res) =>{
+calculatorRouter.get('/tea_log/:id', authCheck, (req,res) =>{
      const id = req.params.id;
      Tea.findById(id)
         .then((result) =>{
@@ -42,8 +39,8 @@ calculatorRouter.get('/:id', authCheck, (req,res) =>{
     })
 });
 
-
 calculatorRouter.post('/tea_log', authCheck, (req,res) =>{
+    console.log(req.body);
     const tea = new Tea(req.body);
     tea.save()
         .then((result) => {
@@ -53,19 +50,5 @@ calculatorRouter.post('/tea_log', authCheck, (req,res) =>{
             console.log(err);
         })
 });
-
-
-calculatorRouter.delete('/tea_log/:id', authCheck, (req,res) =>{
-    const id = req.params.id;
-    Tea.findByIdAndDelete(id)
-        .then(result => {
-            res.json({redirect: '/caclulator/tea_log'})
-        })
-        .catch(err =>{
-        console.log(err);
-        })
-});
-
-
 
 module.exports =calculatorRouter;

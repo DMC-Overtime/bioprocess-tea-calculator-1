@@ -13,12 +13,21 @@
 
     <header><h2>&nbsp TEA History <br></h2>
     <div class ="break"><br></div>
-    <div class ="item">
 
-    <p>Details Here</p>
-    <p><br></p>
-    </div>
-    </div>
+        <% if (teas.length >0){ %>
+        <% teas.forEach(tea => { %>
+        <div class ="item">
+        <a class="single" href="/calculator/tea_log/<%=tea._id %>">
+        <h3>Product: <%= tea.productName %></h3>
+        <h3>MSP: $<%= tea.productMSP %>/kg</h3>
+        <h3>Created: <%= tea.createdAt %></h3>
+        </a></div>
+        <div class ="break"><br></div>
+        <% }) %>
+        <%} else { %>
+        <p> There are no analyses to display.... </p>
+        </div>
+        <% } %>
 
 <br>
 </div>

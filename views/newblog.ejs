@@ -10,11 +10,11 @@
         <div class = "main_container">
         <div class="content">
 
-        <header><h2>&nbsp Contribute to the Discussion <br></h2>
+             <header><h2>&nbsp Contribute to the Discussion <br></h2>
             <div class="form">
             <form action="/blog/blogs" method="POST">
-            <input type="hidden" id="uid" value="<%= user %>" name="uid" required><br><br>
-            <label  for="title"  >Title:</label>
+            <input type="hidden" id="uid" value="<%= user._id %>" name="uid" required><br><br>
+            <label for="title"  >Title:</label>
             <input type="text" class="blogtitle" id="title" name="title" required><br><br>
             <label for="subject">Subject :</label>
             <input type="text" class="blogsubject" id="snippet" name="snippet" required><br><br>

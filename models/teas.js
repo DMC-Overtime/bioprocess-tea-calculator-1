@@ -15,190 +15,227 @@ const teaSchema = new Schema({
         required: true
     },
     productMW: {
-        type: Number,
+        type: String,
         required: true
     },
     productTheorYield: {
+        type: String,
+        required: true
+    },
+    productYieldCoefficientNH3: {
+        type: String,
+        required: true
+    },
+    productYieldCoefficientO2: {
+        type: String,
+        required: true
+    },
+     productVesselSize: {
         type: Number,
         required: true
     },
-    margin: {
-        type: Number,
+     productSellingPrice: {
+        type: String,
         required: true
     },
-    paybackPeriod: {
-        type: Number,
+    productMargin: {
+        type: String,
         required: true
     },
-    discountRate: {
-        type: Number,
+    productPaybackPeriod: {
+        type: String,
         required: true
     },
-    taxRate: {
-        type: Number,
+    productDiscountRate: {
+        type: String,
         required: true
     },
-    percentDebtFinanced: {
-        type: Number,
+    productTaxRate: {
+        type: String,
         required: true
     },
-    DebtInterestRate: {
-        type: Number,
+    productPercentDebtFinanced: {
+        type: String,
         required: true
     },
-    LoanTerm: {
-        type: Number,
+    productDebtInterestRate: {
+        type: String,
         required: true
     },
-    plantCapacity: {
-        type: Number,
+    productLoanTerm: {
+        type: String,
         required: true
     },
-    annualUptime: {
-        type: Number,
+    productPlantCapacity: {
+        type: String,
         required: true
     },
-    batchOnSpec: {
-        type: Number,
+    productAnnualUptime: {
+        type: String,
         required: true
     },
-    reactorSize: {
-        type: Number,
+    productBatchOnSpec: {
+        type: String,
         required: true
     },
-    glucoseCost: {
-        type: Number,
+    productGlucoseCost: {
+        type: String,
         required: true
     },
-    ammoniaCost: {
-        type: Number,
+    productAmmoniaCost: {
+        type: String,
         required: true
     },
-    sulfuricAcidCost: {
-        type: Number,
+    productNaturalGasCost: {
+        type: String,
         required: true
     },
-    naturalGasCost: {
-        type: Number,
+    productElectricityCost: {
+        type: String,
         required: true
     },
-    electricityCost: {
-        type: Number,
+    productCEPCI: {
+        type: String,
         required: true
     },
-    CEPCI: {
-        type: Number,
+    productAveVolumtericRate: {
+        type: String,
         required: true
     },
-    aveVolumtericRate: {
-        type: Number,
+    productTiter: {
+        type: String,
         required: true
     },
-    Titer: {
-        type: Number,
+    productYield: {
+        type: String,
         required: true
     },
-    Yield: {
-        type: Number,
+    productTurnaroundTime: {
+        type: String,
         required: true
     },
-    turnaroundTime: {
-        type: Number,
+    productMediaCost: {
+        type: String,
         required: true
     },
-    mediaCost: {
-        type: Number,
+    productTemperature: {
+        type: String,
         required: true
     },
-    Temperature: {
-        type: Number,
+    productOverallDSPYield: {
+        type: String,
         required: true
     },
-    overallDSPYield: {
-        type: Number,
+    productDspPercentofOpex: {
+        type: String,
         required: true
     },
-    dspPercentofOpex: {
-        type: Number,
+    productDspPercentofCapex: {
+        type: String,
         required: true
     },
-    dspPercentofCapex: {
-        type: Number,
+    productOPEX: {
+        type: String,
         required: true
     },
-    MSP: {
-        type: Number,
+    productCAPEX: {
+        type: String,
         required: true
     },
-    OPEX: {
-        type: Number,
+    productTCI: {
+        type: String,
         required: true
     },
-    CAPEX: {
-        type: Number,
+    productNPV: {
+        type: String,
         required: true
     },
-    TCI: {
-        type: Number,
+    productROI: {
+        type: String,
         required: true
     },
-    NPV: {
-        type: Number,
+    productIRR: {
+        type: String,
         required: true
     },
-    ROI: {
-        type: Number,
+    productMSP: {
+        type: String,
         required: true
     },
-    IRR: {
-        type: Number,
+    productOptimalPlantCapacity: {
+        type: String,
         required: true
     },
-    optimalPlantCapacity: {
-        type: Number,
+    productFermentationYield: {
+        type: String,
         required: true
     },
-    fermentationYield: {
-        type: Number,
+    productFinalBiomass: {
+        type: String,
         required: true
     },
-    overallYield: {
-        type: Number,
+    productSpRate: {
+        type: String,
         required: true
     },
-    finalBiomass: {
-        type: Number,
+    productFermTime: {
+        type: String,
         required: true
     },
-    spRate: {
-        type: Number,
+    productOverallYield: {
+        type: String,
         required: true
     },
-    fermTime: {
-        type: Number,
+    productProFormaTime: {
+        type: String,
         required: true
     },
-    proFormaTime: {
-        type: Array,
+    productProFormaRevenue: {
+        type: String,
         required: true
     },
-    proFormaTBD: {
-        type: Array,
+    productProFormaCOGS: {
+        type: String,
         required: true
     },
-
-
-
-
-
-    proForma: {
-        type: Array,
+    productProFormaDepreciation: {
+        type: String,
         required: true
     },
-
-
+    productProFormaEBITDA: {
+        type: String,
+        required: true
+    },
+    productProFormaEBIT: {
+        type: String,
+        required: true
+    },
+    productProFormaInterest: {
+        type: String,
+        required: true
+    },
+    productProFormaTaxes: {
+        type: String,
+        required: true
+    },
+    productProFormaNetIncome: {
+        type: String,
+        required: true
+    },
+    productProFormaNetCashFlow: {
+        type: String,
+        required: true
+    },
+    productProFormaCumCashFlow: {
+        type: String,
+        required: true
+    },
 
 }, { timestamps: true});
 
 const Tea = mongoose.model('Tea',teaSchema);
 module.exports = Tea;
+
+
+
+

@@ -333,6 +333,24 @@ body{
       position: absolute;
       top: 65px;
       right: 40px;
+        border: 1px solid #FFFFFF;
+        border-radius: 3px;
+        background: #2176DA;
+        color: #FFFFFF;
+        padding: 10px 15px;
+         text-align: center;
+         display: inline-block;
+         font-size: 18px;
+         margin: 4px 2px;
+            cursor: pointer;
+         z-index:900;
+
+}
+
+.submit:hover{
+  border: 1px solid #2176DA;
+  background: #FFFFFF;
+  color: #2176DA;
 
 }
 
