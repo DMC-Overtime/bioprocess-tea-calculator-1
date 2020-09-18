@@ -14,9 +14,7 @@
             $(".menu_close").click(function(){
                 $(".wrapper").removeClass("active")
             });
-
             UpdateTEA();
-
             $('#radios').change(function(){
              //alert('Radio Box has been changed!');
                vesselSize =  UpdateVesselSize();
@@ -27,7 +25,6 @@
                Input[7] = document.getElementById("sellingPrice1").value;
                document.getElementById("sellingPrice2").innerHTML =Input[7];
                UpdateTEA();
-
             });
 
 
@@ -262,8 +259,8 @@
                                   </div>
 
                                  <div class="slidecontainer">
-                                      <input type="range" min="0" max="100" value="5" step="1" class="slider" id="myRange19">
-                                    <div class ="title">Media Cost: $<span id="demo19"> </span>/1000L</div>
+                                      <input type="range" min="0" max="10" value="0.4" step="0.1" class="slider" id="myRange19">
+                                    <div class ="title">Media Cost: $<span id="demo19"> </span>/kg CDW</div>
                                   </div>
 
                                    <div class="slidecontainer">
@@ -473,18 +470,22 @@
             <input type="hidden" id="productSpRate" name="productSpRate"  required>
             <input type="hidden" id="productFermTime" name="productFermTime"  required>
             <input type="hidden" id="productOverallYield" name="productOverallYield"  required>
+            <input type="hidden" id="productFermTimeCourseTime" name="productFermTimeCourseTime"  required>
+            <input type="hidden" id="productFermTimeCourseBiomass" name="productFermTimeCourseBiomass"  required>
+            <input type="hidden" id="productFermTimeCourseProductTiter" name="productFermTimeCourseProductTiter"  required>
             <input type="hidden" id="productProFormaTime" name="productProFormaTime"  required>
             <input type="hidden" id="productProFormaRevenue" name="productProFormaRevenue"  required>
             <input type="hidden" id="productProFormaCOGS" name="productProFormaCOGS"  required>
             <input type="hidden" id="productProFormaDepreciation" name="productProFormaDepreciation"  required>
             <input type="hidden" id="productProFormaEBITDA" name="productProFormaEBITDA"  required>
             <input type="hidden" id="productProFormaEBIT" name="productProFormaEBIT"  required>
+            <input type="hidden" id="productProFormaPrincipal" name="productProFormaPrincipal"  required>
             <input type="hidden" id="productProFormaInterest" name="productProFormaInterest"  required>
             <input type="hidden" id="productProFormaTaxes" name="productProFormaTaxes"  required>
             <input type="hidden" id="productProFormaNetIncome" name="productProFormaNetIncome"  required>
             <input type="hidden" id="productProFormaNetCashFlow" name="productProFormaNetCashFlow"  required>
             <input type="hidden" id="productProFormaCumCashFlow" name="productProFormaCumCashFlow"  required>
-            <button class="submit">Save TEA</button>
+            <button class="submit" id="saveTEA">Save TEA</button>
             </form>
 
 
@@ -545,9 +546,18 @@ function UpdateVesselSize(){
        }
 </script>
 
+ <script>
+    const saveTEA = async function(){
+        alert('Saving');
+    };
+    //main app
+    (function(){
+    //button click
+       const saveTEAButton = document.getElementById('saveTEA');
+       saveTEAButton.addEventListener('click', saveTEA);
+       })();
 
-
-
+ </script>
 
 </body>
 </html>

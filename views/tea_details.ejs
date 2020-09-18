@@ -1,7 +1,8 @@
 <html lang="en">
 <%- include('./partials/header.ejs') %>
 <body>
-<%- include('./partials/nav1_user_calc.ejs') %>
+<%- include('./partials/nav1_user.ejs') %>
+
 
         <div class = "logo">
         <a href="#">TEA Details</a>
@@ -35,21 +36,134 @@
         <li>      Total Capital Investment: $<%=tea.productTCI %>M</li>
         <li>      Optimal Capacity: <%=tea.productOptimalPlantCapacity %> kta</li>
     <p><br></p>
-    <button class="submit-btn">Export Complete Results</button>
+    <button class="submit-btn" id="exportTEA" >Download Complete Results</button>
     </div>
 
 <br>
 </div>
 <br>
-<%- include('./partials/nav2.ejs') %>
  <script>
-    const trashcan = documents.querySelector('a.delete');
-    trashcan.addEventListener('click',(e) => {
-        const endpoint = `/processes/$(trashcan.dataset.doc)`;
-        fetch(endpoint,{
-        method: 'DELETE'
-        }).then((response) => response.json()).then((data)) => window.location.href=data.redirect).catch(err => console.log(err));
-    })
+
+   const download =function(data){
+       const blob = new Blob([data],{type: 'text/csv'});
+       var url = URL.createObjectURL(blob);
+       const a = document.createElement('a');
+       a.setAttribute('hidden', '');
+       a.href =url;
+       a.download ='download.csv';
+       document.body.appendChild(a);
+       a.click();
+       document.body.removeChild(a);
+   };
+
+    const exportTEA = async function(){
+        alert('Export Started');
+        console.log('<%=tea.productName %>');
+        console.log(<%=tea.productIRR %>);
+
+    const rows = [
+          ["Product Name", "<%=tea.productName %>"],
+          ["MSP", "<%=tea.productMSP %>", "$/kg"],
+          [""],
+          ["Chemistry Outputs"],
+          ["Formula", "<%=tea.productFormula %>"],
+          ["Molecular Weight", "<%=tea.productMW %>", "gram/mole"],
+          ["Theoretical Yield", "<%=tea.productTheorYield %>", "gram product/g glucose"],
+          ["NH3 Yield Coefficient", "<%=tea.productYieldCoefficientNH3 %>", "gram product/g NH3"],
+          ["O2 Yield Coefficient", "<%=tea.productYieldCoefficientNH3 %>", "gram product/g O2"],
+          [""],
+          ["Financial Outputs"],
+          ["Selling Price", "<%=tea.productSellingPrice %>", "$/kg"],
+          ["Total Capital Investment (TCI)", "<%=tea.productTCI %>", "$ Million"],
+          ["NPV", "<%=tea.productNPV %>", "$"],
+          ["IRR", "<%=tea.productIRR %>", "%"],
+          ["ROI", "<%=tea.productROI %>", "%"],
+          [""],
+          ["Process Outputs"],
+          ["Optimal Plant Capacity", "<%=tea.productOptimalPlantCapacity %>", "kta"],
+          ["OPEX", "<%=tea.productOPEX %>", "$/kg"],
+          ["CAPEX", "<%=tea.productCAPEX %>", "$/kg"],
+          ["Overall Process Yield", "<%=tea.productOverallYield*100 %>", "%"],
+          ["Fermentation Time", "<%=tea.productFermTime %>", "hrs"],
+          ["Specific Rate", "<%=tea.productSpRate %>", "g/gCDW-hr"],
+          ["Final Biomass Levels", "<%=tea.productFinalBiomass %>", "gCDW/L"],
+          [""],[""],
+          ["Financial Inputs"],
+          ["Selling Price", "<%=tea.productSellingPrice %>", "$/kg"],
+          ["Target Margin", "<%=tea.productMargin %>", "%"],
+          ["Payback Period", "<%=tea.productPaybackPeriod %>", "years"],
+          ["Discount Rate", "<%=tea.productDiscountRate %>", "%"],
+          ["Tax Rate", "<%=tea.productTaxRate %>", "%"],
+          ["Percent Debt Financed", "<%=tea.productPercentDebtFinanced %>", "%"],
+          ["Debt Interest Rate", "<%=tea.productDebtInterestRate %>", "%"],
+          ["Loan Term", "<%=tea.productLoanTerm %>", "years"],
+          [""],
+          ["Process Inputs"],
+          ["Annual Uptime", "<%=tea.productAnnualUptime %>", "hrs"],
+          ["Batches On-Spec", "<%=tea.productBatchOnSpec %>", "%"],
+          ["Main Fermenter Size", "<%=tea.productVesselSize %>", "Liters"],
+          ["Working Volume", "<%=tea.productVesselSize*0.85 %>", "Liters"],
+          [""],
+          ["Raw Materials"],
+          ["Glucose Costs", "<%=tea.productGlucoseCost %>", "$/lb"],
+          ["Ammonia Costs", "<%=tea.productAmmoniaCost %>", "$/lb"],
+          ["Natural Gas Costs", "<%=tea.productNaturalGasCost %>", "$/MMBtu"],
+          ["Electricity Costs", "<%=tea.productElectricityCost %>", "$/KWh"],
+          ["CEPCI", "<%=tea.productCEPCI %>"],
+          [""],
+          ["Fermentation Inputs"],
+          ["Average Volumetric Rate", "<%=tea.productAveVolumtericRate %>", "g/L-hr"],
+          ["Titer", "<%=tea.productTiter %>", "g/L"],
+          ["Fermentation Yield", "<%=tea.productYield %>", "% of Theoretical"],
+          ["Titer", "<%=tea.productTiter %>", "g/L"],
+          ["Turnaround Time", "<%=tea.productTurnaroundTime %>", "hrs"],
+          ["Media Cost", "<%=tea.productMediaCost %>", "$/kgCDW"],
+          ["Temperature", "<%=tea.productTemperature %>", "degrees Celsius"],
+          [""],
+          ["Downstream Purification Inputs"],
+          ["Percent of OPEX allocated for DSP ", "<%=tea.productDspPercentofOpex%>", "%"],
+          ["Percent of CAPEX allocated  for DSP ", "<%=tea.productDspPercentofCapex%>", "%"],
+          ["Titer", "<%=tea.productTiter %>", "g/L"],
+          ["Turnaround Time", "<%=tea.productTurnaroundTime %>", "hrs"],
+          ["Media Cost", "<%=tea.productMediaCost %>", "$/kgCDW"],
+          ["Temperature", "<%=tea.productTemperature %>", "degrees Celsius"],
+          [""],[""],
+          ["Fermentation Time Course "],
+          ["Time (hours)","<%=tea.productFermTimeCourseTime %>" ],
+          ["Biomass (gCDW/L)","<%=tea.productFermTimeCourseBiomass %>" ],
+          ["Product Titer (g/L)", "<%=tea.productFermTimeCourseProductTiter %>" ],
+          [""],[""],
+          ["Pro Forma "],
+          ["Time (years)","<%=tea.productProFormaTime %>" ],
+          ["Revenue ($)","<%=tea.productProFormaRevenue %>" ],
+          ["COGS ($)", "<%=tea.productProFormaCOGS %>" ],
+          ["Depreciation ($)", "<%=tea.productProFormaDepreciation %>" ],
+          ["EBITDA ($)","<%=tea.productProFormaEBITDA %>" ],
+          ["EBIT ($)","<%=tea.productProFormaEBIT %>" ],
+          ["Loan Principal ($)","<%=tea.productProFormaPrincipal %>" ],
+          ["Loan Interest ($)","<%=tea.productProFormaInterest  %>" ],
+          ["Taxes ($)","<%=tea.productProFormaTaxes %>" ],
+          ["Net Income ($)","<%=tea.productProFormaNetIncome%>" ],
+          ["Net Cash Flow ($)","<%=tea.productProFormaNetCashFlow %>" ],
+          ["Cumulative Cash Flow ($)","<%=tea.productProFormaCumCashFlow %>" ],
+            ];
+
+    let csvContent =[];
+    rows.forEach(function(rowArray) {
+        let row = rowArray.join(",");
+        csvContent += row + "\r\n";
+    });
+
+    download(csvContent);
+    };
+
+    //main app
+    (function(){
+    //button click
+       const exportTEAButton = document.getElementById('exportTEA');
+       exportTEAButton.addEventListener('click', exportTEA);
+       })();
+
  </script>
 
 </body>

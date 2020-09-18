@@ -39,6 +39,7 @@ calculatorRouter.get('/tea_log/:id', authCheck, (req,res) =>{
     })
 });
 
+
 calculatorRouter.post('/tea_log', authCheck, (req,res) =>{
     console.log(req.body);
     const tea = new Tea(req.body);

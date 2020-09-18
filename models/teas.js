@@ -186,6 +186,18 @@ const teaSchema = new Schema({
         type: String,
         required: true
     },
+    productFermTimeCourseTime: {
+        type: String,
+        required: true
+    },
+    productFermTimeCourseBiomass: {
+        type: String,
+        required: true
+    },
+    productFermTimeCourseProductTiter: {
+        type: String,
+        required: true
+    },
     productProFormaTime: {
         type: String,
         required: true
@@ -207,6 +219,10 @@ const teaSchema = new Schema({
         required: true
     },
     productProFormaEBIT: {
+        type: String,
+        required: true
+    },
+    productProFormaPrincipal: {
         type: String,
         required: true
     },

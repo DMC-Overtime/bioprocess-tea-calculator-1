@@ -93,14 +93,14 @@ function BOO_DCF(Input,bioprocessOutputs){
     ongoingCapitalDepreciation =[];
     for (let projectYear =0; projectYear  < paybackPeriod; projectYear ++){
          if (projectYear <  yearsInConstruction){
-              ongoingCapitalDepreciation[i] =0;
+              ongoingCapitalDepreciation[projectYear ] =0;
          }else{
               ongoingCapitalDepreciation[projectYear] = ongoingCapitalReinvestmentRate*totalInitialCapitalInvestment;
          }
     }
 
 // Total Depreciation
-     totalDepreciation=[];
+    totalDepreciation=[];
     for (let projectYear =0; projectYear  < paybackPeriod; projectYear ++){
     totalDepreciation[projectYear] = initialTCIDepreciation[projectYear] +ongoingCapitalDepreciation[projectYear];
     }
@@ -120,6 +120,7 @@ function BOO_DCF(Input,bioprocessOutputs){
     interestPayment =[];
     principalPayment =[];
     annualLoanPayments =[];
+    annualLoanPayments =[];
 
     TotalLoanPrinc = fractionDebtFinance*totalInitialCapitalInvestment;
     interestPayment[0] = fractionCapitalSpentYearOne*TotalLoanPrinc*debtInterest;
@@ -132,14 +133,17 @@ function BOO_DCF(Input,bioprocessOutputs){
     LoanOutput =calculateLoanPayments(TotalLoanPrinc,debtInterest,loanTerm);
     annualInterest = LoanOutput.annualInterest;
     annualPrincipal = LoanOutput.annualPrincipal;
+    annualPrincipal2 =[];
 
     for (let projectYear =2; projectYear<paybackPeriod; projectYear++){
         if(projectYear < debtTerm){
             annualLoanPayments[projectYear]=annualPrincipal[projectYear-2]+annualInterest[projectYear-2];
             interestPayment[projectYear]= annualInterest[projectYear-2];
+            annualPrincipal2[projectYear] = annualLoanPayments[projectYear]-interestPayment[projectYear];
         }else if(projectYear > debtTerm-1){
             annualLoanPayments[projectYear]=0;
             interestPayment[projectYear] =0;
+            annualPrincipal2[projectYear] =0;
         }
     }
 
@@ -275,11 +279,12 @@ function BOO_DCF(Input,bioprocessOutputs){
         DCFOutput.IRR = IRR;
         DCFOutput.time = time;
         DCFOutput.revenue = annualRevenue;
-        DCFOutput.COGS = OPEX;
+        DCFOutput.COGS = Opex;
         DCFOutput.totalDepreciation = totalDepreciation;
         DCFOutput.EBITDA= EBITDA;
         DCFOutput.EBIT= EBIT;
-        DCFOutput.InterestPaid = annualInterest;
+        DCFOutput.PrincipalPaid = annualPrincipal2;
+        DCFOutput.InterestPaid = interestPayment;
         DCFOutput.TaxesPaid = taxes;
         DCFOutput.netIncome = netIncome;
         DCFOutput.netCashFlow = netCashFlow;

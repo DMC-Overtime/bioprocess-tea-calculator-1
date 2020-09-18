@@ -11,6 +11,8 @@ const tutorialRoutes = require('./routes/tutorialRoutes');
 const definitionRoutes = require('./routes/definitionRoutes');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const fileSystem = require('fs');
+const fastCSV = require('fast-csv');
 
 //register view engine
 const app = express();
