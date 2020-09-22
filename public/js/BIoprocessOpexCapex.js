@@ -305,7 +305,7 @@ function bioprocessopexcapex(Input){
    // Fermentation Opex Cost Summary
     annualUtilityCosts = annualCostOfHeatKill + annualCostOfSterilization +  annualCostOfCoolingWater + annualCostOfCompressedAir + annualCost0fMassTransfer + CostofBiomassDisposal; //
     annualFeedstockCosts = annualCostOfMedia  + annualCostOfNH3 + annualCostOfGlucose + annualWaterCosts; //
-    annualLaborCosts = 1.122*203923*numberOfTanks; //  (includes overhead labor uses cost per tank (NREL2013))x inflation factor);//
+    annualLaborCosts = 1.122*203923*numberOfTanks; //  (includes labor cost per tank (NREL2013))x inflation factor);//
     annualAdditionalFixedCosts = 1.122*0.037*1.175*(totalDirectCost); // (per NREL2013 x inflation factor); //
     annualFixedCosts = annualAdditionalFixedCosts + annualLaborCosts; //
     annualfermOpex = 1.1*(annualUtilityCosts + annualFeedstockCosts +annualFixedCosts);// With 10% Contingency

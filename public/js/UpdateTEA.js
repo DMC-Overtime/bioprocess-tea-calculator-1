@@ -211,7 +211,8 @@ function bioprocessopexcapex(Input){
     dspYield = Input[29]/100;
     dspOPEXfraction = Input[30]/100;
     dspCAPEXfraction = Input[31]/100;
-
+    NaOHCosts = 0.15; // $/kg, based on $150/tonne https://yosemite.epa.gov/sab/sabproduct.nsf/953CCBEB820F0470852577920076316D/$File/NaOH+Practicality+Study.pdf
+    PeraceticAcidCosts = 5; //$/L for CIP % solution
 
 
    // Advanced Inputs
@@ -223,10 +224,7 @@ function bioprocessopexcapex(Input){
     biomassYieldCoefficientO2 = (MicrobeMW)/(1.212*32); // g biomass/g O2 based on ideal formula 0.84 Glucose + 1 NH3 + 1.212 O2 --> 1 E. coli(C3.85H6.69O1.78N)+ 3.212 H2O + 1.212 CO2
     byproductYieldCoefficientO2 = (FeedstockMW)/(6*32); // g glucose consumed /g O2 for byproduct, based on ideal formula 1 Glucose + 6  O2 --> 6 H2O + 6 CO2
 
-
-
     // Advanced variables which are kept as defaults in the analyses
-
     inoculationFraction = 0.01; // fraction of volume at final biomass concentration used to inoculate production fermenters
     workingVolumeRatio = 0.85; // (L working volume)/(L gross volume)
     BiomassYieldFraction = 0.80; // the actual biomass yield as a fraction of theoretical maximal biomass yield
@@ -234,7 +232,6 @@ function bioprocessopexcapex(Input){
 
 
    // The following are Calculations based on the Fermentation Targets
-
     targetAnnualFermProduction = annualProductionVolumeKta*1000000/dspYield; // % (kg) accounts for DSP losses
     maxVesselWorkingVolume = workingVolumeRatio*vesselSize; // (Liters)
     maxProductPerVessel = finalTiter*maxVesselWorkingVolume/1000; // (kg or product per batch )
@@ -250,7 +247,6 @@ function bioprocessopexcapex(Input){
     plantCapacity = AnnualFermentationProduction*dspYield;
     totalAnnualFermWorkingVolume = numberOfTanks*maxVesselWorkingVolume*numberOfBatchesPerYearPerTank;
 
-
    // Bioreactor  based Calculations
     FermenterRadius = ((vesselSize/1000/3.14159265359)/(2*FermenterAspectRatio))**0.333333; // meters
     FermenterDiameter = 2*FermenterRadius ;// meters
@@ -259,7 +255,6 @@ function bioprocessopexcapex(Input){
     maxFermenterPressure = 1000*9.8066*maxWorkingFillHeight/100000 + 0.25 ; // bar (1 N/m2 =100,000 bar)
 
   // The following are Calculations based on the Fermentation Targets
-
     maxProductPerLcapacity = finalTiter*workingVolumeRatio; // (g of product per L of bioreactor capacity )
     totalFermentationTime = finalTiter/averageVolumetricRate;  // hours
     ProductBatchSugarPerLcapacity = (maxProductPerLcapacity/theorYield); // g glucose / L capacity assumes 100% of theoretical yield for glucose not going to biomass
@@ -278,7 +273,6 @@ function bioprocessopexcapex(Input){
     A = (finalBiomassConcentration - startingBiomassConcentration)/startingBiomassConcentration; // assumes logistic growth
     averageLogisticGrowthRate = -(Math.log(0.01/A))/totalFermentationTime; // (hr-1)
     overallFermYield = maxProductPerLcapacity/TotalBatchSugarPerLcapacity; //g/g
-
 
     // Growth Associated Product Calculations (Assumes Logistic Growth)
     productToCellRatio = finalTiter/(finalBiomassConcentration-startingBiomassConcentration); // (gram product / gram CDW)
@@ -361,7 +355,7 @@ function bioprocessopexcapex(Input){
     maxCoolingRate = 0.460*maxOTR*totalAnnualFermWorkingVolume; // kJ/hr per tank uses 460kJ/mole O2 consumed (Doran), equal to 110kcal/mole ( Humbird)
     cumulativeCoolingDemand = 0.460*cumulativeO2; // kJ
     cumulativeCoolingRateDemandperTank = 0.0000789848*cumulativeCoolingDemand/annualFermentationUpTime; // needed cooling capacity ton
-    cumulativeCoolingRateDemand = numberOfTanks*cumulativeCoolingRateDemandperTank; //
+    cumulativeCoolingRateDemand = numberOfTanks*cumulativeCoolingRateDemandperTank; //ton
 
    // Cooling Tower Water
     coolingWaterTemperature = 29.4 ; // degrees Celsius
@@ -376,6 +370,12 @@ function bioprocessopexcapex(Input){
     mediaSterilizationEnergyConsumption = 4.184*mediaVolume*sterilizationEfficiency*(mediaSterilizationTemperature-ambientTemperature); // (kJ/year)
     annualCostOfSterilization = (mediaSterilizationEnergyConsumption/1055056)*NaturalGasCost; // $/year
 
+    //CIP Costs  // https://www.chemengonline.com/large-scale-fermentation-systems-hygienic-design-principles/
+    // Assumes NAOH at 2wt% treatment after each batch
+    annualNaOHCosts = (numberOfBatchesPerYearPerTank*numberOfTanks*vesselSize)*.02*NaOHCosts;
+    // Assumes Peracetic Acid used at final concentratio of 200ppm  or 0.02%
+    annualPeraceticCosts = (numberOfBatchesPerYearPerTank*numberOfTanks*vesselSize)*.002*PeraceticAcidCosts; //Assumes PA at 15-20%
+    annualCIPCosts = annualNaOHCosts+annualPeraceticCosts;
 
     // Primary Cell Removal Calculations (Centrifugation)
     annualCentrifugeVolume = totalAnnualFermWorkingVolume; // Liters
@@ -398,6 +398,7 @@ function bioprocessopexcapex(Input){
     totalAnnualBiomass = finalBiomassConcentration*totalAnnualFermWorkingVolume/1000; // kg biomass per year
     CostofBiomassDisposal = 0.0003*totalAnnualBiomass*CEPCI + 0*CostOfFuel; // $/year (Ulrich & Vasudevan)
 
+
 // Capex Estimations
 // Major Equipment
 // For all major equipment
@@ -406,14 +407,18 @@ function bioprocessopexcapex(Input){
 // 2009-2020 Producers inflation = 1.17
 // 2013-2020 Producers inflation = 1.00
 // 2010-2020 Producers inflation = 1.12
+// 2017-2020 Producers inflation = 1.06
+
 
          if (vesselSize == 1000000){      // %% Humbird and NREL 2013
-             fermenterUnitCost = 1631000;
+             fermenterUnitCost = 1631000*1.06;
             }else if (vesselSize == 500000){
-             fermenterUnitCost = 974000;
+             fermenterUnitCost = 974000*1.06;
             }else if (vesselSize == 200000){
-             fermenterUnitCost = 442000;
+             fermenterUnitCost = 442000*1.06;
           }
+
+// Area 200
 
 // Main Fermenter Area including Air Handling
         fermenterCost = numberOfTanks*(fermenterUnitCost); // Humbird and NREL 2013 , Quote year 2009
@@ -423,86 +428,163 @@ function bioprocessopexcapex(Input){
         maxBlowerFlowRate = 23.6; //Maximum air flow (m3/s) from a single blower (Seider, Seader, and Lewin 2016)
         numberOfBlowers = Math.ceil(numberOfTanks*maxAirFlowRate*(totalFermentationTime/(totalFermentationTime+turnAroundTime))/maxBlowerFlowRate);// Number of blowers required
         flowRatePerBlower = numberOfTanks*maxAirFlowRate*(totalFermentationTime/(totalFermentationTime+turnAroundTime))/numberOfBlowers;
-        airBlowerCost = numberOfTanks*(9000*(vesselSize/1000000)^0.6); // NREL 2013 , Quote year 2013
         airBlowerCost = numberOfBlowers*29000*(flowRatePerBlower/43.333)^0.6; // NREL 2013 , Quote year 2013, based on $29k for each 43.3m3/s blower
         airBlowerTIC = 1.00*airBlowerCost*1.6;
-        TransferPumpsCost = numberOfTanks*(3933*(vesselSize/950000)^0.8); //NREL 2009
+        TransferPumpsCost = 2*numberOfTanks*(3933*(vesselSize/950000)^0.8); //NREL 2009
         TransferPumpsTIC = 1.17*TransferPumpsCost*2.3;
         fermentationCoolersCost = 0 ; // included in fermenter cost
         fermentationCoolersTIC = 0 ; // included in fermenter cost
-
-//CIP for Main Fermentation
-        causticStorageTankCost = (98000*((numberOfTanks*vesselSize)/105991)^0.7); // NREL 2013 , Quote year 2010, holds 1/10 Ferm Volume od Concentrated Base
-        causticStorageStorageTankTIC = 1.13*causticStorageTankCost*2;//
-
-// Seed Fermenter Area
-         seedEquipmentTIC = 0.27*(fermenterTIC + fermenterAgitatorTIC + airBlowerTIC + TransferPumpsTIC);  // Assume 0.27 * production fermentation equipment cost per NREL_2013
+        mainFermPiping = 0.05*(fermenterTIC+fermenterAgitatorTIC+airBlowerTIC+TransferPumpsTIC);
+        mainFermTIC = (mainFermPiping+fermenterTIC+fermenterAgitatorTIC+airBlowerTIC+TransferPumpsTIC);
 
 // Sugar Storage
         glucoseStorageTankCost = (70000*((averageGlucoseConsumptionRate*12)/264978)^0.7); // NREL 2013 , Quote year 2009, holds 12 hrs of feed.
         glucoseStorageTankTIC = 1.17*glucoseStorageTankCost*2.6; //
+        glucoseStorageTransferPumpsCost = numberOfTanks*(3933*((averageGlucoseConsumptionRate*12)/950000)^0.8); //NREL 2009
+        glucoseStorageTransferPumpsTIC= 1.17*glucoseStorageTransferPumpsCost*2.3;
+        glucoseStoragepiping = 0.05*(glucoseStorageTankTIC+glucoseStorageTransferPumpsTIC);
+        glucoseStorageTIC = (glucoseStoragepiping+glucoseStorageTankTIC+glucoseStorageTransferPumpsTIC);
 
-// Media & Titrant Prep & Storage
-        agitatedMediaPrepTankCost = (91200*(vesselSize/264978)^0.7); // NREL 2013 , Quote year 2009
-        agitatedMediaPrepTankTIC = 1.17*agitatedMediaPrepTankCost*2.6;//
+// Titrant Prep & Storage
         ammoniaStorageTankCost = (98000*((averageNH3ConsumptionRate*12)/105991)^0.7); // NREL 2013 , Quote year 2010, holds 12 hrs of feed.
         ammoniaStorageTankTIC = 1.13*ammoniaStorageTankCost*2;//
+        acidStorageTankTIC = ammoniaStorageTankTIC;
+        ammoniaTransferPumpsCost = numberOfTanks*(3933*((averageNH3ConsumptionRate*12)/950000)^0.8); //NREL 2009
+        ammoniaTransferPumpsCostTIC = 1.17*ammoniaTransferPumpsCost*2.3;
+        acidTransferPumpsCostTIC  = 1.17*ammoniaTransferPumpsCost*2.3;
+        additionPiping = 0.05*(ammoniaStorageTankTIC+acidStorageTankTIC +ammoniaTransferPumpsCostTIC+acidTransferPumpsCostTIC);
+        additionsTIC = (additionPiping+ammoniaStorageTankTIC+acidStorageTankTIC +ammoniaTransferPumpsCostTIC+acidTransferPumpsCostTIC);
+
+// Agitated Media Prep & Storage
+        agitatedMediaPrepTankCost = (91200*(vesselSize/264978)^0.7); // NREL 2013 , Quote year 2009
+        agitatedMediaPrepTankTIC = 1.17*agitatedMediaPrepTankCost*2.6;//
+        mediaTransferPumpsCost = (numberOfTanks+1)*(3933*(vesselSize/950000)^0.8); //NREL 2009 + 1 for RO water addition
+        mediaTransferPumpsCostTIC  = 1.17*mediaTransferPumpsCost*2.3;
+        MediaHeatExchangerTIC = 25000*2;
+        MediaWaterHeaterTIC  = 25000*2;
+        mediaPiping = 0.05*(agitatedMediaPrepTankTIC+mediaTransferPumpsCostTIC+MediaWaterHeaterTIC);
+        mediaPrepTIC = (mediaPiping+agitatedMediaPrepTankTIC+mediaTransferPumpsCostTIC+MediaWaterHeaterTIC);
+
+// Dry Chemicals
+       DryChemicalAddition  = 100000;
+       DryChemicalAdditionTIC = 2*DryChemicalAddition; // 2020 Estimate Lynch
+
+// CIP
+        CIPTankCost = 3*(98000*((vesselSize/100)/105991)^0.7); // NREL 2013 , Quote year 2010, holds 1/100 volume of concentrated
+        CIPTankTIC = 1.13*CIPTankCost*2;//
+        CIPTransferPumpsCost = numberOfTanks*(3933*((vesselSize/100)/950000)^0.8); //NREL 2009
+        CIPTransferPumpsCostTIC  = 1.17*CIPTransferPumpsCost*2.3;
+        CIPFilterCostTIC = 35000*2; // 2020 Estimate Lynch
+        CIPHeaterCostTIC = 30000*2; // 2020 Estimate Lynch
+        CIPpipingTIC = 0.05*(CIPTankTIC +CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC);
+        CIPTIC = (CIPpipingTIC+CIPTankTIC +CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC);
+
+        MainFermAreaTIC = mainFermTIC+glucoseStorageTIC+additionsTIC+mediaPrepTIC+DryChemicalAdditionTIC+ CIPTIC;
+
+
+// Area 100: Seed Fermenter Area
+         seedEquipmentTIC = 0.27*(mainFermTIC + glucoseStorageTIC + additionsTIC + mediaPrepTIC );  // Assume 0.27 * production fermentation equipment cost per NREL_2013
+
+// Area 400 : Primary Cell Removal Capex
+
+// Centrifugation
+        CentrifugeCost = numberOfCentrigfuges*(2748000*((25000)/264000)^0.8); //  SuperPro estimate from https://www.nap.edu/read/12620/chapter/22#353 (4400L/min =264000L/hr)
+        CentrifugeTIC = 1.17*CentrifugeCost*1.8;//
+        Centrifugepiping = 0.05*CentrifugeTIC;
+        CentrifugeTIC = Centrifugepiping + Centrifugepiping;
 
 // Broth Storage
         brothStorageTankCost = (1317000*((vesselSize*numberOfTanks*0.5)/4542000)^0.7); // NREL 2013 , Quote year 2011, sized to 1/2 of fermentation capacity
         brothStorageTankTIC = 1.0*brothStorageTankCost*1.8;
+        brothStorageTransferPumpCost= (3933*((vesselSize*numberOfTanks*0.5)/950000)^0.8); //NREL 2009
+        brothStorageTransferPumpTIC= 1.17*brothStorageTransferPumpCost*2.3;
+        brothStoragePiping = 0.05*(brothStorageTankTIC +brothStorageTransferPumpTIC);
+        brothStorageTIC = (brothStoragePiping+brothStorageTankTIC +brothStorageTransferPumpTIC);
 
- // Centrifugation
-        decanterCentrifugeCost = numberOfCentrigfuges*(2748000*((25000)/264000)^0.8); //  SuperPro estimate from https://www.nap.edu/read/12620/chapter/22#353 (4400L/min =26400L/hr)
-        decanterCentrifugeTIC = 1.122*decanterCentrifugeCost*1.8;//
+// Cell heat Kill
+        HeatTreatmentpackageTIC = 2*250000; // 2020 Lynch Estimate, includes Piping
 
- // Utilities Generation
+        PrimaryCellRemovalTIC = (CentrifugeTIC + brothStorageTIC + HeatTreatmentpackageTIC);
+
+// Area 0: Utilities
+
+// Process Utilities
         // Cooling Water
-           coolingTowerTIC = 250*cumulativeCoolingRateDemand; //
-        // Boiler
+           coolingTowerTIC = 250*cumulativeCoolingRateDemand;
+           coolingTowerPumpsTIC = coolingTowerTIC;
+           coolingTowerPiping = 0.05*(coolingTowerTIC+coolingTowerPumpsTIC);
+           coolingTIC = (coolingTowerPiping+coolingTowerTIC+coolingTowerPumpsTIC);
 
-        // Water Purification
+        // Boiler Package
+            BoilerPackageCosts = 1000000;
+            BoilerPackageTIC = 2*BoilerPackageCosts;
+
+        // AirHandling
+            AirDryingTIC = 100000*2;
+            AirReceiverTIC = 100000*2;
+            AirPiping=0.05*(AirDryingTIC+AirReceiverTIC);
+            AirHandlingTIC =(AirPiping+AirDryingTIC+AirReceiverTIC);
+
+        // Water Handling & Purification
+            MunicpalWaterTankTIC = 50000*2;
+            PotableWaterTankTIC  = 50000*2;
+            SoftenerTankTIC  = 20000*2;
+            BrineTankTIC  = 20000*2;
+            PotableWaterCoolerTIC  = 30000*2;
+            MunipalWaterPumpTIC  = 15000*2;
+            ROSystemTIC  = 20000*2;
+            WaterPipingTIC  = 0.05*(MunicpalWaterTankTIC+PotableWaterTankTIC+SoftenerTankTIC+BrineTankTIC+ PotableWaterCoolerTIC+MunipalWaterPumpTIC+ROSystemTIC);
+            WaterHandlingTIC= (WaterPipingTIC+MunicpalWaterTankTIC+PotableWaterTankTIC+SoftenerTankTIC+BrineTankTIC+ PotableWaterCoolerTIC+MunipalWaterPumpTIC+ROSystemTIC);
+
+       // Waste Disposal
+            WasteWaterTankTIC = 100000*2;
+            WasteWaterHeatExchangerTIC = 25000*2;
+            WasteWaterHeaterTIC  = 25000*2;
+            WasteWaterHeaterPumpTIC = 8000*2;
+            WasteWaterPipingTIC  = 0.05*(WasteWaterTankTIC+WasteWaterHeatExchangerTIC+WasteWaterHeaterTIC+WasteWaterHeaterPumpTIC);
+            WasteWaterTIC = (WasteWaterPipingTIC +WasteWaterTankTIC+WasteWaterHeatExchangerTIC+WasteWaterHeaterTIC+WasteWaterHeaterPumpTIC);
+
+       // Utilities Total
+
+        processUtilitiesTIC  = (coolingTIC + BoilerPackageTIC + AirHandlingTIC+WaterHandlingTIC+WasteWaterTIC)
+
+
+// Area 600 : Instruments & Control
+        controlSystems =0.15*(MainFermAreaTIC + seedEquipmentTIC+ PrimaryCellRemovalTIC+ processUtilitiesTIC);
+        fermtotalInstalledEquipmentCost = MainFermAreaTIC + seedEquipmentTIC+ PrimaryCellRemovalTIC+ processUtilitiesTIC +controlSystems ;
 
 // DSP
-        fermtotalInstalledEquipmentCost = fermenterTIC + fermenterAgitatorTIC + airBlowerTIC +  TransferPumpsTIC +  fermentationCoolersTIC + brothStorageTankTIC + seedEquipmentTIC + glucoseStorageTankTIC + agitatedMediaPrepTankTIC + ammoniaStorageTankTIC +  coolingTowerTIC ;
         totalInstalledEquipmentCost =  fermtotalInstalledEquipmentCost/(1-dspCAPEXfraction);
         dspTIC = dspCAPEXfraction*totalInstalledEquipmentCost;
 
-// Instruments & Control
 
-
-
-// Piping
-        additionalPiping = 0.045*totalInstalledEquipmentCost;
-
-//  Buildings: dministration, Warehousing etc
+//  Buildings: administration, Warehousing etc
         warehousing = 0.04*totalInstalledEquipmentCost;
-        administrativeBuildings = 0.05*totalInstalledEquipmentCost;
+        administrativeBuildings = 0.05*totalInstalledEquipmentCost; //Office
         siteDevelopment = 0.09*totalInstalledEquipmentCost;
 
 // Total Direct Costs
-        totalDirectCost = additionalPiping+siteDevelopment+warehousing+administrativeBuildings +totalInstalledEquipmentCost;
+        totalDirectCost =siteDevelopment+warehousing+administrativeBuildings +totalInstalledEquipmentCost;
 
 // Indirect Costs
 
         HomeOffice = 0.2*totalDirectCost; // Engineering &  https://www.sciencedirect.com/topics/engineering/minimum-ethanol-selling-price
         prorateableExpenses = 0.1*totalDirectCost;
         fieldExpenses  = 0.1*totalDirectCost;
-        officeAndConstructionFee = 0.2*totalDirectCost;
         projectContingency = 0.2*totalDirectCost;
         otherStartupCosts = 0.1*totalDirectCost; // permitting etc.
-        totalIndirectCosts = otherStartupCosts + projectContingency +officeAndConstructionFee +fieldExpenses  + prorateableExpenses + HomeOffice;
+        totalIndirectCosts = otherStartupCosts + projectContingency +HomeOffice +fieldExpenses  + prorateableExpenses ;
         fixedCapitalInvestment = totalDirectCost + totalIndirectCosts;
         workingCapital = 0.05*fixedCapitalInvestment;
         totaCapitalInvestment  = fixedCapitalInvestment + workingCapital;
 
    // Fermentation Opex Cost Summary
     annualUtilityCosts = annualCostOfHeatKill + annualCostOfSterilization +  annualCostOfCoolingWater + annualCostOfCompressedAir + annualCost0fMassTransfer + CostofBiomassDisposal + annualCostOfCentrifugation; //
-    annualFeedstockCosts = annualCostOfMedia  + annualCostOfNH3 + annualCostOfGlucose + annualWaterCosts; //
+    annualRawMaterialCosts = annualCostOfMedia  + annualCostOfNH3 + annualCostOfGlucose + annualWaterCosts + annualCIPCosts; //
     annualLaborCosts = 1.122*203923*numberOfTanks; //  (includes overhead labor uses cost per tank (NREL2013))x inflation factor);//
     annualAdditionalFixedCosts = 1.122*0.037*1.175*(totalDirectCost); // (per NREL2013 x inflation factor); //
     annualFixedCosts = annualAdditionalFixedCosts + annualLaborCosts; //
-    annualfermOpex = annualUtilityCosts + annualFeedstockCosts +annualFixedCosts;//
+    annualfermOpex = annualUtilityCosts + annualRawMaterialCosts +annualFixedCosts;//
 
     //Total Opex
     annualOpex  =  annualfermOpex/(1-dspOPEXfraction);
@@ -514,12 +596,13 @@ function bioprocessopexcapex(Input){
     annualAdditionalFixedCostsperkg = annualAdditionalFixedCosts/plantCapacity;//
     annualfermOpexperkg = annualfermOpex/plantCapacity;//
     annualFixedCostsperkg = annualFixedCosts/plantCapacity;//
-    annualFeedstockCostsperkg = annualFeedstockCosts/plantCapacity;//
+    annualRawMaterialCostsperkg = annualRawMaterialCosts/plantCapacity;//
     annualUtilityCostsperkg = annualUtilityCosts/plantCapacity;//
 
     costOfGlucoseperkg = annualCostOfGlucose/plantCapacity;
     costOfAmmoniaperkg = annualCostOfNH3/plantCapacity;
     costOfMediaperkg = (annualCostOfMedia+ annualWaterCosts)/plantCapacity;
+    costOfCIP = annualCIPCosts/plantCapacity
     costOfAerationperkg = (annualCost0fMassTransfer + annualCostOfCompressedAir)/plantCapacity;
     costOfCoolingperkg = annualCostOfCoolingWater/plantCapacity;
     costOfBiomassDisposalperkg = (CostofBiomassDisposal+annualCostOfHeatKill)/plantCapacity;
