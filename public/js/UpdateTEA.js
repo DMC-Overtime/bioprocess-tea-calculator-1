@@ -503,7 +503,6 @@ function bioprocessopexcapex(Input){
 
 // Cell heat Kill
         HeatTreatmentpackageTIC = 2*250000; // 2020 Lynch Estimate, includes Piping
-
         PrimaryCellRemovalTIC = (CentrifugeTIC + brothStorageTIC + HeatTreatmentpackageTIC);
 
 // Area 0: Utilities
@@ -550,7 +549,7 @@ function bioprocessopexcapex(Input){
 
 
 // Area 600 : Instruments & Control
-        controlSystems =0.15*(MainFermAreaTIC + seedEquipmentTIC+ PrimaryCellRemovalTIC+ processUtilitiesTIC);
+        controlSystems =0.10*(MainFermAreaTIC + seedEquipmentTIC+ PrimaryCellRemovalTIC+ processUtilitiesTIC);
         fermtotalInstalledEquipmentCost = MainFermAreaTIC + seedEquipmentTIC+ PrimaryCellRemovalTIC+ processUtilitiesTIC +controlSystems ;
 
 // DSP
@@ -576,7 +575,8 @@ function bioprocessopexcapex(Input){
         totalIndirectCosts = otherStartupCosts + projectContingency +HomeOffice +fieldExpenses  + prorateableExpenses ;
         fixedCapitalInvestment = totalDirectCost + totalIndirectCosts;
         workingCapital = 0.05*fixedCapitalInvestment;
-        totaCapitalInvestment  = fixedCapitalInvestment + workingCapital;
+        realEstate= 0.06*fixedCapitalInvestment;
+        totaCapitalInvestment  = fixedCapitalInvestment + workingCapital + realEstate;
 
    // Fermentation Opex Cost Summary
     annualUtilityCosts = annualCostOfHeatKill + annualCostOfSterilization +  annualCostOfCoolingWater + annualCostOfCompressedAir + annualCost0fMassTransfer + CostofBiomassDisposal + annualCostOfCentrifugation; //
