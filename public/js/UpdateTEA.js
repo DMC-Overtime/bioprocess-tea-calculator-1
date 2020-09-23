@@ -551,11 +551,15 @@ function bioprocessopexcapex(Input){
 // Area 600 : Instruments & Control
         controlSystems =0.10*(MainFermAreaTIC + seedEquipmentTIC+ PrimaryCellRemovalTIC+ processUtilitiesTIC);
         fermtotalInstalledEquipmentCost = MainFermAreaTIC + seedEquipmentTIC+ PrimaryCellRemovalTIC+ processUtilitiesTIC +controlSystems ;
-
+          console.log(MainFermAreaTIC);
+          console.log(seedEquipmentTIC);
+          console.log(PrimaryCellRemovalTIC);
+           console.log(processUtilitiesTIC);
+           console.log(controlSystems);
 // DSP
         totalInstalledEquipmentCost =  fermtotalInstalledEquipmentCost/(1-dspCAPEXfraction);
         dspTIC = dspCAPEXfraction*totalInstalledEquipmentCost;
-
+      console.log(dspTIC);
 
 //  Buildings: administration, Warehousing etc
         warehousing = 0.04*totalInstalledEquipmentCost;
