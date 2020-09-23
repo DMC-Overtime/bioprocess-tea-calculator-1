@@ -559,8 +559,8 @@ function bioprocessopexcapex(Input){
 // DSP
         totalInstalledEquipmentCost =  fermtotalInstalledEquipmentCost/(1-dspCAPEXfraction);
         dspTIC = dspCAPEXfraction*totalInstalledEquipmentCost;
-      console.log(dspTIC);
-
+        console.log(dspTIC);
+        console.log(totalInstalledEquipmentCost);
 //  Buildings: administration, Warehousing etc
         warehousing = 0.04*totalInstalledEquipmentCost;
         administrativeBuildings = 0.05*totalInstalledEquipmentCost; //Office
