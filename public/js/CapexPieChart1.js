@@ -1,4 +1,4 @@
-  function CapexPieChartTIC(bioprocessOutputs) {
+  function CapexPieChart1(bioprocessOutputs) {
 //Total Installed Equipment
     fermTIC = (bioprocessOutputs.MainFermAreaTIC).toFixed(4);
     seedEquipmentTIC = (bioprocessOutputs.seedEquipmentTIC).toFixed(4);
@@ -11,7 +11,7 @@
 
     data1 = [fermTIC,seedEquipmentTIC,primaryCellRemovalTIC,processUtilitiesTIC,controlSystems,dspTIC];
 
-     let myCapexPieChart= document.getElementById("myCapexPieChart").getContext('2d');
+     let myCapexPieChart= document.getElementById("myCapexPieChart1").getContext('2d');
      let myCapexPieChart1 = new Chart(myCapexPieChart, {
         type:'doughnut',
         data:{

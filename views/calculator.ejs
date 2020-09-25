@@ -407,9 +407,9 @@
         </div>
 
         <div class ="item2">
-                <h3>CAPEX Breakdown (TIC)</h3>
+                <h3>CAPEX Breakdown (TIC) $<span id="bioprocessoutputsTIC"></span></h3>
                 <div class="output" >
-                <canvas id="myCapexPieChart"></canvas>
+                <canvas id="myCapexPieChart1"></canvas>
                 </div>
         </div>
         <div class ="break"><br></div>
@@ -485,6 +485,143 @@
             <input type="hidden" id="productProFormaNetIncome" name="productProFormaNetIncome"  required>
             <input type="hidden" id="productProFormaNetCashFlow" name="productProFormaNetCashFlow"  required>
             <input type="hidden" id="productProFormaCumCashFlow" name="productProFormaCumCashFlow"  required>
+            <input type="hidden" id="MainFermAreaEquip" name="MainFermAreaEquip"  required>
+            <input type="hidden" id="MainFermAreaTIC" name="MainFermAreaTIC"  required>
+            <input type="hidden" id="fermenterCost" name="fermenterCost"  required>
+            <input type="hidden" id="fermenterTIC" name="fermenterTIC"  required>
+            <input type="hidden" id="fermenterAgitatorCost" name="fermenterAgitatorCost"  required>
+            <input type="hidden" id="fermenterAgitatorTIC" name="fermenterAgitatorTIC"  required>
+            <input type="hidden" id="airBlowerCost" name="airBlowerCost"  required>
+            <input type="hidden" id="airBlowerTIC" name="airBlowerTIC"  required>
+            <input type="hidden" id="FermTransferPumpsCost" name="FermTransferPumpsCost"  required>
+            <input type="hidden" id="FermTransferPumpsTIC" name="FermTransferPumpsTIC"  required>
+            <input type="hidden" id="mainFermPiping" name="mainFermPiping"  required>
+            <input type="hidden" id="mainFermTanksEquip" name="mainFermTanksEquip"  required>
+            <input type="hidden" id="mainFermTanksTIC" name="mainFermTanksTIC"  required>
+            <input type="hidden" id="glucoseStorageTankCost" name="glucoseStorageTankCost"  required>
+            <input type="hidden" id="glucoseStorageTankTIC" name="glucoseStorageTankTIC"  required>
+            <input type="hidden" id="glucoseStorageTransferPumpsCost" name="glucoseStorageTransferPumpsCost"  required>
+            <input type="hidden" id="glucoseStorageTransferPumpsTIC" name="glucoseStorageTransferPumpsTIC"  required>
+            <input type="hidden" id="glucoseStoragepiping" name="glucoseStoragepiping"  required>
+            <input type="hidden" id="glucoseStorageEquip" name="glucoseStorageEquip"  required>
+            <input type="hidden" id="glucoseStorageTIC" name="glucoseStorageTIC"  required>
+            <input type="hidden" id="ammoniaStorageTankCost" name="ammoniaStorageTankCost"  required>
+            <input type="hidden" id="ammoniaStorageTankTIC" name="ammoniaStorageTankTIC"  required>
+            <input type="hidden" id="acidStorageTankCost" name="acidStorageTankCost"  required>
+            <input type="hidden" id="acidStorageTankTIC" name="acidStorageTankTIC"  required>
+            <input type="hidden" id="ammoniaTransferPumpsCost" name="ammoniaTransferPumpsCost"  required>
+            <input type="hidden" id="ammoniaTransferPumpsCostTIC" name="ammoniaTransferPumpsCostTIC"  required>
+            <input type="hidden" id="acidTransferPumpsCost" name="acidTransferPumpsCost"  required>
+            <input type="hidden" id="acidTransferPumpsCostTIC" name="acidTransferPumpsCostTIC"  required>
+            <input type="hidden" id="additionPiping" name="additionPiping"  required>
+            <input type="hidden" id="additionsEquip" name="additionsEquip"  required>
+            <input type="hidden" id="additionsTIC" name="additionsTIC"  required>
+            <input type="hidden" id="agitatedMediaPrepTankCost" name="agitatedMediaPrepTankCost"  required>
+            <input type="hidden" id="agitatedMediaPrepTankTIC" name="agitatedMediaPrepTankTIC"  required>
+            <input type="hidden" id="mediaTransferPumpsCost" name="mediaTransferPumpsCost"  required>
+            <input type="hidden" id="mediaTransferPumpsCostTIC" name="mediaTransferPumpsCostTIC"  required>
+            <input type="hidden" id="MediaHeatExchanger" name="MediaHeatExchanger"  required>
+            <input type="hidden" id="MediaHeatExchangerTIC" name="MediaHeatExchangerTIC"  required>
+            <input type="hidden" id="MediaWaterHeater" name="MediaWaterHeater"  required>
+            <input type="hidden" id="MediaWaterHeaterTIC" name="MediaWaterHeaterTIC"  required>
+            <input type="hidden" id="mediaPiping" name="mediaPiping"  required>
+            <input type="hidden" id="DryChemicalAdditionSkid" name="DryChemicalAdditionSkid"  required>
+            <input type="hidden" id="DryChemicalAdditionSkidTIC" name="DryChemicalAdditionSkidTIC"  required>
+            <input type="hidden" id="mediaPrepEquip" name="mediaPrepEquip"  required>
+            <input type="hidden" id="mediaPrepTIC" name="mediaPrepTIC"  required>
+            <input type="hidden" id="CIPTankCost" name="CIPTankCost"  required>
+            <input type="hidden" id="CIPTankTIC" name="CIPTankTIC"  required>
+            <input type="hidden" id="CIPTransferPumpsCost" name="CIPTransferPumpsCost"  required>
+            <input type="hidden" id="CIPTransferPumpsCostTIC" name="CIPTransferPumpsCostTIC"  required>
+            <input type="hidden" id="CIPFilterCost" name="CIPFilterCost"  required>
+            <input type="hidden" id="CIPFilterCostTIC" name="CIPFilterCostTIC"  required>
+            <input type="hidden" id="CIPHeaterCost" name="CIPHeaterCost"  required>
+            <input type="hidden" id="CIPHeaterCostTIC" name="CIPHeaterCostTIC"  required>
+            <input type="hidden" id="CIPpipingTIC" name="CIPpipingTIC"  required>
+            <input type="hidden" id="CIPEquip" name="CIPEquip"  required>
+            <input type="hidden" id="CIPTIC" name="CIPTIC"  required>
+            <input type="hidden" id="seedEquipment" name="seedEquipment"  required>
+            <input type="hidden" id="seedEquipmentTIC" name="seedEquipmentTIC"  required>
+            <input type="hidden" id="CentrifugeCost" name="CentrifugeCost"  required>
+            <input type="hidden" id="CentrifugeTIC" name="CentrifugeTIC"  required>
+            <input type="hidden" id="Centrifugepiping" name="Centrifugepiping"  required>
+            <input type="hidden" id="CentrifugeEquip" name="CentrifugeEquip"  required>
+            <input type="hidden" id="CentrifugeEquipTIC" name="CentrifugeEquipTIC"  required>
+            <input type="hidden" id="brothStorageTankCost" name="brothStorageTankCost"  required>
+            <input type="hidden" id="brothStorageTankTIC" name="brothStorageTankTIC"  required>
+            <input type="hidden" id="brothStorageTransferPumpCost" name="brothStorageTransferPumpCost"  required>
+            <input type="hidden" id="brothStorageTransferPumpTIC" name="brothStorageTransferPumpTIC"  required>
+            <input type="hidden" id="brothStoragePiping" name="brothStoragePiping"  required>
+            <input type="hidden" id="brothStorageEquip" name="brothStorageEquip"  required>
+            <input type="hidden" id="brothStorageTIC" name="brothStorageTIC"  required>
+            <input type="hidden" id="HeatTreatmentpackage" name="HeatTreatmentpackage"  required>
+            <input type="hidden" id="HeatTreatmentpackageTIC" name="HeatTreatmentpackageTIC"  required>
+            <input type="hidden" id="PrimaryCellRemovalEquip" name="PrimaryCellRemovalEquip"  required>
+            <input type="hidden" id="PrimaryCellRemovalTIC" name="PrimaryCellRemovalTIC"  required>
+            <input type="hidden" id="coolingTowerEquip" name="coolingTowerEquip"  required>
+            <input type="hidden" id="coolingTowerTIC" name="coolingTowerTIC"  required>
+            <input type="hidden" id="coolingTowerPumps" name="coolingTowerPumps"  required>
+            <input type="hidden" id="coolingTowerPumpsTIC" name="coolingTowerPumpsTIC"  required>
+            <input type="hidden" id="coolingTowerPiping" name="coolingTowerPiping"  required>
+            <input type="hidden" id="coolingEquip" name="coolingEquip"  required>
+            <input type="hidden" id="coolingTIC" name="coolingTIC"  required>
+            <input type="hidden" id="BoilerPackageCosts" name="BoilerPackageCosts"  required>
+            <input type="hidden" id="BoilerPackageTIC" name="BoilerPackageTIC"  required>
+            <input type="hidden" id="AirDryer" name="AirDryer"  required>
+            <input type="hidden" id="AirDryingTIC" name="AirDryingTIC"  required>
+            <input type="hidden" id="AirReceiver" name="AirReceiver"  required>
+            <input type="hidden" id="AirReceiverTIC" name="AirReceiverTIC"  required>
+            <input type="hidden" id="AirPiping" name="AirPiping"  required>
+            <input type="hidden" id="AirHandlingEquip" name="AirHandlingEquip"  required>
+            <input type="hidden" id="AirHandlingTIC" name="AirHandlingTIC"  required>
+            <input type="hidden" id="PotableWaterTank" name="PotableWaterTank"  required>
+            <input type="hidden" id="PotableWaterTankTIC" name="PotableWaterTankTIC"  required>
+            <input type="hidden" id="MunicpalWaterTank" name="MunicpalWaterTank"  required>
+            <input type="hidden" id="MunicpalWaterTankTIC" name="MunicpalWaterTankTIC"  required>
+            <input type="hidden" id="SoftenerTank" name="SoftenerTank"  required>
+            <input type="hidden" id="SoftenerTankTIC" name="SoftenerTankTIC"  required>
+            <input type="hidden" id="BrineTank" name="BrineTank"  required>
+            <input type="hidden" id="BrineTankTIC" name="BrineTankTIC"  required>
+            <input type="hidden" id="PotableWaterCooler" name="PotableWaterCooler"  required>
+            <input type="hidden" id="PotableWaterCoolerTIC" name="PotableWaterCoolerTIC"  required>
+            <input type="hidden" id="MunipalWaterPump" name="MunipalWaterPump"  required>
+            <input type="hidden" id="MunipalWaterPumpTIC" name="MunipalWaterPumpTIC"  required>
+            <input type="hidden" id="ROSystem" name="ROSystem"  required>
+            <input type="hidden" id="ROSystemTIC" name="ROSystemTIC"  required>
+            <input type="hidden" id="WaterPiping" name="WaterPiping"  required>
+            <input type="hidden" id="WaterHandlingEquip" name="WaterHandlingEquip"  required>
+            <input type="hidden" id="WaterHandlingTIC" name="WaterHandlingTIC"  required>
+            <input type="hidden" id="WasteWaterTank" name="WasteWaterTank"  required>
+            <input type="hidden" id="WasteWaterTankTIC" name="WasteWaterTankTIC"  required>
+            <input type="hidden" id="WasteWaterHeatExchanger" name="WasteWaterHeatExchanger"  required>
+            <input type="hidden" id="WasteWaterHeatExchangerTIC" name="WasteWaterHeatExchangerTIC"  required>
+            <input type="hidden" id="WasteWaterHeater" name="WasteWaterHeater"  required>
+            <input type="hidden" id="WasteWaterHeaterTIC" name="WasteWaterHeaterTIC"  required>
+            <input type="hidden" id="WasteWaterHeaterPump" name="WasteWaterHeaterPump"  required>
+            <input type="hidden" id="WasteWaterHeaterPumpTIC" name="WasteWaterHeaterPumpTIC"  required>
+            <input type="hidden" id="WasteWaterPiping" name="WasteWaterPiping"  required>
+            <input type="hidden" id="WasteWaterEquip" name="WasteWaterEquip"  required>
+            <input type="hidden" id="WasteWaterTIC" name="WasteWaterTIC"  required>
+            <input type="hidden" id="processUtilitiesEquip" name="processUtilitiesEquip"  required>
+            <input type="hidden" id="processUtilitiesTIC" name="processUtilitiesTIC"  required>
+            <input type="hidden" id="controlSystems" name="controlSystems"  required>
+            <input type="hidden" id="fermtotalInstalledEquipmentCost" name="fermtotalInstalledEquipmentCost"  required>
+            <input type="hidden" id="dspTIC" name="dspTIC"  required>
+            <input type="hidden" id="totalInstalledEquipmentCost" name="totalInstalledEquipmentCost"  required>
+            <input type="hidden" id="warehousing" name="warehousing"  required>
+            <input type="hidden" id="administrativeBuildings" name="administrativeBuildings"  required>
+            <input type="hidden" id="siteDevelopment" name="siteDevelopment"  required>
+            <input type="hidden" id="totalDirectCost" name="totalDirectCost"  required>
+            <input type="hidden" id="HomeOffice" name="HomeOffice"  required>
+            <input type="hidden" id="prorateableExpenses" name="prorateableExpenses"  required>
+            <input type="hidden" id="fieldExpenses" name="fieldExpenses"  required>
+            <input type="hidden" id="projectContingency" name="projectContingency"  required>
+            <input type="hidden" id="otherStartupCosts" name="otherStartupCosts"  required>
+            <input type="hidden" id="totalIndirectCosts" name="totalIndirectCosts"  required>
+            <input type="hidden" id="fixedCapitalInvestment" name="fixedCapitalInvestment"  required>
+            <input type="hidden" id="workingCapital" name="workingCapital"  required>
+            <input type="hidden" id="totaCapitalInvestment" name="totaCapitalInvestment"  required>
+
             <button class="submit" id="saveTEA">Save TEA</button>
             </form>
 
@@ -509,7 +646,7 @@
   <script src="/js/BOO_DCF.js"></script>
   <script src="/js/ProFormaChart.js"></script>
   <script src="/js/OpexPieChart.js"></script>
-  <script src="/js/CapexPieChart.js"></script>
+  <script src="/js/CapexPieChart1.js"></script>
    <script src="/js/UpdateTEA.js"></script>
   <!-- Dynamic Scripts for Process Inputs-->
 

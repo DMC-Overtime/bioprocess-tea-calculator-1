@@ -246,6 +246,550 @@ const teaSchema = new Schema({
         type: String,
         required: true
     },
+    MainFermAreaEquip: {
+        type: String,
+        required: true
+    },
+    MainFermAreaTIC: {
+        type: String,
+        required: true
+    },
+    fermenterCost: {
+        type: String,
+        required: true
+    },
+    fermenterTIC: {
+        type: String,
+        required: true
+    },
+    fermenterAgitatorCost: {
+        type: String,
+        required: true
+    },
+    fermenterAgitatorTIC: {
+        type: String,
+        required: true
+    },
+    airBlowerCost: {
+        type: String,
+        required: true
+    },
+    airBlowerTIC: {
+        type: String,
+        required: true
+    },
+    FermTransferPumpsCost: {
+        type: String,
+        required: true
+    },
+    FermTransferPumpsTIC: {
+        type: String,
+        required: true
+    },
+    mainFermPiping: {
+        type: String,
+        required: true
+    },
+    mainFermTanksEquip: {
+        type: String,
+        required: true
+    },
+    mainFermTanksTIC: {
+        type: String,
+        required: true
+    },
+    glucoseStorageTankCost: {
+        type: String,
+        required: true
+    },
+    glucoseStorageTankTIC: {
+        type: String,
+        required: true
+    },
+    glucoseStorageTransferPumpsCost: {
+        type: String,
+        required: true
+    },
+    glucoseStorageTransferPumpsTIC: {
+        type: String,
+        required: true
+    },
+    glucoseStoragepiping: {
+        type: String,
+        required: true
+    },
+    glucoseStorageEquip: {
+        type: String,
+        required: true
+    },
+    glucoseStorageTIC: {
+        type: String,
+        required: true
+    },
+    ammoniaStorageTankCost: {
+        type: String,
+        required: true
+    },
+    ammoniaStorageTankTIC: {
+        type: String,
+        required: true
+    },
+    acidStorageTankCost: {
+        type: String,
+        required: true
+    },
+    acidStorageTankTIC: {
+        type: String,
+        required: true
+    },
+    ammoniaTransferPumpsCost: {
+        type: String,
+        required: true
+    },
+    ammoniaTransferPumpsCostTIC: {
+        type: String,
+        required: true
+    },
+    acidTransferPumpsCost: {
+        type: String,
+        required: true
+    },
+    acidTransferPumpsCostTIC: {
+        type: String,
+        required: true
+    },
+    additionPiping : {
+        type: String,
+        required: true
+    },
+    additionsEquip: {
+        type: String,
+        required: true
+    },
+    additionsTIC: {
+        type: String,
+        required: true
+    },
+    agitatedMediaPrepTankCost: {
+        type: String,
+        required: true
+    },
+    agitatedMediaPrepTankTIC: {
+        type: String,
+        required: true
+    },
+    mediaTransferPumpsCost: {
+        type: String,
+        required: true
+    },
+    mediaTransferPumpsCostTIC: {
+        type: String,
+        required: true
+    },
+    MediaHeatExchanger: {
+        type: String,
+        required: true
+    },
+    MediaHeatExchangerTIC: {
+        type: String,
+        required: true
+    },
+    MediaWaterHeater: {
+        type: String,
+        required: true
+    },
+    MediaWaterHeaterTIC: {
+        type: String,
+        required: true
+    },
+    mediaPiping: {
+        type: String,
+        required: true
+    },
+    DryChemicalAdditionSkid : {
+        type: String,
+        required: true
+    },
+    DryChemicalAdditionSkidTIC: {
+        type: String,
+        required: true
+    },
+    mediaPrepEquip : {
+        type: String,
+        required: true
+    },
+    mediaPrepTIC: {
+        type: String,
+        required: true
+    },
+    CIPTankCost: {
+        type: String,
+        required: true
+    },
+    CIPTankTIC: {
+        type: String,
+        required: true
+    },
+    CIPTransferPumpsCost: {
+        type: String,
+        required: true
+    },
+    CIPTransferPumpsCostTIC: {
+        type: String,
+        required: true
+    },
+    CIPFilterCost: {
+        type: String,
+        required: true
+    },
+    CIPFilterCostTIC: {
+        type: String,
+        required: true
+    },
+    CIPHeaterCost: {
+        type: String,
+        required: true
+    },
+    CIPHeaterCostTIC: {
+        type: String,
+        required: true
+    },
+    CIPpipingTIC: {
+        type: String,
+        required: true
+    },
+    CIPEquip: {
+        type: String,
+        required: true
+    },
+    CIPTIC: {
+        type: String,
+        required: true
+    },
+    seedEquipment: {
+        type: String,
+        required: true
+    },
+    seedEquipmentTIC: {
+        type: String,
+        required: true
+    },
+    CentrifugeCost: {
+        type: String,
+        required: true
+    },
+    CentrifugeTIC: {
+        type: String,
+        required: true
+    },
+    Centrifugepiping: {
+        type: String,
+        required: true
+    },
+    CentrifugeEquip: {
+        type: String,
+        required: true
+    },
+    CentrifugeEquipTIC: {
+        type: String,
+        required: true
+    },
+    brothStorageTankCost: {
+        type: String,
+        required: true
+    },
+    brothStorageTankTIC: {
+        type: String,
+        required: true
+    },
+    brothStorageTransferPumpCost: {
+        type: String,
+        required: true
+    },
+    brothStorageTransferPumpTIC: {
+        type: String,
+        required: true
+    },
+    brothStoragePiping: {
+        type: String,
+        required: true
+    },
+    brothStorageEquip: {
+        type: String,
+        required: true
+    },
+    brothStorageTIC: {
+        type: String,
+        required: true
+    },
+    HeatTreatmentpackage: {
+        type: String,
+        required: true
+    },
+    HeatTreatmentpackageTIC: {
+        type: String,
+        required: true
+    },
+    PrimaryCellRemovalEquip: {
+        type: String,
+        required: true
+    },
+    PrimaryCellRemovalTIC: {
+        type: String,
+        required: true
+    },
+    coolingTowerEquip: {
+        type: String,
+        required: true
+    },
+    coolingTowerTIC: {
+        type: String,
+        required: true
+    },
+    coolingTowerPumps: {
+        type: String,
+        required: true
+    },
+    coolingTowerPumpsTIC: {
+        type: String,
+        required: true
+    },
+    coolingTowerPiping: {
+        type: String,
+        required: true
+    },
+    coolingEquip: {
+        type: String,
+        required: true
+    },
+    coolingTIC: {
+        type: String,
+        required: true
+    },
+    BoilerPackageCosts: {
+        type: String,
+        required: true
+    },
+    BoilerPackageTIC: {
+        type: String,
+        required: true
+    },
+    AirDryer: {
+        type: String,
+        required: true
+    },
+    AirDryingTIC: {
+        type: String,
+        required: true
+    },
+    AirReceiver: {
+        type: String,
+        required: true
+    },
+    AirReceiverTIC: {
+        type: String,
+        required: true
+    },
+    AirPiping: {
+        type: String,
+        required: true
+    },
+    AirHandlingEquip: {
+        type: String,
+        required: true
+    },
+    AirHandlingTIC: {
+        type: String,
+        required: true
+    },
+    MunicpalWaterTank: {
+        type: String,
+        required: true
+    },
+    MunicpalWaterTankTIC: {
+        type: String,
+        required: true
+    },
+    PotableWaterTank: {
+        type: String,
+        required: true
+    },
+    PotableWaterTankTIC: {
+        type: String,
+        required: true
+    },
+    SoftenerTank: {
+        type: String,
+        required: true
+    },
+    SoftenerTankTIC: {
+        type: String,
+        required: true
+    },
+    BrineTank: {
+        type: String,
+        required: true
+    },
+    BrineTankTIC: {
+        type: String,
+        required: true
+    },
+    PotableWaterCooler: {
+        type: String,
+        required: true
+    },
+   PotableWaterCoolerTIC: {
+        type: String,
+        required: true
+    },
+   MunipalWaterPump: {
+        type: String,
+        required: true
+    },
+   MunipalWaterPumpTIC: {
+        type: String,
+        required: true
+    },
+   ROSystem : {
+        type: String,
+        required: true
+    },
+   ROSystemTIC: {
+        type: String,
+        required: true
+    },
+   WaterPiping: {
+        type: String,
+        required: true
+    },
+   WaterHandlingEquip: {
+        type: String,
+        required: true
+    },
+   WaterHandlingTIC: {
+        type: String,
+        required: true
+    },
+   WasteWaterTank: {
+        type: String,
+        required: true
+    },
+   WasteWaterTankTIC: {
+        type: String,
+        required: true
+    },
+   WasteWaterHeatExchanger: {
+        type: String,
+        required: true
+    },
+   WasteWaterHeatExchangerTIC: {
+        type: String,
+        required: true
+    },
+   WasteWaterHeater: {
+        type: String,
+        required: true
+    },
+   WasteWaterHeaterTIC: {
+        type: String,
+        required: true
+    },
+   WasteWaterHeaterPump: {
+        type: String,
+        required: true
+    },
+   WasteWaterHeaterPumpTIC: {
+        type: String,
+        required: true
+    },
+   WasteWaterPiping: {
+        type: String,
+        required: true
+    },
+   WasteWaterEquip: {
+        type: String,
+        required: true
+    },
+   WasteWaterTIC: {
+        type: String,
+        required: true
+    },
+   processUtilitiesEquip: {
+        type: String,
+        required: true
+    },
+   processUtilitiesTIC: {
+        type: String,
+        required: true
+    },
+   controlSystems: {
+        type: String,
+        required: true
+    },
+   fermtotalInstalledEquipmentCost: {
+        type: String,
+        required: true
+    },
+   dspTIC: {
+        type: String,
+        required: true
+    },
+   totalInstalledEquipmentCost: {
+        type: String,
+        required: true
+    },
+   warehousing: {
+        type: String,
+        required: true
+    },
+   administrativeBuildings: {
+        type: String,
+        required: true
+    },
+   siteDevelopment: {
+        type: String,
+        required: true
+    },
+   totalDirectCost: {
+        type: String,
+        required: true
+    },
+   HomeOffice: {
+        type: String,
+        required: true
+    },
+   prorateableExpenses: {
+        type: String,
+        required: true
+    },
+   fieldExpenses: {
+        type: String,
+        required: true
+    },
+   projectContingency: {
+        type: String,
+        required: true
+    },
+   otherStartupCosts: {
+        type: String,
+        required: true
+    },
+   totalIndirectCosts: {
+        type: String,
+        required: true
+    },
+   fixedCapitalInvestment: {
+        type: String,
+        required: true
+    },
+    workingCapital: {
+        type: String,
+        required: true
+    },
+   totaCapitalInvestment: {
+        type: String,
+        required: true
+    },
 
 }, { timestamps: true});
 

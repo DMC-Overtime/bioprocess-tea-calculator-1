@@ -10,13 +10,10 @@ function UpdateTEA(){
 //          25-Yield,                     26-turnaroundTime,    27-mediaCost              28-Temperature,         29-overallDSPYield,
 //          30-dspPercentofOpex,          31-dspPercentofCapex ];
 
-
-
 slider = [];
 pageInput=[];
 Input = [];
 pageInput =[];
-
 
 //Update Vessel Size  & Associated Page Outputs
 vesselSize =  UpdateVesselSize();
@@ -88,11 +85,13 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
                 myOpexPieChart.destroy();
                }
               var myOpexPieChart = OpexPieChart(bioprocessOutputs);
-               if(myCapexPieChart){
-                myCapexPieChart.destroy();
+               if(myOpexPieChart){
+                myOpexPieChart.destroy();
                }
-              var myCapexPieChart = CapexPieChart(bioprocessOutputs);
-
+              var myCapexPieChart1 = CapexPieChart1(bioprocessOutputs);
+               if(myCapexPieChart1){
+                myCapexPieChart1.destroy();
+               }
 
 
  // Pull Process Inputs into hidden submission Form
@@ -173,6 +172,148 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
        document.getElementById('productProFormaNetIncome').value = DCFOutput_netIncome.toString();
        document.getElementById('productProFormaNetCashFlow').value = DCFOutput_netCashFlow.toString();
        document.getElementById('productProFormaCumCashFlow').value = DCFOutput_cumCashFlow.toString();
+
+
+ // Pull Bioprocess CAPEX Outputs into hidden submission Form
+
+      document.getElementById('MainFermAreaEquip').value = (bioprocessOutputs.MainFermAreaEquip).toFixed(2);
+      document.getElementById('MainFermAreaTIC').value = (bioprocessOutputs.MainFermAreaTIC).toFixed(2);
+      document.getElementById('fermenterCost').value =(bioprocessOutputs.fermenterCost).toFixed(2);
+      document.getElementById('fermenterTIC').value =(bioprocessOutputs.fermenterTIC).toFixed(2);
+      document.getElementById('fermenterAgitatorCost').value =(bioprocessOutputs.fermenterAgitatorCost).toFixed(2);
+      document.getElementById('fermenterAgitatorTIC').value =(bioprocessOutputs.fermenterAgitatorTIC).toFixed(2);
+      document.getElementById('airBlowerCost').value =(bioprocessOutputs.airBlowerCost).toFixed(2);
+      document.getElementById('airBlowerTIC').value =(bioprocessOutputs.airBlowerTIC).toFixed(2);
+      document.getElementById('FermTransferPumpsCost').value =(bioprocessOutputs.TransferPumpsCost).toFixed(2);
+      document.getElementById('FermTransferPumpsTIC').value =(bioprocessOutputs.TransferPumpsTIC).toFixed(2);
+      document.getElementById('mainFermPiping').value =(bioprocessOutputs.mainFermPiping).toFixed(2);
+      document.getElementById('mainFermTanksEquip').value = (bioprocessOutputs.mainFermEquip).toFixed(2);
+      document.getElementById('mainFermTanksTIC').value =(bioprocessOutputs.mainFermTIC).toFixed(2);
+      document.getElementById('glucoseStorageTankCost').value =(bioprocessOutputs.glucoseStorageTankCost).toFixed(2);
+      document.getElementById('glucoseStorageTankTIC').value =(bioprocessOutputs.glucoseStorageTankTIC).toFixed(2);
+      document.getElementById('glucoseStorageTransferPumpsCost').value =(bioprocessOutputs.glucoseStorageTransferPumpsCost).toFixed(2);
+      document.getElementById('glucoseStorageTransferPumpsTIC').value = (bioprocessOutputs.glucoseStorageTransferPumpsTIC).toFixed(2);
+      document.getElementById('glucoseStoragepiping').value =(bioprocessOutputs.glucoseStoragepiping).toFixed(2);
+      document.getElementById('glucoseStorageEquip').value = (bioprocessOutputs.glucoseStorageEquip).toFixed(2);
+      document.getElementById('glucoseStorageTIC').value =(bioprocessOutputs.glucoseStorageTIC).toFixed(2);
+      document.getElementById('ammoniaStorageTankCost').value = (bioprocessOutputs.ammoniaStorageTankCost).toFixed(2);
+      document.getElementById('ammoniaStorageTankTIC').value =(bioprocessOutputs.ammoniaStorageTankTIC).toFixed(2);
+      document.getElementById('acidStorageTankCost').value = (bioprocessOutputs.acidStorageTankCost).toFixed(2);
+      document.getElementById('acidStorageTankTIC').value =(bioprocessOutputs.acidStorageTankTIC).toFixed(2);
+      document.getElementById('ammoniaTransferPumpsCost').value = (bioprocessOutputs.ammoniaTransferPumpsCost).toFixed(2);
+      document.getElementById('ammoniaTransferPumpsCostTIC').value =(bioprocessOutputs.ammoniaTransferPumpsCostTIC).toFixed(2);
+      document.getElementById('acidTransferPumpsCost').value = (bioprocessOutputs.acidTransferPumpsCost).toFixed(2);
+      document.getElementById('acidTransferPumpsCostTIC').value =(bioprocessOutputs.acidTransferPumpsCostTIC).toFixed(2);
+      document.getElementById('additionPiping').value = (bioprocessOutputs.additionPiping).toFixed(2);
+      document.getElementById('additionsEquip').value =(bioprocessOutputs.additionsEquip).toFixed(2);
+      document.getElementById('additionsTIC').value = (bioprocessOutputs.additionsTIC).toFixed(2);
+      document.getElementById('agitatedMediaPrepTankCost').value =(bioprocessOutputs.agitatedMediaPrepTankCost).toFixed(2);
+      document.getElementById('agitatedMediaPrepTankTIC').value = (bioprocessOutputs.agitatedMediaPrepTankTIC).toFixed(2);
+      document.getElementById('mediaTransferPumpsCost').value =(bioprocessOutputs.mediaTransferPumpsCost).toFixed(2);
+      document.getElementById('mediaTransferPumpsCostTIC').value = (bioprocessOutputs.mediaTransferPumpsCostTIC).toFixed(2);
+      document.getElementById('MediaHeatExchanger').value =(bioprocessOutputs.MediaHeatExchanger).toFixed(2);
+      document.getElementById('MediaHeatExchangerTIC').value =(bioprocessOutputs.MediaHeatExchangerTIC).toFixed(2);
+      document.getElementById('MediaWaterHeater').value =(bioprocessOutputs.MediaWaterHeater).toFixed(2);
+      document.getElementById('MediaWaterHeaterTIC').value =(bioprocessOutputs.MediaWaterHeaterTIC).toFixed(2);
+      document.getElementById('mediaPiping').value =(bioprocessOutputs.MediaHeatExchanger).toFixed(2);
+      document.getElementById('DryChemicalAdditionSkid').value =(bioprocessOutputs.DryChemicalAdditionSkid).toFixed(2);
+      document.getElementById('DryChemicalAdditionSkidTIC').value =(bioprocessOutputs.DryChemicalAdditionSkidTIC).toFixed(2);
+      document.getElementById('mediaPrepEquip').value =(bioprocessOutputs.mediaPrepEquip).toFixed(2);
+      document.getElementById('mediaPrepTIC').value =(bioprocessOutputs.mediaPrepTIC).toFixed(2);
+      document.getElementById('CIPTankCost').value =(bioprocessOutputs.CIPTankCost).toFixed(2);
+      document.getElementById('CIPTankTIC').value =(bioprocessOutputs.CIPTankTIC).toFixed(2);
+      document.getElementById('CIPTransferPumpsCost').value =(bioprocessOutputs.CIPTransferPumpsCost).toFixed(2);
+      document.getElementById('CIPTransferPumpsCostTIC').value =(bioprocessOutputs.CIPTransferPumpsCostTIC).toFixed(2);
+      document.getElementById('CIPFilterCost').value =(bioprocessOutputs.CIPFilterCost).toFixed(2);
+      document.getElementById('CIPFilterCostTIC').value =(bioprocessOutputs.CIPFilterCostTIC).toFixed(2)
+      document.getElementById('CIPHeaterCost').value =(bioprocessOutputs.CIPHeaterCost).toFixed(2);
+      document.getElementById('CIPHeaterCostTIC').value =(bioprocessOutputs.CIPHeaterCostTIC).toFixed(2);
+      document.getElementById('CIPpipingTIC').value =(bioprocessOutputs.CIPpipingTIC).toFixed(2);
+      document.getElementById('CIPEquip').value =(bioprocessOutputs.CIPEquip).toFixed(2);
+      document.getElementById('CIPTIC').value =(bioprocessOutputs.CIPTIC).toFixed(2);
+      document.getElementById('seedEquipment').value =(bioprocessOutputs.seedEquipment).toFixed(2);
+      document.getElementById('seedEquipmentTIC').value =(bioprocessOutputs.seedEquipmentTIC).toFixed(2);
+      document.getElementById('CentrifugeCost').value =(bioprocessOutputs.CentrifugeCost).toFixed(2);
+      document.getElementById('CentrifugeTIC').value =(bioprocessOutputs.CentrifugeTIC).toFixed(2);
+      document.getElementById('Centrifugepiping').value =(bioprocessOutputs.Centrifugepiping).toFixed(2);
+      document.getElementById('CentrifugeEquip').value =(bioprocessOutputs.CentrifugeEquip).toFixed(2);
+      document.getElementById('CentrifugeEquipTIC').value =(bioprocessOutputs.CentrifugeEquipTIC).toFixed(2);
+      document.getElementById('brothStorageTankCost').value =(bioprocessOutputs.brothStorageTankCost).toFixed(2);
+      document.getElementById('brothStorageTankTIC').value =(bioprocessOutputs.brothStorageTankTIC).toFixed(2);
+      document.getElementById('brothStorageTransferPumpCost').value =(bioprocessOutputs.brothStorageTransferPumpCost).toFixed(2);
+      document.getElementById('brothStorageTransferPumpTIC').value =(bioprocessOutputs.brothStorageTransferPumpTIC).toFixed(2);
+      document.getElementById('brothStoragePiping').value =(bioprocessOutputs.brothStoragePiping).toFixed(2);
+      document.getElementById('brothStorageEquip').value =(bioprocessOutputs.brothStorageEquip).toFixed(2);
+      document.getElementById('brothStorageTIC').value =(bioprocessOutputs.brothStorageTIC).toFixed(2);
+      document.getElementById('HeatTreatmentpackage').value =(bioprocessOutputs.HeatTreatmentpackage).toFixed(2);
+      document.getElementById('HeatTreatmentpackageTIC').value =(bioprocessOutputs.HeatTreatmentpackageTIC).toFixed(2);
+      document.getElementById('PrimaryCellRemovalEquip').value =(bioprocessOutputs.PrimaryCellRemovalEquip).toFixed(2);
+      document.getElementById('PrimaryCellRemovalTIC').value =(bioprocessOutputs.PrimaryCellRemovalTIC).toFixed(2);
+      document.getElementById('coolingTowerEquip').value =(bioprocessOutputs.coolingTowerEquip).toFixed(2);
+      document.getElementById('coolingTowerTIC').value =(bioprocessOutputs.coolingTowerTIC).toFixed(2);
+      document.getElementById('coolingTowerPumps').value =(bioprocessOutputs.coolingTowerPumps).toFixed(2);
+      document.getElementById('coolingTowerPumpsTIC').value =(bioprocessOutputs.coolingTowerPumpsTIC).toFixed(2);
+      document.getElementById('coolingTowerPiping').value =(bioprocessOutputs.coolingTowerPiping).toFixed(2);
+      document.getElementById('coolingEquip').value =(bioprocessOutputs.coolingEquip).toFixed(2);
+      document.getElementById('coolingTIC').value =(bioprocessOutputs.coolingTIC).toFixed(2);
+      document.getElementById('BoilerPackageCosts').value =(bioprocessOutputs.BoilerPackageCosts).toFixed(2);
+      document.getElementById('BoilerPackageTIC').value =(bioprocessOutputs.BoilerPackageTIC).toFixed(2);
+      document.getElementById('AirDryer').value =(bioprocessOutputs.AirDryer).toFixed(2);
+      document.getElementById('AirDryingTIC').value =(bioprocessOutputs.AirDryingTIC).toFixed(2);
+      document.getElementById('AirReceiver').value =(bioprocessOutputs.AirReceiver).toFixed(2);
+      document.getElementById('AirReceiverTIC').value =(bioprocessOutputs.AirReceiverTIC).toFixed(2);
+      document.getElementById('AirPiping').value =(bioprocessOutputs.AirPiping).toFixed(2);
+      document.getElementById('AirHandlingEquip').value =(bioprocessOutputs.AirHandlingEquip).toFixed(2);
+      document.getElementById('AirHandlingTIC').value =(bioprocessOutputs.AirHandlingTIC).toFixed(2);
+      document.getElementById('MunicpalWaterTank').value =(bioprocessOutputs.MunicpalWaterTank).toFixed(2);
+      document.getElementById('MunicpalWaterTankTIC').value =(bioprocessOutputs.MunicpalWaterTankTIC).toFixed(2);
+      document.getElementById('PotableWaterTank').value =(bioprocessOutputs.PotableWaterTank).toFixed(2);
+      document.getElementById('PotableWaterTankTIC').value =(bioprocessOutputs.PotableWaterTankTIC).toFixed(2);
+      document.getElementById('SoftenerTank').value =(bioprocessOutputs.SoftenerTank).toFixed(2);
+      document.getElementById('SoftenerTankTIC').value =(bioprocessOutputs.SoftenerTankTIC).toFixed(2);
+      document.getElementById('BrineTank').value =(bioprocessOutputs.BrineTank).toFixed(2);
+      document.getElementById('BrineTankTIC').value =(bioprocessOutputs.BrineTankTIC).toFixed(2);
+      document.getElementById('PotableWaterCooler').value =(bioprocessOutputs.PotableWaterCooler).toFixed(2);
+      document.getElementById('PotableWaterCoolerTIC').value =(bioprocessOutputs.PotableWaterCoolerTIC).toFixed(2);
+      document.getElementById('MunipalWaterPump').value =(bioprocessOutputs.MunipalWaterPump).toFixed(2);
+      document.getElementById('MunipalWaterPumpTIC').value =(bioprocessOutputs.MunipalWaterPumpTIC).toFixed(2);
+      document.getElementById('ROSystem').value =(bioprocessOutputs.ROSystem).toFixed(2);
+      document.getElementById('ROSystemTIC').value =(bioprocessOutputs.ROSystemTIC).toFixed(2);
+      document.getElementById('WaterPiping').value =(bioprocessOutputs.WaterPiping).toFixed(2);
+      document.getElementById('WaterHandlingEquip').value =(bioprocessOutputs.WaterHandlingEquip).toFixed(2);
+      document.getElementById('WaterHandlingTIC').value =(bioprocessOutputs.WaterHandlingTIC).toFixed(2);
+      document.getElementById('WasteWaterTank').value =(bioprocessOutputs.WasteWaterTank).toFixed(2);
+      document.getElementById('WasteWaterTankTIC').value =(bioprocessOutputs.WasteWaterTankTIC).toFixed(2);
+      document.getElementById('WasteWaterHeatExchanger').value =(bioprocessOutputs.WasteWaterHeatExchanger).toFixed(2);
+      document.getElementById('WasteWaterHeatExchangerTIC').value =(bioprocessOutputs.WasteWaterHeatExchangerTIC).toFixed(2);
+      document.getElementById('WasteWaterHeater').value =(bioprocessOutputs.WasteWaterHeater).toFixed(2);
+      document.getElementById('WasteWaterHeaterTIC').value =(bioprocessOutputs.WasteWaterHeaterTIC).toFixed(2);
+      document.getElementById('WasteWaterHeaterPump').value =(bioprocessOutputs.WasteWaterHeaterPump).toFixed(2);
+      document.getElementById('WasteWaterHeaterPumpTIC').value =(bioprocessOutputs.WasteWaterHeaterPumpTIC).toFixed(2);
+      document.getElementById('WasteWaterPiping').value =(bioprocessOutputs.WasteWaterPiping).toFixed(2);
+      document.getElementById('WasteWaterEquip').value =(bioprocessOutputs.WasteWaterEquip).toFixed(2);
+      document.getElementById('WasteWaterTIC').value =(bioprocessOutputs.WasteWaterTIC).toFixed(2);
+      document.getElementById('processUtilitiesEquip').value =(bioprocessOutputs.processUtilitiesEquip).toFixed(2);
+      document.getElementById('processUtilitiesTIC').value =(bioprocessOutputs.processUtilitiesTIC).toFixed(2);
+      document.getElementById('controlSystems').value =(bioprocessOutputs.controlSystems).toFixed(2);
+      document.getElementById('fermtotalInstalledEquipmentCost').value =(bioprocessOutputs.fermtotalInstalledEquipmentCost).toFixed(2);
+      document.getElementById('dspTIC').value =(bioprocessOutputs.dspTIC).toFixed(2);
+      document.getElementById('totalInstalledEquipmentCost').value =(bioprocessOutputs.totalInstalledEquipmentCost).toFixed(2);
+      document.getElementById('warehousing').value =(bioprocessOutputs.warehousing).toFixed(2);
+      document.getElementById('administrativeBuildings').value =(bioprocessOutputs.administrativeBuildings).toFixed(2);
+      document.getElementById('siteDevelopment').value =(bioprocessOutputs.siteDevelopment).toFixed(2);
+      document.getElementById('totalDirectCost').value =(bioprocessOutputs.totalDirectCost).toFixed(2);
+      document.getElementById('HomeOffice').value =(bioprocessOutputs.HomeOffice).toFixed(2);
+      document.getElementById('prorateableExpenses').value =(bioprocessOutputs.prorateableExpenses).toFixed(2);
+      document.getElementById('fieldExpenses').value =(bioprocessOutputs.fieldExpenses).toFixed(2);
+      document.getElementById('projectContingency').value =(bioprocessOutputs.projectContingency).toFixed(2);
+      document.getElementById('otherStartupCosts').value =(bioprocessOutputs.otherStartupCosts).toFixed(2);
+      document.getElementById('totalIndirectCosts').value =(bioprocessOutputs.totalIndirectCosts).toFixed(2);
+      document.getElementById('fixedCapitalInvestment').value =(bioprocessOutputs.fixedCapitalInvestment).toFixed(2);
+      document.getElementById('workingCapital').value =(bioprocessOutputs.workingCapital).toFixed(2);
+      document.getElementById('totaCapitalInvestment').value =(bioprocessOutputs.totaCapitalInvestment).toFixed(2);
+      document.getElementById('bioprocessoutputsTIC').innerHTML = (bioprocessOutputs.totalInstalledEquipmentCost).toFixed(0);
+
 
 }
 
@@ -354,8 +495,7 @@ function bioprocessopexcapex(Input){
     // Cooling Calculations(Cooling Tower Water)
     maxCoolingRate = 0.460*maxOTR*totalAnnualFermWorkingVolume; // kJ/hr per tank uses 460kJ/mole O2 consumed (Doran), equal to 110kcal/mole ( Humbird)
     cumulativeCoolingDemand = 0.460*cumulativeO2; // kJ
-    cumulativeCoolingRateDemandperTank = 0.0000789848*cumulativeCoolingDemand/annualFermentationUpTime; // needed cooling capacity ton
-    cumulativeCoolingRateDemand = numberOfTanks*cumulativeCoolingRateDemandperTank; //ton
+    cumulativeCoolingRateDemand = 0.0000789848*cumulativeCoolingDemand/annualFermentationUpTime; // needed cooling capacity ton
 
    // Cooling Tower Water
     coolingWaterTemperature = 29.4 ; // degrees Celsius
@@ -378,11 +518,12 @@ function bioprocessopexcapex(Input){
     annualCIPCosts = annualNaOHCosts+annualPeraceticCosts;
 
     // Primary Cell Removal Calculations (Centrifugation)
+        // Sigma = Q/2uo e coli uo=6.81X10-9 m/s
+    CentrifugeFlowRate = 10000; //L/hour = 10m3/hr = 0.0028 m3/s) doable with disc stacked centrifuge
     annualCentrifugeVolume = totalAnnualFermWorkingVolume; // Liters
-    decanterCentrifugeFlowRate = 264000; // (L/hour) SuperPro estimate from https://www.nap.edu/read/12620/chapter/22#353 (4400L/min =26400L/hr)
-    hoursOfCentrifugationRequired = annualCentrifugeVolume/25000;
+    hoursOfCentrifugationRequired = annualCentrifugeVolume/10000;
     numberOfCentrigfuges = Math.ceil(hoursOfCentrifugationRequired/annualUpTime);
-    actualAnnualCentrifugeUptime = annualCentrifugeVolume/(numberOfCentrigfuges*decanterCentrifugeFlowRate)
+    actualAnnualCentrifugeUptime = annualCentrifugeVolume/(numberOfCentrigfuges*CentrifugeFlowRate)
     powerConsumptionPerCentrigfuge = 50 ;// kW  include 40 kW for centrifuge and 10kW for pumps
     annualCostOfCentrifugation = numberOfCentrigfuges*powerConsumptionPerCentrigfuge*actualAnnualCentrifugeUptime*ElectricityCost;// $/year
 
@@ -412,17 +553,17 @@ function bioprocessopexcapex(Input){
 
 
          if (vesselSize == 1000000){      // %% NREL 2013, quote year 2010 , inflation - 1.12
-             fermenterUnitCost = (1.12)*(176000)*(Math.pow((1000000/76000),0.7));
+             fermenterUnitCost = (176000)*(Math.pow((1000000/76000),0.7));
             }else if (vesselSize = 500000){
-             fermenterUnitCost = (1.12)*(176000)*(Math.pow((500000/76000),0.7));
+             fermenterUnitCost = (176000)*(Math.pow((500000/76000),0.7));
             }else if (vesselSize = 200000){
-             fermenterUnitCost = (1.12)*(176000)*(Math.pow((200000/76000),0.7));
+             fermenterUnitCost = (176000)*(Math.pow((200000/76000),0.7));
           }
 
 
 // Main Fermenter Area including Air Handling
         fermenterCost = numberOfTanks*(fermenterUnitCost); // NREL 2013 , Quote year 2010
-        fermenterTIC = 1.03*fermenterCost*2;
+        fermenterTIC = 1.12*fermenterCost*2;
         fermenterAgitatorCost = numberOfTanks*36000*(Math.pow((vesselSize/75708),0.5)); // NREL 2013 , Quote year 2013
         fermenterAgitatorTIC = 1.00*fermenterAgitatorCost*1.5;
         maxBlowerFlowRate = 23.6; //Maximum air flow (m3/s) from a single blower (Seider, Seader, and Lewin 2016)
@@ -437,14 +578,16 @@ function bioprocessopexcapex(Input){
         mainFermPiping = 0.045*(fermenterTIC+fermenterAgitatorTIC+airBlowerTIC+TransferPumpsTIC);
         mainFermTIC = (mainFermPiping+fermenterTIC+fermenterAgitatorTIC+airBlowerTIC+TransferPumpsTIC);
         mainFermEquip = fermenterCost + fermenterAgitatorCost + airBlowerCost +TransferPumpsCost+ fermentationCoolersCost;
-       // console.log(mainFermEquip);
+        //console.log(numberOfTanks);
+        //console.log(fermenterUnitCost);
+        //console.log(mainFermEquip);
        // console.log(fermenterUnitCost);
        // console.log(fermenterAgitatorCost);
        // console.log(airBlowerCost);
        // console.log(TransferPumpsCost);
 
 // Sugar Storage
-        glucoseStorageTankCost = (70000*(Math.pow(averageGlucoseConsumptionRate*12)/264978),0.7); // NREL 2013 , Quote year 2009, holds 12 hrs of feed.
+        glucoseStorageTankCost = 70000*(Math.pow(((averageGlucoseConsumptionRate*12)/264978),0.7)); // NREL 2013 , Quote year 2009, holds 12 hrs of feed.
         glucoseStorageTankTIC = 1.17*glucoseStorageTankCost*2.6; //
         glucoseStorageTransferPumpsCost = numberOfTanks*3933*(Math.pow(((averageGlucoseConsumptionRate*12)/950000),0.8)); //NREL 2009
         glucoseStorageTransferPumpsTIC= 1.17*glucoseStorageTransferPumpsCost*2.3;
@@ -454,15 +597,17 @@ function bioprocessopexcapex(Input){
        // console.log(sugarStorageEquip);
 
 // Titrant Prep & Storage
-        ammoniaStorageTankCost = (98000*(Math.pow((averageNH3ConsumptionRate*12)/105991),0.7)); // NREL 2013 , Quote year 2010, holds 12 hrs of feed.
+        ammoniaStorageTankCost = 98000*(Math.pow(((averageNH3ConsumptionRate*12)/105991),0.7)); // NREL 2013 , Quote year 2010, holds 12 hrs of feed.
         ammoniaStorageTankTIC = 1.13*ammoniaStorageTankCost*2;//
-        acidStorageTankTIC = ammoniaStorageTankTIC;
-        ammoniaTransferPumpsCost = numberOfTanks*(3933*(Math.pow((averageNH3ConsumptionRate*12)/950000),0.8)); //NREL 2009
+        acidStorageTankCost = ammoniaStorageTankCost;
+        acidStorageTankTIC = 1.13*acidStorageTankCost*2;//
+        ammoniaTransferPumpsCost = numberOfTanks*3933*(Math.pow(((averageNH3ConsumptionRate*12)/950000),0.8)); //NREL 2009
         ammoniaTransferPumpsCostTIC = 1.17*ammoniaTransferPumpsCost*2.3;
+        acidTransferPumpsCost  = ammoniaTransferPumpsCost;
         acidTransferPumpsCostTIC  = 1.17*ammoniaTransferPumpsCost*2.3;
         additionPiping = 0.045*(ammoniaStorageTankTIC+acidStorageTankTIC +ammoniaTransferPumpsCostTIC+acidTransferPumpsCostTIC);
         additionsTIC = (additionPiping+ammoniaStorageTankTIC+acidStorageTankTIC +ammoniaTransferPumpsCostTIC+acidTransferPumpsCostTIC);
-        additionsEquip =  ammoniaStorageTankCost+acidStorageTankTIC+ 2*ammoniaTransferPumpsCost;
+        additionsEquip =  ammoniaStorageTankCost+acidStorageTankCost +ammoniaTransferPumpsCost+ acidTransferPumpsCost ;
         //console.log(additionsEquip);
 
 // Agitated Media Prep & Storage
@@ -474,14 +619,15 @@ function bioprocessopexcapex(Input){
         MediaWaterHeater = 25000;
         MediaHeatExchangerTIC = MediaHeatExchanger *2;
         MediaWaterHeaterTIC  = MediaWaterHeater*2;
-        mediaPiping = 0.045*(agitatedMediaPrepTankTIC+mediaTransferPumpsCostTIC+MediaWaterHeaterTIC);
-        mediaPrepTIC = (mediaPiping+agitatedMediaPrepTankTIC+mediaTransferPumpsCostTIC+MediaWaterHeaterTIC);
-        mediaPrepEquip = agitatedMediaPrepTankCost +mediaTransferPumpsCost +MediaHeatExchanger +MediaWaterHeater;
-
 
 // Dry Chemicals
        DryChemicalAddition  = 100000;
        DryChemicalAdditionTIC = 2*DryChemicalAddition; // 2020 Estimate Lynch
+
+        mediaPiping = 0.045*(agitatedMediaPrepTankTIC+mediaTransferPumpsCostTIC+MediaWaterHeaterTIC);
+        mediaPrepTIC = (mediaPiping+agitatedMediaPrepTankTIC+mediaTransferPumpsCostTIC+MediaWaterHeaterTIC+DryChemicalAdditionTIC );
+        mediaPrepEquip = agitatedMediaPrepTankCost +mediaTransferPumpsCost +MediaHeatExchanger +MediaWaterHeater +DryChemicalAddition;
+
 
 // CIP
         CIPTankCost = 3*(98000*(Math.pow((vesselSize/100)/105991),0.7)); // NREL 2013 , Quote year 2010, holds 1/100 volume of concentrated
@@ -495,23 +641,30 @@ function bioprocessopexcapex(Input){
         CIPpipingTIC = 0.045*(CIPTankTIC +CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC);
         CIPTIC = (CIPpipingTIC+CIPTankTIC +CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC);
         CIPEquip = CIPTankCost+CIPTransferPumpsCost + CIPFilterCost +CIPHeaterCost;
-        //console.log(CIPEquip);
 
-        MainFermAreaEquip = mainFermEquip+glucoseStorageEquip+additionsEquip+mediaPrepEquip+DryChemicalAddition+CIPEquip ;
-        MainFermAreaTIC = mainFermTIC+glucoseStorageTIC+additionsTIC+mediaPrepTIC+DryChemicalAdditionTIC+ CIPTIC;
+
+        MainFermAreaEquip = mainFermEquip+glucoseStorageEquip+additionsEquip+mediaPrepEquip+CIPEquip ;
+        MainFermAreaTIC = mainFermTIC+glucoseStorageTIC+additionsTIC+mediaPrepTIC+ CIPTIC;
         console.log(MainFermAreaEquip);
         console.log(MainFermAreaTIC);
 
 // Area 100: Seed Fermenter Area
-         seedEquipmentTIC = 0.27*(mainFermTIC + glucoseStorageTIC + additionsTIC + mediaPrepTIC );  // Assume 0.27 * production fermentation equipment cost per NREL_2013
+        seedEquipment  = 0.27*MainFermAreaEquip;
+        seedEquipmentTIC = 0.27*MainFermAreaTIC;  // Assume 0.27 * production fermentation equipment cost per NREL_2013
 
 // Area 400 : Primary Cell Removal Capex
 
 // Centrifugation
-        CentrifugeCost = numberOfCentrigfuges*(2748000*(Math.pow((25000)/264000),0.8)); //  SuperPro estimate from https://www.nap.edu/read/12620/chapter/22#353 (4400L/min =264000L/hr)
-        CentrifugeTIC = 1.17*CentrifugeCost*1.8;//
+
+        // Sigma = Q/2uo e coli uo=6.81X10-9 m/s
+        CentrifugeFlowRate2 = 0.0028; // m3/sec or 10000L/hour ) doable with disc stacked centrifuge
+        Sigma = 205580; // needed sigama in m2, at 10000L/hr flow rate
+        // cost of 200 X 1000 m2 Cenrifuge is $325,000, 1998 https://www.cheric.org/files/education/cyberlecture/d200301/d200301-1801.pdf
+        CentrifugeCost = numberOfCentrigfuges*325000*1.71;// 1.61 to correct for time
+        CentrifugeTIC = CentrifugeCost*1.8;//
         Centrifugepiping = 0.045*CentrifugeTIC;
-        CentrifugeTIC = Centrifugepiping + Centrifugepiping;
+        CentrifugeEquip = CentrifugeCost + Centrifugepiping;
+        CentrifugeEquipTIC = CentrifugeTIC + Centrifugepiping;
 
 // Broth Storage
         brothStorageTankCost = (1317000*(Math.pow((vesselSize*numberOfTanks*0.5)/4542000),0.7)); // NREL 2013 , Quote year 2011, sized to 1/2 of fermentation capacity
@@ -519,19 +672,24 @@ function bioprocessopexcapex(Input){
         brothStorageTransferPumpCost= (3933*(Math.pow((vesselSize*numberOfTanks*0.5)/950000),0.8)); //NREL 2009
         brothStorageTransferPumpTIC= 1.17*brothStorageTransferPumpCost*2.3;
         brothStoragePiping = 0.045*(brothStorageTankTIC +brothStorageTransferPumpTIC);
+        brothStorageEquip = brothStorageTankCost+ brothStorageTransferPumpCost+brothStoragePiping;
         brothStorageTIC = (brothStoragePiping+brothStorageTankTIC +brothStorageTransferPumpTIC);
 
 // Cell heat Kill
         HeatTreatmentpackageTIC = 2*250000; // 2020 Lynch Estimate, includes Piping
+        PrimaryCellRemovalEquip = CentrifugeEquip+ brothStorageEquip+HeatTreatmentpackageTIC/2;
         PrimaryCellRemovalTIC = (CentrifugeTIC + brothStorageTIC + HeatTreatmentpackageTIC);
 
 // Area 0: Utilities
 
 // Process Utilities
         // Cooling Water
-           coolingTowerTIC = 250*cumulativeCoolingRateDemand;
-           coolingTowerPumpsTIC = coolingTowerTIC;
+           coolingTowerEquip = 250*cumulativeCoolingRateDemand; //$/ton
+           coolingTowerTIC = 2*coolingTowerEquip; //$/ton
+           coolingTowerPumps = coolingTowerEquip;
+           coolingTowerPumpsTIC = 2.3*coolingTowerPumps;
            coolingTowerPiping = 0.045*(coolingTowerTIC+coolingTowerPumpsTIC);
+           coolingEquip = coolingTowerEquip +coolingTowerPumps;
            coolingTIC = (coolingTowerPiping+coolingTowerTIC+coolingTowerPumpsTIC);
 
         // Boiler Package
@@ -539,33 +697,50 @@ function bioprocessopexcapex(Input){
             BoilerPackageTIC = 2*BoilerPackageCosts;
 
         // AirHandling
-            AirDryingTIC = 100000*2;
-            AirReceiverTIC = 100000*2;
+            AirDryer = 100000;
+            AirDryingTIC = AirDryer*2;
+            AirReceiver = 100000;
+            AirReceiverTIC = AirReceiver*2;
             AirPiping=0.045*(AirDryingTIC+AirReceiverTIC);
+            AirHandlingEquip = AirDryer + AirReceiver;
             AirHandlingTIC =(AirPiping+AirDryingTIC+AirReceiverTIC);
 
         // Water Handling & Purification
-            MunicpalWaterTankTIC = 50000*2;
-            PotableWaterTankTIC  = 50000*2;
-            SoftenerTankTIC  = 20000*2;
-            BrineTankTIC  = 20000*2;
-            PotableWaterCoolerTIC  = 30000*2;
-            MunipalWaterPumpTIC  = 15000*2;
-            ROSystemTIC  = 20000*2;
-            WaterPipingTIC  = 0.045*(MunicpalWaterTankTIC+PotableWaterTankTIC+SoftenerTankTIC+BrineTankTIC+ PotableWaterCoolerTIC+MunipalWaterPumpTIC+ROSystemTIC);
-            WaterHandlingTIC= (WaterPipingTIC+MunicpalWaterTankTIC+PotableWaterTankTIC+SoftenerTankTIC+BrineTankTIC+ PotableWaterCoolerTIC+MunipalWaterPumpTIC+ROSystemTIC);
+            MunicpalWaterTank =50000;
+            MunicpalWaterTankTIC = MunicpalWaterTank*2;
+            PotableWaterTank =50000;
+            PotableWaterTankTIC  = PotableWaterTank*2;
+            SoftenerTank = 20000;
+            SoftenerTankTIC  = SoftenerTank*2;
+            BrineTank = 20000;
+            BrineTankTIC  = BrineTank*2;
+            PotableWaterCooler = 30000;
+            PotableWaterCoolerTIC  = PotableWaterCooler*2;
+            MunipalWaterPump = 15000;
+            MunipalWaterPumpTIC  = MunipalWaterPump*2.3;
+            ROSystem = 20000;
+            ROSystemTIC = ROSystem*2;
+            WaterPiping  = 0.045*(MunicpalWaterTankTIC+PotableWaterTankTIC+SoftenerTankTIC+BrineTankTIC+ PotableWaterCoolerTIC+MunipalWaterPumpTIC+ROSystemTIC);
+            WaterHandlingEquip = (MunicpalWaterTank+PotableWaterTank+SoftenerTank+BrineTank+ PotableWaterCooler+MunipalWaterPump+ROSystem);
+            WaterHandlingTIC= (WaterPiping+MunicpalWaterTankTIC+PotableWaterTankTIC+SoftenerTankTIC+BrineTankTIC+ PotableWaterCoolerTIC+MunipalWaterPumpTIC+ROSystemTIC);
 
        // Waste Disposal
-            WasteWaterTankTIC = 100000*2;
-            WasteWaterHeatExchangerTIC = 25000*2;
-            WasteWaterHeaterTIC  = 25000*2;
-            WasteWaterHeaterPumpTIC = 8000*2;
-            WasteWaterPipingTIC  = 0.045*(WasteWaterTankTIC+WasteWaterHeatExchangerTIC+WasteWaterHeaterTIC+WasteWaterHeaterPumpTIC);
-            WasteWaterTIC = (WasteWaterPipingTIC +WasteWaterTankTIC+WasteWaterHeatExchangerTIC+WasteWaterHeaterTIC+WasteWaterHeaterPumpTIC);
+            WasteWaterTank = 100000;
+            WasteWaterTankTIC = 2*WasteWaterTank;
+            WasteWaterHeatExchanger= 25000;
+            WasteWaterHeatExchangerTIC = WasteWaterHeatExchanger*2;
+            WasteWaterHeater = 25000;
+            WasteWaterHeaterTIC  = WasteWaterHeater*2;
+            WasteWaterHeaterPump =  8000;
+            WasteWaterHeaterPumpTIC = WasteWaterHeaterPump*2.3;
+            WasteWaterPiping  = 0.045*(WasteWaterTankTIC+WasteWaterHeatExchangerTIC+WasteWaterHeaterTIC+WasteWaterHeaterPumpTIC);
+            WasteWaterEquip = (WasteWaterPiping +WasteWaterTank+WasteWaterHeatExchanger+WasteWaterHeater+WasteWaterHeaterPump);
+            WasteWaterTIC = (WasteWaterPiping +WasteWaterTankTIC+WasteWaterHeatExchangerTIC+WasteWaterHeaterTIC+WasteWaterHeaterPumpTIC);
 
        // Utilities Total
+            processUtilitiesEquip = (coolingEquip + BoilerPackageCosts + AirHandlingEquip + WaterHandlingEquip + WasteWaterEquip);
+            processUtilitiesTIC  = (coolingTIC + BoilerPackageTIC + AirHandlingTIC + WaterHandlingTIC + WasteWaterTIC);
 
-        processUtilitiesTIC  = (coolingTIC + BoilerPackageTIC + AirHandlingTIC+WaterHandlingTIC+WasteWaterTIC)
 
 
 // Area 600 : Instruments & Control
@@ -636,6 +811,8 @@ function bioprocessopexcapex(Input){
 
     var bioprocessOutputs = new Object();
 
+// FermOutputs
+
     bioprocessOutputs.time = time;
     bioprocessOutputs.biomass = Biomass;
     bioprocessOutputs.productTiter = productTiter;
@@ -643,6 +820,8 @@ function bioprocessopexcapex(Input){
     bioprocessOutputs.specificRate = specificRate;
     bioprocessOutputs.overallFermYield = overallFermYield;
     bioprocessOutputs.fermTime = totalFermentationTime;
+
+// OPEX Outputs
 
     bioprocessOutputs.annualOpex = annualOpex;
     bioprocessOutputs.opexperkg = opexperkg;
@@ -659,13 +838,168 @@ function bioprocessopexcapex(Input){
     bioprocessOutputs.costOfLaborperkg =costOfLaborperkg;
     bioprocessOutputs.otherFixedCostsperkg =otherFixedCostsperkg;
     bioprocessOutputs.dspOPEXperkg = dspOPEXperkg ;
-    bioprocessOutputs.fermTIC = fermenterTIC + fermenterAgitatorTIC+ airBlowerTIC;
-    bioprocessOutputs.transferPumpsTIC = TransferPumpsTIC;
-    bioprocessOutputs.storageTanksTIC =  glucoseStorageTankTIC+brothStorageTankTIC+ammoniaStorageTankTIC;
-    bioprocessOutputs.prepTankTIC = agitatedMediaPrepTankTIC;
-    bioprocessOutputs.seedEquipmentTIC = seedEquipmentTIC;
-    bioprocessOutputs.coolingTIC= coolingTowerTIC;
-    bioprocessOutputs.dspTIC= dspTIC;
+
+// CAPEX Outputs
+
+        bioprocessOutputs.MainFermAreaEquip = MainFermAreaEquip  ;
+        bioprocessOutputs.MainFermAreaTIC = MainFermAreaTIC;
+
+// Main Ferm
+
+        bioprocessOutputs.fermenterCost =  fermenterCost;
+        bioprocessOutputs.fermenterTIC = fermenterTIC;
+        bioprocessOutputs.fermenterAgitatorCost = fermenterAgitatorCost;
+        bioprocessOutputs.fermenterAgitatorTIC = fermenterAgitatorTIC;
+        bioprocessOutputs.airBlowerCost = airBlowerCost;
+        bioprocessOutputs.airBlowerTIC = airBlowerTIC;
+        bioprocessOutputs.TransferPumpsCost = TransferPumpsCost;
+        bioprocessOutputs.TransferPumpsTIC = TransferPumpsTIC;
+        bioprocessOutputs.mainFermPiping = mainFermPiping ;
+        bioprocessOutputs.mainFermEquip = mainFermEquip;
+        bioprocessOutputs.mainFermTIC = mainFermTIC;
+
+// Sugar Storage
+        bioprocessOutputs.glucoseStorageTankCost = glucoseStorageTankCost;
+        bioprocessOutputs.glucoseStorageTankTIC = glucoseStorageTankTIC;
+        bioprocessOutputs.glucoseStorageTransferPumpsCost = glucoseStorageTransferPumpsCost;
+        bioprocessOutputs.glucoseStorageTransferPumpsTIC = glucoseStorageTransferPumpsTIC;
+        bioprocessOutputs.glucoseStoragepiping = glucoseStoragepiping;
+        bioprocessOutputs.glucoseStorageEquip =  glucoseStorageEquip;
+        bioprocessOutputs.glucoseStorageTIC = glucoseStorageTIC ;
+
+// Titrant Storage
+        bioprocessOutputs.ammoniaStorageTankCost =ammoniaStorageTankCost;
+        bioprocessOutputs.ammoniaStorageTankTIC =ammoniaStorageTankTIC;
+        bioprocessOutputs.acidStorageTankCost = ammoniaStorageTankCost;
+        bioprocessOutputs.acidStorageTankTIC =acidStorageTankTIC ;
+        bioprocessOutputs.ammoniaTransferPumpsCost  =ammoniaTransferPumpsCost;
+        bioprocessOutputs.ammoniaTransferPumpsCostTIC =ammoniaTransferPumpsCostTIC;
+        bioprocessOutputs.acidTransferPumpsCost = acidTransferPumpsCost ;
+        bioprocessOutputs.acidTransferPumpsCostTIC  =acidTransferPumpsCostTIC ;
+        bioprocessOutputs.additionPiping =additionPiping ;
+        bioprocessOutputs.additionsEquip =additionsEquip;
+        bioprocessOutputs.additionsTIC =additionsTIC;
+
+//Media Prep
+        bioprocessOutputs.agitatedMediaPrepTankCost =agitatedMediaPrepTankCost;
+        bioprocessOutputs.agitatedMediaPrepTankTIC = agitatedMediaPrepTankTIC;
+        bioprocessOutputs.mediaTransferPumpsCost = mediaTransferPumpsCost;
+        bioprocessOutputs.mediaTransferPumpsCostTIC  = mediaTransferPumpsCostTIC;
+        bioprocessOutputs.MediaHeatExchanger = MediaHeatExchanger;
+        bioprocessOutputs.MediaWaterHeater =  MediaWaterHeater;
+        bioprocessOutputs.MediaHeatExchangerTIC = MediaHeatExchangerTIC;
+        bioprocessOutputs.MediaWaterHeaterTIC  = MediaWaterHeaterTIC;
+        bioprocessOutputs.mediaPiping = mediaPiping;
+        bioprocessOutputs.DryChemicalAdditionSkid = DryChemicalAddition;
+        bioprocessOutputs.DryChemicalAdditionSkidTIC = DryChemicalAdditionTIC;
+        bioprocessOutputs.mediaPrepEquip = mediaPrepEquip;
+        bioprocessOutputs.mediaPrepTIC =mediaPrepTIC;
+
+// CIP
+        bioprocessOutputs.CIPTankCost = CIPTankCost;
+        bioprocessOutputs.CIPTankTIC = CIPTankTIC;
+        bioprocessOutputs.CIPTransferPumpsCost =CIPTransferPumpsCost;
+        bioprocessOutputs.CIPTransferPumpsCostTIC  = CIPTransferPumpsCostTIC ;
+        bioprocessOutputs.CIPFilterCost = CIPFilterCost;
+        bioprocessOutputs.CIPFilterCostTIC = CIPFilterCostTIC;
+        bioprocessOutputs.CIPHeaterCost = CIPHeaterCost;
+        bioprocessOutputs.CIPHeaterCostTIC = CIPHeaterCostTIC;
+        bioprocessOutputs.CIPpipingTIC = CIPpipingTIC;
+        bioprocessOutputs.CIPEquip = CIPEquip;
+        bioprocessOutputs.CIPTIC = CIPTIC;
+
+//Seed
+        bioprocessOutputs.seedEquipment = seedEquipment ;
+        bioprocessOutputs.seedEquipmentTIC = seedEquipmentTIC;
+
+// Primary Cell Removal
+        bioprocessOutputs.CentrifugeCost = CentrifugeCost ;
+        bioprocessOutputs.CentrifugeTIC = CentrifugeTIC;
+        bioprocessOutputs.Centrifugepiping = Centrifugepiping;
+        bioprocessOutputs.CentrifugeEquip = CentrifugeEquip;
+        bioprocessOutputs.CentrifugeEquipTIC =  CentrifugeEquipTIC;
+        bioprocessOutputs.brothStorageTankCost = brothStorageTankCost;
+        bioprocessOutputs.brothStorageTankTIC = brothStorageTankTIC;
+        bioprocessOutputs.brothStorageTransferPumpCost= brothStorageTransferPumpCost;
+        bioprocessOutputs.brothStorageTransferPumpTIC= brothStorageTransferPumpTIC;
+        bioprocessOutputs.brothStoragePiping = brothStoragePiping;
+        bioprocessOutputs.brothStorageEquip = brothStorageEquip;
+        bioprocessOutputs.brothStorageTIC =brothStorageTIC ;
+        bioprocessOutputs.HeatTreatmentpackage = HeatTreatmentpackageTIC/2;
+        bioprocessOutputs.HeatTreatmentpackageTIC  = HeatTreatmentpackageTIC;
+        bioprocessOutputs.PrimaryCellRemovalEquip= PrimaryCellRemovalEquip;
+        bioprocessOutputs.PrimaryCellRemovalTIC = PrimaryCellRemovalTIC;
+
+// Process Utilities
+
+
+        // Cooling Water
+           bioprocessOutputs.coolingTowerEquip = coolingTowerEquip;
+           bioprocessOutputs.coolingTowerTIC = coolingTowerTIC;
+           bioprocessOutputs.coolingTowerPumps = coolingTowerPumps;
+           bioprocessOutputs.coolingTowerPumpsTIC = coolingTowerPumpsTIC;
+           bioprocessOutputs.coolingTowerPiping = coolingTowerPiping;
+           bioprocessOutputs.coolingEquip =coolingEquip;
+           bioprocessOutputs.coolingTIC = coolingTIC;
+           bioprocessOutputs.BoilerPackageCosts = BoilerPackageCosts;
+           bioprocessOutputs.BoilerPackageTIC = BoilerPackageTIC;
+            bioprocessOutputs.AirDryer = AirDryer;
+            bioprocessOutputs.AirDryingTIC = AirDryingTIC;
+            bioprocessOutputs.AirReceiver = AirReceiver;
+            bioprocessOutputs.AirReceiverTIC = AirReceiverTIC;
+            bioprocessOutputs.AirPiping=AirPiping;
+            bioprocessOutputs.AirHandlingEquip = AirHandlingEquip;
+            bioprocessOutputs.AirHandlingTIC =AirHandlingTIC;
+            bioprocessOutputs.MunicpalWaterTank =MunicpalWaterTank;
+            bioprocessOutputs.MunicpalWaterTankTIC = MunicpalWaterTankTIC;
+            bioprocessOutputs.PotableWaterTank = PotableWaterTank ;
+            bioprocessOutputs.PotableWaterTankTIC  = PotableWaterTankTIC;
+            bioprocessOutputs.SoftenerTank = SoftenerTank ;
+            bioprocessOutputs.SoftenerTankTIC  = SoftenerTankTIC ;
+            bioprocessOutputs.BrineTank = BrineTank ;
+            bioprocessOutputs.BrineTankTIC  = BrineTankTIC;
+            bioprocessOutputs.PotableWaterCooler = PotableWaterCooler;
+            bioprocessOutputs.PotableWaterCoolerTIC  = PotableWaterCoolerTIC;
+            bioprocessOutputs.MunipalWaterPump = MunipalWaterPump;
+            bioprocessOutputs.MunipalWaterPumpTIC  = MunipalWaterPumpTIC;
+            bioprocessOutputs.ROSystem = ROSystem;
+            bioprocessOutputs.ROSystemTIC = ROSystemTIC ;
+            bioprocessOutputs.WaterPiping  = WaterPiping;
+            bioprocessOutputs.WaterHandlingEquip = WaterHandlingEquip;
+            bioprocessOutputs.WaterHandlingTIC= WaterHandlingTIC;
+            bioprocessOutputs.WasteWaterTank = WasteWaterTank;
+            bioprocessOutputs.WasteWaterTankTIC = WasteWaterTankTIC;
+            bioprocessOutputs.WasteWaterHeatExchanger= WasteWaterHeatExchanger;
+            bioprocessOutputs.WasteWaterHeatExchangerTIC = WasteWaterHeatExchangerTIC ;
+            bioprocessOutputs.WasteWaterHeater = WasteWaterHeater ;
+            bioprocessOutputs.WasteWaterHeaterTIC  = WasteWaterHeaterTIC;
+            bioprocessOutputs.WasteWaterHeaterPump =  WasteWaterHeaterPump ;
+            bioprocessOutputs.WasteWaterHeaterPumpTIC = WasteWaterHeaterPumpTIC;
+            bioprocessOutputs.WasteWaterPiping  = WasteWaterPiping;
+            bioprocessOutputs.WasteWaterEquip = WasteWaterEquip;
+            bioprocessOutputs.WasteWaterTIC = WasteWaterTIC;
+            bioprocessOutputs.processUtilitiesEquip =processUtilitiesEquip;
+            bioprocessOutputs.processUtilitiesTIC  =processUtilitiesTIC;
+
+        bioprocessOutputs.controlSystems =controlSystems;
+        bioprocessOutputs.fermtotalInstalledEquipmentCost = fermtotalInstalledEquipmentCost ;
+        bioprocessOutputs.dspTIC =dspTIC;
+        bioprocessOutputs.totalInstalledEquipmentCost =totalInstalledEquipmentCost;
+        bioprocessOutputs.warehousing = warehousing;
+        bioprocessOutputs.administrativeBuildings = administrativeBuildings ; //Office
+        bioprocessOutputs.siteDevelopment = siteDevelopment;
+        bioprocessOutputs.totalDirectCost = totalDirectCost;
+
+// Indirect Costs
+        bioprocessOutputs.HomeOffice = HomeOffice;
+        bioprocessOutputs.prorateableExpenses = prorateableExpenses;
+        bioprocessOutputs.fieldExpenses  = fieldExpenses ;
+        bioprocessOutputs.projectContingency = projectContingency ;
+        bioprocessOutputs.otherStartupCosts = otherStartupCosts ;
+        bioprocessOutputs.totalIndirectCosts = totalIndirectCosts ;
+        bioprocessOutputs.fixedCapitalInvestment = fixedCapitalInvestment;
+        bioprocessOutputs.workingCapital = workingCapital;
+        bioprocessOutputs.totaCapitalInvestment  = totaCapitalInvestment ;
 
 
     return bioprocessOutputs;
