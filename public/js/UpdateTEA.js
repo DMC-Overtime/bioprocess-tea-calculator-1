@@ -664,7 +664,7 @@ function bioprocessopexcapex(Input){
         CentrifugeFlowRate2 = 0.0028; // m3/sec or 10000L/hour ) doable with disc stacked centrifuge
         Sigma = 205580; // needed sigama in m2, at 10000L/hr flow rate
         // cost of 200 X 1000 m2 Cenrifuge is $325,000, 1998 https://www.cheric.org/files/education/cyberlecture/d200301/d200301-1801.pdf
-        CentrifugeCost = numberOfCentrigfuges*325000*1.71;// 1.61 to correct for time
+        CentrifugeCost = numberOfCentrigfuges*325000*1.59;// 1.59 to correct for time
         CentrifugeTIC = CentrifugeCost*1.8;//
         Centrifugepiping = 0.045*CentrifugeTIC;
         CentrifugeEquip = CentrifugeCost + Centrifugepiping;
