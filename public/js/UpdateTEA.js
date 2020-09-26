@@ -47,15 +47,18 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
 //Calculate Bioprocess Outputs & Associated Page Outputs
     bioprocessOutputs = bioprocessopexcapex(Input);
 
+     var myFermChart = FermChart(bioprocessOutputs);
      if (myFermChart) {
           myFermChart.destroy();
      }
-     var myFermChart = FermChart(bioprocessOutputs);
 
      document.getElementById("fermYield").innerHTML = (parseFloat(bioprocessOutputs.overallFermYield)).toFixed(3);
      document.getElementById("specificRate").innerHTML = parseFloat(bioprocessOutputs.specificRate).toFixed(2);
      document.getElementById("finalBiomass").innerHTML = parseFloat(bioprocessOutputs.finalBiomass).toFixed(2);
      document.getElementById("fermTime").innerHTML = parseFloat(bioprocessOutputs.fermTime).toFixed(0);
+     document.getElementById("maxOTR").innerHTML = parseFloat(bioprocessOutputs.maxOTR).toFixed(2);
+     document.getElementById("maxKla").innerHTML = parseFloat(bioprocessOutputs.maxKla).toFixed(2);
+     document.getElementById("maxCooling").innerHTML = parseFloat(bioprocessOutputs.maxCoolingRate).toFixed(2);
      document.getElementById("overallYield").innerHTML = ((Input[29]/100)*(parseFloat(bioprocessOutputs.overallFermYield))).toFixed(2);
      document.getElementById("OPEX").innerHTML = bioprocessOutputs.opexperkg.toFixed(2);
      document.getElementById("CAPEX").innerHTML = bioprocessOutputs.capexperkg.toFixed(2);
@@ -77,12 +80,10 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
           time = DCFOutput.time;
           cumCashFlow = DCFOutput.cumCashFlow;
 
+
+              var myProFormaChart = ProFormaChart(time,cumCashFlow);
               if(myProFormaChart){
                myProFormaChart.destroy();
-               }
-              var myProFormaChart = ProFormaChart(time,cumCashFlow);
-              if(myOpexPieChart){
-                myOpexPieChart.destroy();
                }
               var myOpexPieChart = OpexPieChart(bioprocessOutputs);
                if(myOpexPieChart){
@@ -142,6 +143,9 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
        document.getElementById('productFinalBiomass').value = parseFloat(bioprocessOutputs.finalBiomass).toFixed(2);
        document.getElementById('productSpRate').value = parseFloat(bioprocessOutputs.specificRate).toFixed(2);
        document.getElementById('productFermTime').value =parseFloat(bioprocessOutputs.fermTime).toFixed(0);
+       document.getElementById('productMaxOTR').value =parseFloat(bioprocessOutputs.maxOTR).toFixed(2);
+       document.getElementById('productMaxKLA').value =parseFloat(bioprocessOutputs.maxKla).toFixed(2);
+       document.getElementById('productMaxCoolingRate').value =parseFloat(bioprocessOutputs.maxCoolingRate).toFixed(2);
        document.getElementById('productOverallYield').value = ((Input[29]/100)*(parseFloat(bioprocessOutputs.overallFermYield))).toFixed(2);
        document.getElementById('productFermTimeCourseTime').value = bioprocessOutputs.time.toString();
        document.getElementById('productFermTimeCourseBiomass').value = bioprocessOutputs.biomass.toString();
@@ -493,7 +497,7 @@ function bioprocessopexcapex(Input){
     annualCost0fMassTransfer = annualMassTransferPowerNeed*ElectricityCost; //
 
     // Cooling Calculations(Cooling Tower Water)
-    maxCoolingRate = 0.460*maxOTR*totalAnnualFermWorkingVolume; // kJ/hr per tank uses 460kJ/mole O2 consumed (Doran), equal to 110kcal/mole ( Humbird)
+    maxCoolingRate = 0.460*maxOTR; // kJ/hr per tank uses 460kJ/mole O2 consumed (Doran), equal to 110kcal/mole ( Humbird)
     cumulativeCoolingDemand = 0.460*cumulativeO2; // kJ
     cumulativeCoolingRateDemand = 0.0000789848*cumulativeCoolingDemand/annualFermentationUpTime; // needed cooling capacity ton
 
@@ -820,6 +824,9 @@ function bioprocessopexcapex(Input){
     bioprocessOutputs.specificRate = specificRate;
     bioprocessOutputs.overallFermYield = overallFermYield;
     bioprocessOutputs.fermTime = totalFermentationTime;
+    bioprocessOutputs.maxOTR = maxOTR;
+    bioprocessOutputs.maxKla = maxKla;
+    bioprocessOutputs.maxCoolingRate = maxCoolingRate;
 
 // OPEX Outputs
 

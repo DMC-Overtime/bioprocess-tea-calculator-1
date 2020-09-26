@@ -182,6 +182,18 @@ const teaSchema = new Schema({
         type: String,
         required: true
     },
+    productMaxOTR: {
+        type: String,
+        required: true
+    },
+    productMaxKLA: {
+        type: String,
+        required: true
+    },
+    productMaxCoolingRate: {
+        type: String,
+        required: true
+    },
     productOverallYield: {
         type: String,
         required: true
