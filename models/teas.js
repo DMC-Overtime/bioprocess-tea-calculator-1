@@ -282,14 +282,6 @@ const teaSchema = new Schema({
         type: String,
         required: true
     },
-    airBlowerCost: {
-        type: String,
-        required: true
-    },
-    airBlowerTIC: {
-        type: String,
-        required: true
-    },
     FermTransferPumpsCost: {
         type: String,
         required: true
@@ -403,14 +395,6 @@ const teaSchema = new Schema({
         required: true
     },
     MediaHeatExchangerTIC: {
-        type: String,
-        required: true
-    },
-    MediaWaterHeater: {
-        type: String,
-        required: true
-    },
-    MediaWaterHeaterTIC: {
         type: String,
         required: true
     },
@@ -534,14 +518,6 @@ const teaSchema = new Schema({
         type: String,
         required: true
     },
-    HeatTreatmentpackage: {
-        type: String,
-        required: true
-    },
-    HeatTreatmentpackageTIC: {
-        type: String,
-        required: true
-    },
     PrimaryCellRemovalEquip: {
         type: String,
         required: true
@@ -602,6 +578,14 @@ const teaSchema = new Schema({
         type: String,
         required: true
     },
+    AirCompressor: {
+        type: String,
+        required: true
+    },
+    AirCompressorTIC: {
+        type: String,
+        required: true
+    },
     AirPiping: {
         type: String,
         required: true
@@ -630,19 +614,11 @@ const teaSchema = new Schema({
         type: String,
         required: true
     },
-    SoftenerTank: {
+    SoftenerSystem: {
         type: String,
         required: true
     },
-    SoftenerTankTIC: {
-        type: String,
-        required: true
-    },
-    BrineTank: {
-        type: String,
-        required: true
-    },
-    BrineTankTIC: {
+    SoftenerSystemTIC: {
         type: String,
         required: true
     },
@@ -659,14 +635,6 @@ const teaSchema = new Schema({
         required: true
     },
    MunipalWaterPumpTIC: {
-        type: String,
-        required: true
-    },
-   ROSystem : {
-        type: String,
-        required: true
-    },
-   ROSystemTIC: {
         type: String,
         required: true
     },
@@ -690,27 +658,19 @@ const teaSchema = new Schema({
         type: String,
         required: true
     },
-   WasteWaterHeatExchanger: {
+   HeatKillExchanger: {
         type: String,
         required: true
     },
-   WasteWaterHeatExchangerTIC: {
+   HeatKillExchangerTIC: {
         type: String,
         required: true
     },
-   WasteWaterHeater: {
+   WasteWaterPump: {
         type: String,
         required: true
     },
-   WasteWaterHeaterTIC: {
-        type: String,
-        required: true
-    },
-   WasteWaterHeaterPump: {
-        type: String,
-        required: true
-    },
-   WasteWaterHeaterPumpTIC: {
+   WasteWaterPumpTIC: {
         type: String,
         required: true
     },
