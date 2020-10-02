@@ -2,7 +2,6 @@
 <%- include('./partials/header.ejs') %>
 <body>
 <%- include('./partials/nav1_user.ejs') %>
-
         <div class = "logo">
         <a href="#">Tutorials</a>
         </div>
@@ -10,64 +9,135 @@
         <div class = "main_container">
         <div class="content">
 
-    <header><h2>&nbsp Watch a Video ! <br></h2>
+    <header><h2>&nbsp Calculator Overview <br></h2>
+    <div class ="break"><br></div>
+        <div class ="item">
+                <p>A TEA begins with, and is specific to, the details of the process being modeled. For bioprocesses,
+                a plant can be divided into upstream and downstream areas. Upstream areas are related to fermentation,
+                which can be either aerobic or anaerobic. The current version of this calculator is focused on
+                aerobic fermentation. Downstream areas are related to product purification. Product
+                purification methods depend on the physical and chemical properties of the product, and also on other
+                factors, like purity requirements. The series of unit operations required for purification will, however,
+                be similar for any given product chemistry (i.e. polyols, organic acids, amino acids). The cost
+                estimation techniques used in this model have an expected accuracy of +/- 30 to 50%. Missing process steps
+                or equipment is the most common source of error in early-stage cost models.</p>
+                <p><br></p>
+                <div class = "output"></div>
+        </div>
+     <div class ="break"><br></div>
+  <header><h2>&nbsp  How to use this App <br></h2>
+  <div class ="break"><br></div>
+        <div class ="item">
+                <p>
+                In the menu to the left, the user can modify settings for a number of the process and financial
+                parameters. The default values are based on publicly available data and literature. For key
+                process metrics the user can examine base-, expected-, and worst-case scenarios. As an early-stage
+                development tool, a model like this is intended to give technology developers (1) an indication of
+                current economic performance based on their demonstrated process metrics, (2) target process metrics
+                needed to achieve a desired economic performance, and 3) an understanding of the relative importance of
+                the various process metrics.</p>
+                <p><br></p>
+                <div class = "output"></div>
+        </div>
+     <div class ="break"><br></div>
+   <h2>&nbsp Use Cases and Limitations <br></h2>
     <div class ="break"><br></div>
 
         <div class ="item">
-                <h3>TEA Overview </h3>
+                <h3>Use Cases  </h3>
+
                     <p><br></p>
+                    <li>New Construction : This calculator should be used for projects requiring the construction of new
+                    dedicated plants for the production of chemicals using bioprocesses. Estimates of capital costs  for
+                    new plant construction are based on brownfield assumptions. (See below). With this calculator, the
+                    minimum annual production capacity considered for a new facility is 1kta ( 1 kilotonne per annum/year)
+                    or alternative 1,000,000 kg of a chemical product per year. Processes resulting in annual production
+                    volumes lower than this should not use these estimates. Additionally, for products at the low end of
+                    these production volumes, contract manufacturing (leveraging existing facilities, rather than building
+                    a new plant) may be commercially viable. The current version of this calculator assumes new construction. </li>
+
+                     <p><br></p>
+                    <li>Production Volumes: As mentioned this calculator should be used for processes producing anywhere
+                    from 1 to 100kta of a chemical. This equates to 1,000,000 to 100,000,000 kg per year.  The use should
+                    assess whether the volumes considered by this calculator are  meaningful in light of the market size
+                    for a given product. For example, if the current worldwide annual production is lower than 1 kta
+                    , this calculator is likely not appropriate.  </li>
+
+                    <p><br></p>
+                    <li><a href="https://www.planacademy.com/greenfield-brownfield-engineering-definition/#:~:text=While%20greenfield%20is%20an%20undeveloped,developed%20and%20might%20be%20contaminated." target="popup">Brownfield Site Development:</a>
+                     It is important to note that the current capital cost estimates are for Brownfield site develop.
+                     This assumes that the plant is constructed on a site with current access to a larger waste water treatment facility and basic
+                     utilties such as natural gas and electric power. The costs to install process level utilities  ( those needed
+                     for specific process unit operations including steam, air, water) are included as well as initial waste processing.
+                     </li>
+                    <p><br></p>
+                    <li> Product Types: The current version of the Bioprocess TEA calculator enables users to evaluate the
+                      biosynthetic production of a wide variety of organic chemicals. Currently products are limited to
+                      those containing carbon, hydrogen, oxygen and nitrogen atoms. There is currently no support for
+                      chemicals with a wider variety of functional groups such as those containing sulfur or other heteroatoms.
+                      This functionality may be added in the future. </li>
+
                 <div class = "output"></div>
         </div>
         <div class ="break"><br></div>
 
         <div class ="item">
-                <h3>Proforma and Cash Flow Anlaysis</h3>
+                <h3>Current Limitations </h3>
                     <p><br></p>
+                    <li>Sugar Sources: The current version of the calculator assumes glucose (dextrose) as the carbon and electron source
+                    for the production of any given target chemicals. Future variants may include additional feedstocks. Please feel free to request
+                    a new feedstock in the discussion board.</li>
+                    <p><br></p>
+                    <li>Downstream Purification: Currently, the calculator estimates the costs associated with primary cell removal.
+                    These costs are standard in most bioprocesses, whether the product is in the supernatant or the cell pellet.
+                    However, as of today, the calculator only enables the user to estimate additional DSP operating and capital costs
+                    as a fraction of total costs without any detailed estimates of these unit operations. The vast diversity  of potential
+                    DSP unit operations may be added at a later date or upon request. Generally we would recommend the following assumptions
+                    for estimating DSP costs. <br><br>
+                    Importantly, the current estimates assume a single byproduct: carbon dioxide. All dextrose not going to produce biomass or product
+                    is completely oxidized to carbon dioxide. In most cases this likely overestimates the oxygen requirements of the process and
+                    represents a worse case scenario with respect to aeration, this represents a best case scenario with respect to DSP. Real world
+                    downstream purification processes must often deal with the removal of several unwanted organic byproducts, which are function of
+                    the product and biosynthetic pathway, as well as strain and conditions used. <br><br>
+                    Capital costs for DSP can range from 20% of the TIC to over 80% depending on the complexity of the DSP and number of unit operations.
+                    Simple distillation, such as is used for ethanol, may be on the lower end (~ 20%), whereas DSPs requiring chromatographic separations
+                    or electrodialysis would be anticipated to account for 50-70% of the TIC. <br><br>
+                    Operating costs for DSP are often a smaller fraction of the  total percentage of OPEX, and we recommend from 10% at the low end to 40%
+                    at the high end.<br><br>
+                    The default values for DSP of 25% of OPEX and 55% of CAPEX are recommended when the user does not have a specific downstream in mind.
+                    </li>
+                    <p><br></p>
+                    <li>Product Acidity/Basicity: Currently the calculator does not account for product acidity or basicity.
+                     Specifically it assumes the product will have a pKa ~ 7.0, and that the pH of the fermentation is held
+                     constant at neutral pH. This means that for products which are acids and/or bases the model does not
+                     account for the costs of the titrants needed for neutralization, although capital estimates for titrant
+                      delivery are included. While future iterations of the calculator may include these estimates based
+                      on user input pKas, currently, if necessary, the user can estimate the worst case scenario by
+                      assuming one mole of base or acid required per mole of product produced in the facility. Default
+                      ammonia prices of $0.12/lb ($0.000264/g) correlates to ~ $/0.0045/mole of base. Currently, I would
+                       recommend a sulfuric acid price estimate  of $150/tonne ($0.000150/g) correlates to ~ $/0.0074/mole
+                       of acid. In the even that the uncharged form is desired after purification, the user can estimate
+                        a worse case scenario where an equivalent amount of both acid and base are needed in the process,
+                        for example 1 mole of base needed per mole of product in the fermentation to maintain a neutral
+                        pH and 1 mole of acid in the DSP to convert the salt form of the product to the neutral form.
+                        In the example case of 50 kta facility producing acrylic acid (MW = 72.06g/mole), these calculations
+                         would estimate an additional annual titrant cost of $8,257,000 or $0.16/kg or $0.072/lb, which
+                          in the case of a commodity is not insignificant. Disposal of the large amount of salt waste
+                          in the DSP would also increase the relative DSP operating and capital costs.
+
+                     </li>
                 <div class = "output"></div>
         </div>
         <div class ="break"><br></div>
 
-         <div class ="item">
-                <h3>Caclulator: Chemical Inputs</h3>
-                    <p><br></p>
+                <div class ="item">
+                <h3>For Model Details refer to <a href="#" target="popup">Lynch, 2020 </a></h3>
                 <div class = "output"></div>
         </div>
         <div class ="break"><br></div>
-
-        <div class ="item">
-                <h3>Caclulator: Plant Level Inputs</h3>
-                    <p><br></p>
-                <div class = "output"></div>
-        </div>
         <div class ="break"><br></div>
-
-        <div class ="item">
-                <h3>Fermentation 1</h3>
-                    <p><br></p>
-                <div class = "output"></div>
-        </div>
-        <div class ="break"><br></div>
-
-         <div class ="item">
-                <h3>Fermentation 2</h3>
-                    <p><br></p>
-                <div class = "output"></div>
-        </div>
-        <div class ="break"><br></div>
-
-         <div class ="item">
-                <h3>Fermentation 3</h3>
-                    <p><br></p>
-                <div class = "output"></div>
-        </div>
-        <div class ="break"><br></div>
-
-         <div class ="item">
-                <h3>DSP </h3>
-                    <p><br></p>
-                <div class = "output"></div>
-        </div>
-        <div class ="break"><br></div>
+    <h2>&nbsp Video Tutoritals Coming Soon ! <br></h2>
+    <div class ="break"><br></div>
 
 
 
