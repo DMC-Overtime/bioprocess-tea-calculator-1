@@ -481,9 +481,8 @@ function bioprocessopexcapex(Input){
     if (fermentationTemperature > 33){
         cumulativeCoolingWaterNeeded =  cumulativeCoolingDemand/(4.184*(fermentationTemperature-4-coolingWaterTemperature))/1000; // (m3 of cooling water), assumes 37C fermentation, 32C outlet cooling water
     }else{
-         cumulativeCoolingWaterNeeded =  cumulativeCoolingDemand/(4.184*(1))/1000; // (m3 of cooling water), assumes 37C fermentation, 32C outlet cooling water
+         cumulativeCoolingWaterNeeded =  cumulativeCoolingDemand/(4.184*(1))/1000; // (m3 of cooling water)
     }
-    cumulativeCoolingWaterNeeded =  cumulativeCoolingDemand/(4.184*(fermentationTemperature-5-coolingWaterTemperature))/1000; // (m3 of cooling water), assumes 37C fermentation, 32C outlet cooling water
     averageCoolingWaterFlowRate = (cumulativeCoolingWaterNeeded/annualFermentationUpTime)/3600; // m3/sec
     annualCostOfCoolingWater = cumulativeCoolingWaterNeeded*((0.0001+(0.00003/averageCoolingWaterFlowRate))*CEPCI + 0.003*CostOfFuel);// $/year (Ulrich & Vasudevan)
 
