@@ -342,7 +342,7 @@
         <div class ="break"><br></div>
 
 
-        <div class ="item">
+        <div class ="item" id ="myProformadiv">
                 <h3>Projected Cumulative Cash Flow</h3>
                     <p><br></p>
                     <div class = "output">
@@ -393,7 +393,7 @@
         </div>
         <div class ="break"><br></div>
 
-        <div class ="item">
+        <div class ="item" id ="myFermChartdiv">
                 <h3>Fermentation Time Course</h3>
                     <p><br></p>
                 <div class = "output">
@@ -403,14 +403,14 @@
         <div class ="break"><br></div>
 
 
-        <div class ="item2">
+        <div class ="item2" id ="myOpexdiv">
                 <h3>OPEX Breakdown</h3>
                 <div class=output">
                 <canvas id="myOpexPieChart"></canvas>
                 </div>
         </div>
 
-        <div class ="item2">
+        <div class ="item2" id ="myCapexdiv">
                 <h3>CAPEX Breakdown (TIC) $<span id="bioprocessoutputsTIC"></span></h3>
                 <div class="output" >
                 <canvas id="myCapexPieChart1"></canvas>
@@ -647,7 +647,6 @@
    <script src="/js/UpdateTEA.js"></script>
   <!-- Dynamic Scripts for Process Inputs-->
 
-
 <script>
 // Update TEA in response to sliders.
 
@@ -662,6 +661,14 @@ pageInput =[];
     pageInput[i].innerHTML = slider[i].value;
     slider[i].oninput = function() {
              pageInput[i].innerHTML = this.value;
+             $('#myProFormaChart').remove();
+             $('#myProformadiv').append('<canvas id="myProFormaChart"></canvas>');
+             $('#myFermChart').remove();
+             $('#myFermChartdiv').append('<canvas id="myFermChart"></canvas>');
+             $('#myOpexPieChart').remove();
+             $('#myOpexdiv').append('<canvas id="myOpexPieChart"></canvas>');
+             $('#myCapexPieChart1').remove();
+             $('#myCapexdiv').append('<canvas id="myCapexPieChart1"></canvas>');
              UpdateTEA();
          }
    }
@@ -677,6 +684,15 @@ function UpdateVesselSize(){
              }
          }
          return vesselSize;
+             $('#myProFormaChart').remove();
+             $('#myProformadiv').append('<canvas id="myProFormaChart"></canvas>');
+             $('#myFermChart').remove();
+             $('#myFermChartdiv').append('<canvas id="myFermChart"></canvas>');
+             $('#myOpexPieChart').remove();
+             $('#myOpexdiv').append('<canvas id="myOpexPieChart"></canvas>');
+             $('#myCapexPieChart1').remove();
+             $('#myCapexdiv').append('<canvas id="myCapexPieChart1"></canvas>');
+         UpdateTEA();
        }
 </script>
 

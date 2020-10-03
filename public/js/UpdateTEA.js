@@ -47,10 +47,7 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
 //Calculate Bioprocess Outputs & Associated Page Outputs
     bioprocessOutputs = bioprocessopexcapex(Input);
 
-     var myFermChart = FermChart(bioprocessOutputs);
-     if (myFermChart) {
-          myFermChart.destroy();
-     }
+     window.myFermChart = FermChart(bioprocessOutputs);
 
      document.getElementById("fermYield").innerHTML = (parseFloat(bioprocessOutputs.overallFermYield)).toFixed(3);
      document.getElementById("specificRate").innerHTML = parseFloat(bioprocessOutputs.specificRate).toFixed(2);
@@ -81,19 +78,9 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
           cumCashFlow = DCFOutput.cumCashFlow;
 
 
-              var myProFormaChart = ProFormaChart(time,cumCashFlow);
-              if(myProFormaChart){
-               myProFormaChart.destroy();
-               }
-              var myOpexPieChart = OpexPieChart(bioprocessOutputs);
-               if(myOpexPieChart){
-                myOpexPieChart.destroy();
-               }
-              var myCapexPieChart1 = CapexPieChart1(bioprocessOutputs);
-               if(myCapexPieChart1){
-                myCapexPieChart1.destroy();
-               }
-
+               window.myProFormaChart = ProFormaChart(time,cumCashFlow);
+               window.myOpexPieChart = OpexPieChart(bioprocessOutputs);
+               window.myCapexPieChart1 = CapexPieChart1(bioprocessOutputs);
 
  // Pull Process Inputs into hidden submission Form
        document.getElementById('productName').value =Input[0];
