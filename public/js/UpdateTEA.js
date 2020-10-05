@@ -736,7 +736,7 @@ function bioprocessopexcapex(Input){
                  ldT1 = ((201-60)-(60-25))/(Math.log((201-60)/(60-25)));
                  U1 = 1; // kW/m2-K
                  HeatKillExchangerArea = qHeatKill/(U1*ldT1);
-                 HeatKillExchanger = 15000*(Math.pow((HeatKillExchangerArea/140),0.5)); //
+                 HeatKillExchanger = 1.59*15000*(Math.pow((HeatKillExchangerArea/140),0.5)); //
                  HeatKillExchangerTIC = HeatKillExchanger*3.1;
 
             WasteWaterPiping  = 0.045*(WasteWaterTankTIC+HeatKillExchangerTIC+WasteWaterPumpTIC);
@@ -748,7 +748,7 @@ function bioprocessopexcapex(Input){
                  ldT0 = ((201-120)-(120-25))/(Math.log((201-120)/(120-25)));
                  U0 = 1; // kW/m2-K
                  MediaHeatExchangerArea = qSterilization/(U0*ldT0);
-                 MediaHeatExchanger = 15000*(Math.pow((MediaHeatExchangerArea/140),0.5)); //
+                 MediaHeatExchanger = 1.59*15000*(Math.pow((MediaHeatExchangerArea/140),0.5)); //
                  MediaHeatExchangerTIC = MediaHeatExchanger*3.1;
 
         // Update Media Prep costs
@@ -797,7 +797,7 @@ function bioprocessopexcapex(Input){
     annualUtilityCosts = annualCostOfHeatKill + annualCostOfSterilization +  annualCostOfCoolingWater + annualCostOfCompressedAir + annualCost0fMassTransfer  + annualCostOfCentrifugation; //
     annualRawMaterialCosts = annualCostOfMedia  + annualCostOfNH3 + annualCostOfGlucose + annualWaterCosts + annualCIPCosts; //
     annualLaborCosts = 1.122*203923*numberOfTanks; //  (includes overhead labor uses cost per tank (NREL2013))x inflation factor);//
-    annualAdditionalFixedCosts = 1.122*0.037*1.175*(totalDirectCost); // (per NREL2013 x inflation factor); //
+    annualAdditionalFixedCosts = 1.122*0.037*(totalDirectCost); // (per NREL2013 x inflation factor); //
     annualFixedCosts = annualAdditionalFixedCosts + annualLaborCosts; //
     annualfermOpex = annualUtilityCosts + annualRawMaterialCosts +annualFixedCosts;//
 
