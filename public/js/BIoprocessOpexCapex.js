@@ -252,7 +252,7 @@ function bioprocessopexcapex(Input){
         brothStorageTIC = brothStorageTankTIC + brothStorageTankTransferPumpsTIC;
 
         // Seed Equipment
-        seedEquipmentTIC = 0.27*(fermenterTIC + fermenterAgitatorTIC + airBlowerTIC + mainFermtransferPumpsTIC+ brothStorageTIC);  // Assume 0.27 * production fermentation equipment cost per NREL_2013
+        seedEquipmentTIC = 0.27*(fermenterTIC + fermenterAgitatorTIC + airBlowerTIC + mainFermTransferPumpsTIC+ brothStorageTIC);  // Assume 0.27 * production fermentation equipment cost per NREL_2013
 
         // Glucose Storage & Transfer
         glucoseStorageTankCost = (70000*((averageGlucoseConsumptionRate*12)/264978)^0.7); // NREL 2013 , Quote year 2009, holds 12 hrs of feed.

@@ -1,7 +1,29 @@
-function UpdateTEA(){
 
-//Inputs from User Input
-// Set Up Input Array & Define Initial Baseline Inputs & Outputs.
+
+Input = [];
+Input[7] = 1.46;// selling Price
+const myChemical = new chemical();
+myChemical.carbon = 3;
+myChemical.hydrogen = 8;
+myChemical.oxygen = 2;
+myChemical.nitrogen = 0;
+petroIRR = 30;
+myChemical.MW = calcMW(myChemical);
+myChemical.H2CO2ratio = calcH2CO2ratio(myChemical);
+myChemical.formula = calcFormula(myChemical);
+myChemicalEquation = balanceEquation(myChemical);
+TitersArray =[];
+RatesArray =[];
+TitersArray[0] = 100;
+RatesArray[0] = 2;
+
+GlucoseCosts = [0.04,0.05,0.06,0.07,0.08,0.09,0.10,0.11,0.12,0.13,0.14,0.15,0.16,0.17,0.18];
+    for(let i=1; i< 1000; i++){
+      TitersArray[i] = TitersArray[i-1]+1;
+      RatesArray[i] =(TitersArray[i]/50);
+    }
+
+
 // Input    0-productName,                1-productFormula      2-productMW,              3-theorYield,           4-productYieldCoefficientNH3,
 //          5-productYieldCoefficientO2,  6-vesselSize,         7-sellingPrice,           8-margin,               9-paybackPeriod,
 //          10-discountRate,              11-taxRate,           12-percentDebtFinanced,   13-DebtInterestRate,    14-LoanTerm,
@@ -10,296 +32,146 @@ function UpdateTEA(){
 //          25-Yield,                     26-turnaroundTime,    27-mediaCost              28-Temperature,         29-overallDSPYield,
 //          30-dspPercentofOpex,          31-dspPercentofCapex ];
 
-slider = [];
-pageInput=[];
-Input = [];
-pageInput =[];
 
-//Update Vessel Size  & Associated Page Outputs
-vesselSize =  UpdateVesselSize();
-Input[6] = parseFloat(vesselSize);
-
-//Update  Chemistry  & Associated Page Outputs
-myChemical = UpdateChemical();
-myChemicalEquation = balanceEquation(myChemical);
-Input[0] = myChemical.name;
+Input[0] = 'Name';
 Input[1] = myChemical.formula;
 Input[2] = parseFloat(myChemical.MW);
 Input[3] = parseFloat(myChemicalEquation.theorYield);
 Input[4] = parseFloat(myChemicalEquation.productYieldCoefficientNH3);
 Input[5] = parseFloat(myChemicalEquation.productYieldCoefficientO2);
+Input[6] = 1000000;// Vessel Size
+Input[8] = 20; // margin
+Input[9] = 10; //paybackPeriod,
+Input[10] = 20; // discountRate
+Input[11] = 21;//taxRate
+Input[12] = 60;//percentDebtFinanced
+Input[13] = 8;//DebtInterestRate
+Input[14] = 15;//LoanTerm,
+Input[15] = 50;// plantCapacity
+Input[16] = 90;//annualUptime
+Input[17] = 95;//batchOnSpec
+Input[19] = 0.12;//ammoniaCost,
+Input[20] = 3.1;//naturalGasCost
+Input[21] = 0.11;//electricityCost
+Input[22] = 603;//CEPCI
+Input[25] = 90;//25-Yield,
+Input[26] = 16; //turnaroundTime,
+Input[27] = 0.4; // 27-mediaCost
+Input[28] = 0.4; //28-Temperature,
+Input[29] = 95; //29-overallDSPYield,
+Input[30] = 20; //  30-dspPercentofOpex
+Input[31] = 20; //  31-dspPercentofCapex ];
+RateAtPetroIRR =[];
 
-//Update Selling Price
-Input[7] = document.getElementById("sellingPrice1").value;
-document.getElementById("sellingPrice2").innerHTML =Input[7];
+    for(let i=0; i< 15; i++){
+        Input[18] = GlucoseCosts[i];
+        RateAtPetroIRR[i] = '>10'
 
-//Update Sliders & Associated Page Outputs
-
-    for(let i=0; i< 24; i++){
-        pageInput[i] = document.getElementById("demo"+i);
-        Input[i+8]= parseFloat(pageInput[i].innerHTML);
+        for(let j=0; j< 1000; j++){
+            Input[23] = RatesArray[j]; //Titer,
+            Input[24] = TitersArray[j]; //aveVolumtericRate,
+            bioprocessOutputs = bioprocessopexcapex(Input);
+            DCFOutput = BOO_DCF(Input,bioprocessOutputs);
+            IRR = ((DCFOutput.IRR)*100).toFixed(2);
+             if (IRR > petroIRR) {
+              RateAtPetroIRR[i] = Input[23];
+              j=1000;
+              }
+         }
+         console.log(RateAtPetroIRR[i])
     }
-     document.getElementById("Margin").innerHTML = Input[8];
-     document.getElementById("Rate").innerHTML = Input[23];
-     document.getElementById("Titer").innerHTML = Input[24];
-     document.getElementById("dspYield").innerHTML = Input[29]/100;
 
-//Calculate Bioprocess Outputs & Associated Page Outputs
+ function chemical(name, formula, carbon, hydrogen, oxygen, nitrogen, MWvalue, H2CO2ratio){
+         this.name = name;
+         this.formula = formula;
+         this.carbon = carbon;
+         this.hydrogen = hydrogen;
+         this.oxygen = oxygen;
+         this.nitrogen = nitrogen;
+         this.MWvalue = MWvalue;
+         this.H2CO2ratio = H2CO2ratio;
+}
+  function chemicalEquation(prodCoeff,oxygenCoeff,ammoniaCoeff,waterCoeff,co2Coeff,theorYield,productYieldCoefficientNH3,productYieldCoefficientO2){
+         this.prodCoeff = prodCoeff;
+         this.oxygenCoeff = oxygenCoeff;
+         this.ammoniaCoeff = ammoniaCoeff;
+         this.waterCoeff = waterCoeff;
+         this.co2Coeff = co2Coeff;
+         this.theorYield = theorYield;
+         this.productYieldCoefficientNH3 = productYieldCoefficientNH3 ;
+         this.productYieldCoefficientO2 = productYieldCoefficientO2;
+ }
+ function balanceEquation(chemical){
 
-            for(let z=0; z< 32; z++){
-            console.log(Input[z]);
-            }
-    bioprocessOutputs = bioprocessopexcapex(Input);
+// Balances the following Equation 1 Glucose + oxygenCoeff * O2 + ammoniaCoeff* NH3 --> prodCoeff * Product + waterCoeff* H2O + co2Coeff * CO2
+// where Product  =  C(carbon)H(hydrogen)O(oxygen)N(nitrogen)
 
-     window.myFermChart = FermChart(bioprocessOutputs);
-
-     document.getElementById("fermYield").innerHTML = (parseFloat(bioprocessOutputs.overallFermYield)).toFixed(3);
-     document.getElementById("specificRate").innerHTML = parseFloat(bioprocessOutputs.specificRate).toFixed(2);
-     document.getElementById("finalBiomass").innerHTML = parseFloat(bioprocessOutputs.finalBiomass).toFixed(2);
-     document.getElementById("fermTime").innerHTML = parseFloat(bioprocessOutputs.fermTime).toFixed(0);
-     document.getElementById("maxOTR").innerHTML = parseFloat(bioprocessOutputs.maxOTR).toFixed(2);
-     document.getElementById("maxKla").innerHTML = parseFloat(bioprocessOutputs.maxKla).toFixed(2);
-     document.getElementById("maxCooling").innerHTML = parseFloat(bioprocessOutputs.maxCoolingRate).toFixed(2);
-     document.getElementById("overallYield").innerHTML = ((Input[29]/100)*(parseFloat(bioprocessOutputs.overallFermYield))).toFixed(2);
-     document.getElementById("OPEX").innerHTML = bioprocessOutputs.opexperkg.toFixed(2);
-     document.getElementById("CAPEX").innerHTML = bioprocessOutputs.capexperkg.toFixed(2);
-     document.getElementById("TCI").innerHTML = (bioprocessOutputs.totaCapitalInvestment/1000000).toFixed(2);
-     document.getElementById("plantCapacity").innerHTML = (bioprocessOutputs.plantCapacity/1000000).toFixed(2);
-     MSP = (bioprocessOutputs.opexperkg/(1-(Input[8]/100))).toFixed(2);
-
-
-
-//Update Selling Price & Associated Page Outputs
-
-//Calculate DCF
-     DCFOutput = BOO_DCF(Input,bioprocessOutputs);
-
-          document.getElementById("NPV").innerHTML = (DCFOutput.NPV/1000000).toFixed(2);
-          document.getElementById("ROI").innerHTML = ((DCFOutput.ROI)*100).toFixed(2);
-          document.getElementById("IRR").innerHTML = ((DCFOutput.IRR)*100).toFixed(2);
-          document.getElementById("MSP").innerHTML = ((DCFOutput.MSP)).toFixed(2);
-          time = DCFOutput.time;
-          cumCashFlow = DCFOutput.cumCashFlow;
+    MWfeedstock = 180.156; // glucose
 
 
-               window.myProFormaChart = ProFormaChart(time,cumCashFlow);
-               window.myOpexPieChart = OpexPieChart(bioprocessOutputs);
-               window.myCapexPieChart1 = CapexPieChart1(bioprocessOutputs);
+//Calculate Stoichiometry and theoretic Yield
 
- // Pull Process Inputs into hidden submission Form
-       document.getElementById('productName').value =Input[0];
-       document.getElementById('productFormula').value = Input[1];
-       document.getElementById('productMW').value = Input[2];
-       document.getElementById('productTheorYield').value = Input[3];
-       document.getElementById('productYieldCoefficientNH3').value = Input[4];
-       document.getElementById('productYieldCoefficientO2').value = Input[5];
-       document.getElementById('productVesselSize').value = Input[6];
-       document.getElementById('productSellingPrice').value = Input[7];
-       document.getElementById('productMargin').value = Input[8];
-       document.getElementById('productPaybackPeriod').value = Input[9];
-       document.getElementById('productDiscountRate').value = Input[10];
-       document.getElementById('productTaxRate').value = Input[11];
-       document.getElementById('productPercentDebtFinanced').value = Input[12];
-       document.getElementById('productDebtInterestRate').value = Input[13];
-       document.getElementById('productLoanTerm').value = Input[14];
-       document.getElementById('productPlantCapacity').value = Input[15];
-       document.getElementById('productAnnualUptime').value = Input[16];
-       document.getElementById('productBatchOnSpec').value = Input[17];
-       document.getElementById('productGlucoseCost').value = Input[18];
-       document.getElementById('productAmmoniaCost').value = Input[19];
-       document.getElementById('productNaturalGasCost').value = Input[20];
-       document.getElementById('productElectricityCost').value = Input[21];
-       document.getElementById('productCEPCI').value = Input[22];
-       document.getElementById('productAveVolumtericRate').value= Input[23];
-       document.getElementById('productTiter').value = Input[24];
-       document.getElementById('productYield').value = Input[25];
-       document.getElementById('productTurnaroundTime').value = Input[26];
-       document.getElementById('productMediaCost').value = Input[27];
-       document.getElementById('productTemperature').value = Input[28];
-       document.getElementById('productOverallDSPYield').value = Input[29];
-       document.getElementById('productDspPercentofOpex').value = Input[30];
-       document.getElementById('productDspPercentofCapex').value = Input[31];
+    if (chemical.H2CO2ratio == 2) {
+        equationType = "neutral";
+        //1 C6H12O6 +  X NH3  → Y  CaHbOcNd+ Z H2O
+        prodCoeff = 6/chemical.carbon;
+        ammoniaCoeff = 6*(chemical.nitrogen/chemical.carbon);
+        waterCoeff = 6-6*(chemical.oxygen/chemical.carbon);
+        co2Coeff =0 ;
+        oxygenCoeff =0 ;
 
- // Pull Process Inputs into hidden submission Form
+    } else if (chemical.H2CO2ratio > 2){
+        equationType = "reduced";
+        //1 C6H12O6 +  W NH3 → X CaHbOcNd + Y H2O +  Z  CO2 
+        value1 = chemical.carbon + 0.25*chemical.hydrogen - 0.5*chemical.oxygen - 0.75*chemical.nitrogen;
+        prodCoeff = 6/value1;
+        ammoniaCoeff = chemical.nitrogen*prodCoeff;
+        waterCoeff = 6 + 1.5*chemical.nitrogen*prodCoeff - 0.5*chemical.hydrogen*prodCoeff;
+        co2Coeff = 0.25*chemical.hydrogen*prodCoeff - 0.5*chemical.oxygen*prodCoeff - 0.75*chemical.nitrogen*prodCoeff;
+        oxygenCoeff =0 ;
 
-       document.getElementById('productOPEX').value =bioprocessOutputs.opexperkg.toFixed(2);
-       document.getElementById('productCAPEX').value = bioprocessOutputs.capexperkg.toFixed(2);
-       document.getElementById('productTCI').value =  (bioprocessOutputs.totaCapitalInvestment/1000000).toFixed(2);
-       document.getElementById('productNPV').value = DCFOutput.NPV.toFixed(2);
-       document.getElementById('productROI').value = DCFOutput.ROI.toFixed(2);
-       document.getElementById('productIRR').value = DCFOutput.IRR.toFixed(2);
-       document.getElementById('productMSP').value = DCFOutput.MSP.toFixed(2);
-       document.getElementById('productOptimalPlantCapacity').value = (bioprocessOutputs.plantCapacity/1000000).toFixed(2);
-       document.getElementById('productFermentationYield').value =  (parseFloat(bioprocessOutputs.overallFermYield)).toFixed(3);
-       document.getElementById('productFinalBiomass').value = parseFloat(bioprocessOutputs.finalBiomass).toFixed(2);
-       document.getElementById('productSpRate').value = parseFloat(bioprocessOutputs.specificRate).toFixed(2);
-       document.getElementById('productFermTime').value =parseFloat(bioprocessOutputs.fermTime).toFixed(0);
-       document.getElementById('productMaxOTR').value =parseFloat(bioprocessOutputs.maxOTR).toFixed(2);
-       document.getElementById('productMaxKLA').value =parseFloat(bioprocessOutputs.maxKla).toFixed(2);
-       document.getElementById('productMaxCoolingRate').value =parseFloat(bioprocessOutputs.maxCoolingRate).toFixed(2);
-       document.getElementById('productOverallYield').value = ((Input[29]/100)*(parseFloat(bioprocessOutputs.overallFermYield))).toFixed(2);
-       document.getElementById('productFermTimeCourseTime').value = bioprocessOutputs.time.toString();
-       document.getElementById('productFermTimeCourseBiomass').value = bioprocessOutputs.biomass.toString();
-       document.getElementById('productFermTimeCourseProductTiter').value = bioprocessOutputs.productTiter.toString();
+    } else { //(chemical.H2CO2ratio < 2)
+        equationType = "oxidized";
+        prodCoeff = 6/chemical.carbon;
+        ammoniaCoeff = 6*(chemical.nitrogen/chemical.carbon);
+        waterCoeff = 6 + 9*(chemical.nitrogen/chemical.carbon) - 3*(chemical.hydrogen/chemical.carbon);
+        oxygenCoeff = 3*(chemical.oxygen/chemical.carbon) + 4.5*(chemical.nitrogen/chemical.carbon) -1.5*(chemical.hydrogen/chemical.carbon);
+        co2Coeff =0 ;
+    }
 
-       DCFOutput_time = DCFOutput.time;
-       DCFOutput_revenue = DCFOutput.revenue;
-       DCFOutput_COGS = DCFOutput.COGS;
-       DCFOutput_totalDepreciation =DCFOutput.totalDepreciation;
-       DCFOutput_EBITDA =DCFOutput.EBITDA;
-       DCFOutput_EBIT = DCFOutput.EBIT;
-       DCFOutput_PrincipalPaid = DCFOutput.PrincipalPaid;
-       DCFOutput_InterestPaid = DCFOutput.InterestPaid;
-       DCFOutput_TaxesPaid = DCFOutput.TaxesPaid;
-       DCFOutput_netIncome = DCFOutput.netIncome;
-       DCFOutput_netCashFlow = DCFOutput.netCashFlow;
-       DCFOutput_cumCashFlow = DCFOutput.cumCashFlow;
+    prodCoeff = prodCoeff.toFixed(2);
+    oxygenCoeff = oxygenCoeff.toFixed(2);
+    ammoniaCoeff = ammoniaCoeff.toFixed(2);
+    waterCoeff = waterCoeff .toFixed(2);
+    co2Coeff = co2Coeff.toFixed(2);
+    theorYield = (chemical.MW*prodCoeff/MWfeedstock).toFixed(3);
+    productYieldCoefficientNH3 = ((chemical.MW*prodCoeff)/(ammoniaCoeff*17.031)).toFixed(4);
+    productYieldCoefficientO2 = ((chemical.MW*prodCoeff)/(oxygenCoeff*32)).toFixed(4);
 
-       document.getElementById('productProFormaTime').value = DCFOutput_time.toString();
-       document.getElementById('productProFormaRevenue').value = DCFOutput_revenue.toString();
-       document.getElementById('productProFormaCOGS').value = DCFOutput_COGS.toString();
-       document.getElementById('productProFormaDepreciation').value = DCFOutput_totalDepreciation.toString();
-       document.getElementById('productProFormaEBITDA').value = DCFOutput_EBITDA.toString();
-       document.getElementById('productProFormaEBIT').value = DCFOutput_EBIT.toString();
-       document.getElementById('productProFormaPrincipal').value = DCFOutput_PrincipalPaid.toString();
-       document.getElementById('productProFormaInterest').value = DCFOutput_InterestPaid.toString();
-       document.getElementById('productProFormaTaxes').value = DCFOutput_TaxesPaid.toString();
-       document.getElementById('productProFormaNetIncome').value = DCFOutput_netIncome.toString();
-       document.getElementById('productProFormaNetCashFlow').value = DCFOutput_netCashFlow.toString();
-       document.getElementById('productProFormaCumCashFlow').value = DCFOutput_cumCashFlow.toString();
+     // Output
+     var myChemicalEquation = new chemicalEquation(prodCoeff,oxygenCoeff, ammoniaCoeff,waterCoeff,co2Coeff,theorYield,productYieldCoefficientNH3,productYieldCoefficientO2);
 
+     return myChemicalEquation;
 
- // Pull Bioprocess CAPEX Outputs into hidden submission Form
-
-      document.getElementById('MainFermAreaEquip').value = (bioprocessOutputs.MainFermAreaEquip).toFixed(2);
-      document.getElementById('MainFermAreaTIC').value = (bioprocessOutputs.MainFermAreaTIC).toFixed(2);
-      document.getElementById('fermenterCost').value =(bioprocessOutputs.fermenterCost).toFixed(2);
-      document.getElementById('fermenterTIC').value =(bioprocessOutputs.fermenterTIC).toFixed(2);
-      document.getElementById('fermenterAgitatorCost').value =(bioprocessOutputs.fermenterAgitatorCost).toFixed(2);
-      document.getElementById('fermenterAgitatorTIC').value =(bioprocessOutputs.fermenterAgitatorTIC).toFixed(2);
-      document.getElementById('FermTransferPumpsCost').value =(bioprocessOutputs.TransferPumpsCost).toFixed(2);
-      document.getElementById('FermTransferPumpsTIC').value =(bioprocessOutputs.TransferPumpsTIC).toFixed(2);
-      document.getElementById('mainFermPiping').value =(bioprocessOutputs.mainFermPiping).toFixed(2);
-      document.getElementById('mainFermTanksEquip').value = (bioprocessOutputs.mainFermEquip).toFixed(2);
-      document.getElementById('mainFermTanksTIC').value =(bioprocessOutputs.mainFermTIC).toFixed(2);
-      document.getElementById('glucoseStorageTankCost').value =(bioprocessOutputs.glucoseStorageTankCost).toFixed(2);
-      document.getElementById('glucoseStorageTankTIC').value =(bioprocessOutputs.glucoseStorageTankTIC).toFixed(2);
-      document.getElementById('glucoseStorageTransferPumpsCost').value =(bioprocessOutputs.glucoseStorageTransferPumpsCost).toFixed(2);
-      document.getElementById('glucoseStorageTransferPumpsTIC').value = (bioprocessOutputs.glucoseStorageTransferPumpsTIC).toFixed(2);
-      document.getElementById('glucoseStoragepiping').value =(bioprocessOutputs.glucoseStoragepiping).toFixed(2);
-      document.getElementById('glucoseStorageEquip').value = (bioprocessOutputs.glucoseStorageEquip).toFixed(2);
-      document.getElementById('glucoseStorageTIC').value =(bioprocessOutputs.glucoseStorageTIC).toFixed(2);
-      document.getElementById('ammoniaStorageTankCost').value = (bioprocessOutputs.ammoniaStorageTankCost).toFixed(2);
-      document.getElementById('ammoniaStorageTankTIC').value =(bioprocessOutputs.ammoniaStorageTankTIC).toFixed(2);
-      document.getElementById('acidStorageTankCost').value = (bioprocessOutputs.acidStorageTankCost).toFixed(2);
-      document.getElementById('acidStorageTankTIC').value =(bioprocessOutputs.acidStorageTankTIC).toFixed(2);
-      document.getElementById('ammoniaTransferPumpsCost').value = (bioprocessOutputs.ammoniaTransferPumpsCost).toFixed(2);
-      document.getElementById('ammoniaTransferPumpsCostTIC').value =(bioprocessOutputs.ammoniaTransferPumpsCostTIC).toFixed(2);
-      document.getElementById('acidTransferPumpsCost').value = (bioprocessOutputs.acidTransferPumpsCost).toFixed(2);
-      document.getElementById('acidTransferPumpsCostTIC').value =(bioprocessOutputs.acidTransferPumpsCostTIC).toFixed(2);
-      document.getElementById('additionPiping').value = (bioprocessOutputs.additionPiping).toFixed(2);
-      document.getElementById('additionsEquip').value =(bioprocessOutputs.additionsEquip).toFixed(2);
-      document.getElementById('additionsTIC').value = (bioprocessOutputs.additionsTIC).toFixed(2);
-      document.getElementById('agitatedMediaPrepTankCost').value =(bioprocessOutputs.agitatedMediaPrepTankCost).toFixed(2);
-      document.getElementById('agitatedMediaPrepTankTIC').value = (bioprocessOutputs.agitatedMediaPrepTankTIC).toFixed(2);
-      document.getElementById('mediaTransferPumpsCost').value =(bioprocessOutputs.mediaTransferPumpsCost).toFixed(2);
-      document.getElementById('mediaTransferPumpsCostTIC').value = (bioprocessOutputs.mediaTransferPumpsCostTIC).toFixed(2);
-      document.getElementById('MediaHeatExchanger').value =(bioprocessOutputs.MediaHeatExchanger).toFixed(2);
-      document.getElementById('MediaHeatExchangerTIC').value =(bioprocessOutputs.MediaHeatExchangerTIC).toFixed(2);
-      document.getElementById('mediaPiping').value =(bioprocessOutputs.mediaPiping).toFixed(2);
-      document.getElementById('DryChemicalAdditionSkid').value =(bioprocessOutputs.DryChemicalAdditionSkid).toFixed(2);
-      document.getElementById('DryChemicalAdditionSkidTIC').value =(bioprocessOutputs.DryChemicalAdditionSkidTIC).toFixed(2);
-      document.getElementById('mediaPrepEquip').value =(bioprocessOutputs.mediaPrepEquip).toFixed(2);
-      document.getElementById('mediaPrepTIC').value =(bioprocessOutputs.mediaPrepTIC).toFixed(2);
-      document.getElementById('CIPTankCost').value =(bioprocessOutputs.CIPTankCost).toFixed(2);
-      document.getElementById('CIPTankTIC').value =(bioprocessOutputs.CIPTankTIC).toFixed(2);
-      document.getElementById('CIPTransferPumpsCost').value =(bioprocessOutputs.CIPTransferPumpsCost).toFixed(2);
-      document.getElementById('CIPTransferPumpsCostTIC').value =(bioprocessOutputs.CIPTransferPumpsCostTIC).toFixed(2);
-      document.getElementById('CIPFilterCost').value =(bioprocessOutputs.CIPFilterCost).toFixed(2);
-      document.getElementById('CIPFilterCostTIC').value =(bioprocessOutputs.CIPFilterCostTIC).toFixed(2)
-      document.getElementById('CIPHeaterCost').value =(bioprocessOutputs.CIPHeaterCost).toFixed(2);
-      document.getElementById('CIPHeaterCostTIC').value =(bioprocessOutputs.CIPHeaterCostTIC).toFixed(2);
-      document.getElementById('CIPpipingTIC').value =(bioprocessOutputs.CIPpipingTIC).toFixed(2);
-      document.getElementById('CIPEquip').value =(bioprocessOutputs.CIPEquip).toFixed(2);
-      document.getElementById('CIPTIC').value =(bioprocessOutputs.CIPTIC).toFixed(2);
-      document.getElementById('seedEquipment').value =(bioprocessOutputs.seedEquipment).toFixed(2);
-      document.getElementById('seedEquipmentTIC').value =(bioprocessOutputs.seedEquipmentTIC).toFixed(2);
-      document.getElementById('CentrifugeCost').value =(bioprocessOutputs.CentrifugeCost).toFixed(2);
-      document.getElementById('CentrifugeTIC').value =(bioprocessOutputs.CentrifugeTIC).toFixed(2);
-      document.getElementById('Centrifugepiping').value =(bioprocessOutputs.Centrifugepiping).toFixed(2);
-      document.getElementById('CentrifugeEquip').value =(bioprocessOutputs.CentrifugeEquip).toFixed(2);
-      document.getElementById('CentrifugeEquipTIC').value =(bioprocessOutputs.CentrifugeEquipTIC).toFixed(2);
-      document.getElementById('brothStorageTankCost').value =(bioprocessOutputs.brothStorageTankCost).toFixed(2);
-      document.getElementById('brothStorageTankTIC').value =(bioprocessOutputs.brothStorageTankTIC).toFixed(2);
-      document.getElementById('brothStorageTransferPumpCost').value =(bioprocessOutputs.brothStorageTransferPumpCost).toFixed(2);
-      document.getElementById('brothStorageTransferPumpTIC').value =(bioprocessOutputs.brothStorageTransferPumpTIC).toFixed(2);
-      document.getElementById('brothStoragePiping').value =(bioprocessOutputs.brothStoragePiping).toFixed(2);
-      document.getElementById('brothStorageEquip').value =(bioprocessOutputs.brothStorageEquip).toFixed(2);
-      document.getElementById('brothStorageTIC').value =(bioprocessOutputs.brothStorageTIC).toFixed(2);
-      document.getElementById('PrimaryCellRemovalEquip').value =(bioprocessOutputs.PrimaryCellRemovalEquip).toFixed(2);
-      document.getElementById('PrimaryCellRemovalTIC').value =(bioprocessOutputs.PrimaryCellRemovalTIC).toFixed(2);
-      document.getElementById('coolingTowerEquip').value =(bioprocessOutputs.coolingTowerEquip).toFixed(2);
-      document.getElementById('coolingTowerTIC').value =(bioprocessOutputs.coolingTowerTIC).toFixed(2);
-      document.getElementById('coolingTowerPumps').value =(bioprocessOutputs.coolingTowerPumps).toFixed(2);
-      document.getElementById('coolingTowerPumpsTIC').value =(bioprocessOutputs.coolingTowerPumpsTIC).toFixed(2);
-      document.getElementById('coolingTowerPiping').value =(bioprocessOutputs.coolingTowerPiping).toFixed(2);
-      document.getElementById('coolingEquip').value =(bioprocessOutputs.coolingEquip).toFixed(2);
-      document.getElementById('coolingTIC').value =(bioprocessOutputs.coolingTIC).toFixed(2);
-      document.getElementById('BoilerPackageCosts').value =(bioprocessOutputs.BoilerPackageCosts).toFixed(2);
-      document.getElementById('BoilerPackageTIC').value =(bioprocessOutputs.BoilerPackageTIC).toFixed(2);
-      document.getElementById('AirDryer').value =(bioprocessOutputs.AirDryer).toFixed(2);
-      document.getElementById('AirDryingTIC').value =(bioprocessOutputs.AirDryingTIC).toFixed(2);
-      document.getElementById('AirReceiver').value =(bioprocessOutputs.AirReceiver).toFixed(2);
-      document.getElementById('AirReceiverTIC').value =(bioprocessOutputs.AirReceiverTIC).toFixed(2);
-      document.getElementById('AirCompressor').value =(bioprocessOutputs.AirCompressor).toFixed(2);
-      document.getElementById('AirCompressorTIC').value =(bioprocessOutputs.AirCompressorTIC).toFixed(2);
-      document.getElementById('AirPiping').value =(bioprocessOutputs.AirPiping).toFixed(2);
-      document.getElementById('AirHandlingEquip').value =(bioprocessOutputs.AirHandlingEquip).toFixed(2);
-      document.getElementById('AirHandlingTIC').value =(bioprocessOutputs.AirHandlingTIC).toFixed(2);
-      document.getElementById('MunicpalWaterTank').value =(bioprocessOutputs.MunicpalWaterTank).toFixed(2);
-      document.getElementById('MunicpalWaterTankTIC').value =(bioprocessOutputs.MunicpalWaterTankTIC).toFixed(2);
-      document.getElementById('PotableWaterTank').value =(bioprocessOutputs.PotableWaterTank).toFixed(2);
-      document.getElementById('PotableWaterTankTIC').value =(bioprocessOutputs.PotableWaterTankTIC).toFixed(2);
-      document.getElementById('SoftenerSystem').value =(bioprocessOutputs.SoftenerSystem).toFixed(2);
-      document.getElementById('SoftenerSystemTIC').value =(bioprocessOutputs.SoftenerSystemTIC).toFixed(2);
-      document.getElementById('PotableWaterCooler').value =(bioprocessOutputs.PotableWaterCooler).toFixed(2);
-      document.getElementById('PotableWaterCoolerTIC').value =(bioprocessOutputs.PotableWaterCoolerTIC).toFixed(2);
-      document.getElementById('MunipalWaterPump').value =(bioprocessOutputs.MunipalWaterPump).toFixed(2);
-      document.getElementById('MunipalWaterPumpTIC').value =(bioprocessOutputs.MunipalWaterPumpTIC).toFixed(2);
-      document.getElementById('WaterPiping').value =(bioprocessOutputs.WaterPiping).toFixed(2);
-      document.getElementById('WaterHandlingEquip').value =(bioprocessOutputs.WaterHandlingEquip).toFixed(2);
-      document.getElementById('WaterHandlingTIC').value =(bioprocessOutputs.WaterHandlingTIC).toFixed(2);
-      document.getElementById('WasteWaterTank').value =(bioprocessOutputs.WasteWaterTank).toFixed(2);
-      document.getElementById('WasteWaterTankTIC').value =(bioprocessOutputs.WasteWaterTankTIC).toFixed(2);
-      document.getElementById('HeatKillExchanger').value =(bioprocessOutputs.HeatKillExchanger).toFixed(2);
-      document.getElementById('HeatKillExchangerTIC').value =(bioprocessOutputs.HeatKillExchangerTIC).toFixed(2);
-      document.getElementById('WasteWaterPump').value =(bioprocessOutputs.WasteWaterPump).toFixed(2);
-      document.getElementById('WasteWaterPumpTIC').value =(bioprocessOutputs.WasteWaterPumpTIC).toFixed(2);
-      document.getElementById('WasteWaterPiping').value =(bioprocessOutputs.WasteWaterPiping).toFixed(2);
-      document.getElementById('WasteWaterEquip').value =(bioprocessOutputs.WasteWaterEquip).toFixed(2);
-      document.getElementById('WasteWaterTIC').value =(bioprocessOutputs.WasteWaterTIC).toFixed(2);
-      document.getElementById('processUtilitiesEquip').value =(bioprocessOutputs.processUtilitiesEquip).toFixed(2);
-      document.getElementById('processUtilitiesTIC').value =(bioprocessOutputs.processUtilitiesTIC).toFixed(2);
-      document.getElementById('controlSystems').value =(bioprocessOutputs.controlSystems).toFixed(2);
-      document.getElementById('fermtotalInstalledEquipmentCost').value =(bioprocessOutputs.fermtotalInstalledEquipmentCost).toFixed(2);
-      document.getElementById('dspTIC').value =(bioprocessOutputs.dspTIC).toFixed(2);
-      document.getElementById('totalInstalledEquipmentCost').value =(bioprocessOutputs.totalInstalledEquipmentCost).toFixed(2);
-      document.getElementById('warehousing').value =(bioprocessOutputs.warehousing).toFixed(2);
-      document.getElementById('administrativeBuildings').value =(bioprocessOutputs.administrativeBuildings).toFixed(2);
-      document.getElementById('siteDevelopment').value =(bioprocessOutputs.siteDevelopment).toFixed(2);
-      document.getElementById('totalDirectCost').value =(bioprocessOutputs.totalDirectCost).toFixed(2);
-      document.getElementById('HomeOffice').value =(bioprocessOutputs.HomeOffice).toFixed(2);
-      document.getElementById('prorateableExpenses').value =(bioprocessOutputs.prorateableExpenses).toFixed(2);
-      document.getElementById('fieldExpenses').value =(bioprocessOutputs.fieldExpenses).toFixed(2);
-      document.getElementById('projectContingency').value =(bioprocessOutputs.projectContingency).toFixed(2);
-      document.getElementById('otherStartupCosts').value =(bioprocessOutputs.otherStartupCosts).toFixed(2);
-      document.getElementById('totalIndirectCosts').value =(bioprocessOutputs.totalIndirectCosts).toFixed(2);
-      document.getElementById('fixedCapitalInvestment').value =(bioprocessOutputs.fixedCapitalInvestment).toFixed(2);
-      document.getElementById('workingCapital').value =(bioprocessOutputs.workingCapital).toFixed(2);
-      document.getElementById('totaCapitalInvestment').value =(bioprocessOutputs.totaCapitalInvestment).toFixed(2);
-      document.getElementById('bioprocessoutputsTIC').innerHTML = (bioprocessOutputs.totalInstalledEquipmentCost).toFixed(0);
-
-
+}
+function calcMW(chemical){
+     MW = (12.0107*(chemical.carbon)+1.00784*(chemical.hydrogen)+15.999*(chemical.oxygen)+14.0067*(chemical.nitrogen)).toFixed(2);
+     return MW;
+}
+function calcH2CO2ratio(chemical){
+     H2CO2ratio =  0.5*(chemical.hydrogen/chemical.carbon)-1*(chemical.oxygen/chemical.carbon)-1.5*(chemical.nitrogen/chemical.carbon)+2;
+     return H2CO2ratio;
+}
+function calcFormula(chemical){
+    formula = 'C';
+    formula += chemical.carbon;
+    formula +='H'
+    formula += chemical.hydrogen;
+    formula +='O'
+    formula += chemical.oxygen;
+    formula +='N'
+    formula += chemical.nitrogen;
+    return formula;
 }
 
 function bioprocessopexcapex(Input){
@@ -1021,3 +893,368 @@ function bioprocessopexcapex(Input){
 
     return bioprocessOutputs;
     }
+
+    function BOO_DCF(Input,bioprocessOutputs){
+
+//Inputs from User Input
+// Input    0-productName,                1-productFormula      2-productMW,              3-theorYield,           4-productYieldCoefficientNH3,
+//          5-productYieldCoefficientO2,  6-vesselSize,         7-sellingPrice,           8-margin,               9-paybackPeriod,
+//          10-discountRate,              11-taxRate,           12-percentDebtFinanced,   13-DebtInterestRate,    14-LoanTerm,
+//          15-plantCapacity,             16-annualUptime,      17-batchOnSpec,           18-glucoseCost,         19-ammoniaCost,
+//          20-naturalGasCost,            21-electricityCost    22-CEPCI,                 23-aveVolumtericRate,   24-Titer,
+//          25-Yield,                     26-turnaroundTime,    27-mediaCost              28-Temperature,         29-overallDSPYield,
+//          30-dspPercentofOpex,          31-dspPercentofCapex ];
+
+
+
+    //Inputs from User Input
+       sellingPrice = Input[7];
+       margin = Input[8]/100;
+       paybackPeriod = Input[9];
+       discountRate  = Input[10]/100;
+       taxRate = Input[11]/100;
+       fractionDebtFinance  = Input[12]/100;
+       debtInterest  = Input[13]/100;
+       debtTerm = Input[14];
+
+    //Inputs calculated from user inputs using BioprocessOpexCapex.js
+    annualOpex = bioprocessOutputs.annualOpex;// $
+    opexperkg = bioprocessOutputs.opexperkg; // $/kg
+    totalInitialCapitalInvestment = bioprocessOutputs.totaCapitalInvestment;  // $
+    capexperkg = bioprocessOutputs.capexperkg;  // $
+    plantCapacity = bioprocessOutputs.plantCapacity ; // (kg)
+
+    // Advanced Financial Variables
+    fractionEquityFinance = 1-fractionDebtFinance;
+    yearsInConstruction = 2;
+    fractionCapitalSpentYearOne = 0.7;
+    fractionCapitalSpentYearTwo = 0.3;
+    bookDepreciationPeriod = 10;  // years
+    ongoingCapitalReinvestmentRate = 0.01;// fraction of TCI
+    yearsToRampToFullProduction = 3;// years
+
+    // Working capital Assumptions
+    accountsReceivableDelay = 45; // days
+    inventoryHoldingPeriod = 60; //days
+    accountsPayableDelay = 30; // days (currently groups paychecks and raw materials)
+
+
+    totalFinanced = fractionDebtFinance*totalInitialCapitalInvestment;
+
+    // Expenses
+    // Capital spending
+    InitialCapitalInvestment=[];
+    for (let projectYear=0; projectYear < paybackPeriod; projectYear ++){
+        if (projectYear  == 0){
+            InitialCapitalInvestment[projectYear] = fractionCapitalSpentYearOne*totalInitialCapitalInvestment;
+        }else if (projectYear  == 1){
+            InitialCapitalInvestment[projectYear] = fractionCapitalSpentYearTwo*totalInitialCapitalInvestment;
+        }else {
+            InitialCapitalInvestment[projectYear] = 0;
+        }
+    }
+
+    // Ongoing Capital & Total Capital
+    ongoingCapitalInvestment=[]
+    totalCapitalInvestment =[];
+    for (let projectYear=0; projectYear < paybackPeriod; projectYear++){
+        if (projectYear== 0){
+            ongoingCapitalInvestment[projectYear] = 0;
+            totalCapitalInvestment[projectYear] = InitialCapitalInvestment[projectYear];
+        }else if (projectYear == 1){
+            ongoingCapitalInvestment[projectYear] = 0;
+            totalCapitalInvestment[projectYear] = InitialCapitalInvestment[projectYear];
+        }else {
+            ongoingCapitalInvestment[projectYear] = ongoingCapitalReinvestmentRate*totalInitialCapitalInvestment;
+            totalCapitalInvestment[projectYear] = ongoingCapitalInvestment[projectYear]+InitialCapitalInvestment[projectYear];
+        }
+
+    }
+//Depreciation
+    depreciationYear = yearsInConstruction +bookDepreciationPeriod;
+
+// Depreciation of Initial Investment
+   initialTCIDepreciation =[];
+   for (let projectYear=0; projectYear < paybackPeriod; projectYear++){
+        if (projectYear <  yearsInConstruction){
+            initialTCIDepreciation[projectYear] =0;
+        }else if(projectYear >= yearsInConstruction && projectYear < depreciationYear){
+            initialTCIDepreciation[projectYear] =totalInitialCapitalInvestment/bookDepreciationPeriod;
+        }else{
+            initialTCIDepreciation[projectYear] = 0;
+        }
+    }
+
+// Depreciation of Ongoing Investment
+    ongoingCapitalDepreciation =[];
+    for (let projectYear =0; projectYear  < paybackPeriod; projectYear ++){
+         if (projectYear <  yearsInConstruction){
+              ongoingCapitalDepreciation[projectYear ] =0;
+         }else{
+              ongoingCapitalDepreciation[projectYear] = ongoingCapitalReinvestmentRate*totalInitialCapitalInvestment;
+         }
+    }
+
+// Total Depreciation
+    totalDepreciation=[];
+    for (let projectYear =0; projectYear  < paybackPeriod; projectYear ++){
+    totalDepreciation[projectYear] = initialTCIDepreciation[projectYear] +ongoingCapitalDepreciation[projectYear];
+    }
+
+// Operating Costs
+      Opex=[];
+       for(let projectYear=0; projectYear < paybackPeriod; projectYear++){
+         if (projectYear < yearsInConstruction){
+               Opex[projectYear] =0;
+         }else{
+               Opex[projectYear] =annualOpex;
+         }
+
+        }
+
+// Loan Payments
+    interestPayment =[];
+    principalPayment =[];
+    annualLoanPayments =[];
+    annualLoanPayments =[];
+
+    TotalLoanPrinc = fractionDebtFinance*totalInitialCapitalInvestment;
+    interestPayment[0] = fractionCapitalSpentYearOne*TotalLoanPrinc*debtInterest;
+    principalPayment[0] = 0;
+    interestPayment[1] = TotalLoanPrinc*debtInterest;
+    principalPayment[1] = 0;
+    annualLoanPayments[0] = interestPayment[0];
+    annualLoanPayments[1] = interestPayment[1];
+    loanTerm = debtTerm-2;
+    LoanOutput =calculateLoanPayments(TotalLoanPrinc,debtInterest,loanTerm);
+    annualInterest = LoanOutput.annualInterest;
+    annualPrincipal = LoanOutput.annualPrincipal;
+    annualPrincipal2 =[];
+
+    for (let projectYear =2; projectYear<paybackPeriod; projectYear++){
+        if(projectYear < debtTerm){
+            annualLoanPayments[projectYear]=annualPrincipal[projectYear-2]+annualInterest[projectYear-2];
+            interestPayment[projectYear]= annualInterest[projectYear-2];
+            annualPrincipal2[projectYear] = annualLoanPayments[projectYear]-interestPayment[projectYear];
+        }else if(projectYear > debtTerm-1){
+            annualLoanPayments[projectYear]=0;
+            interestPayment[projectYear] =0;
+            annualPrincipal2[projectYear] =0;
+        }
+    }
+
+//  Production & Sales, assumes 3 year Ramp up (.5,.75,1)
+    annualProduction =[];
+    annualRevenue =[];
+    for (let projectYear=0; projectYear<paybackPeriod; projectYear++){
+        if (projectYear == 0){
+            annualProduction[projectYear]= 0;
+        }else if (projectYear == 1){
+            annualProduction[projectYear]= 0;
+        }else if (projectYear == 2){
+            annualProduction[projectYear] = 0.5*plantCapacity;
+        }else if (projectYear== 3){
+            annualProduction[projectYear] = 0.75*plantCapacity;
+        }else {
+            annualProduction[projectYear] = plantCapacity;
+        }
+        annualRevenue[projectYear] = sellingPrice*annualProduction[projectYear];
+
+    }
+
+   // Income
+   EBITDA =[];
+   EBIT =[];
+   EBT =[];
+       for (let projectYear=0; projectYear<paybackPeriod; projectYear++){
+        if (annualRevenue[projectYear] >0){
+            EBITDA[projectYear] = annualRevenue[projectYear] - Opex[projectYear]-ongoingCapitalInvestment[projectYear];
+            EBIT[projectYear] = EBITDA[projectYear] - totalDepreciation[projectYear];
+            EBT[projectYear] = EBIT[projectYear] - interestPayment[projectYear];
+
+        }else {
+            EBITDA[projectYear] = 0;
+            EBIT[projectYear]= 0;
+            EBT[projectYear] = 0;
+        }
+
+    }
+
+   // Taxes & Net Income
+   taxes =[];
+   netIncome =[];
+    for (let projectYear=0; projectYear<paybackPeriod; projectYear++){
+        if (EBT[projectYear] > 0){
+            taxes[projectYear]= EBT[projectYear]*taxRate;
+            netIncome[projectYear] = EBT[projectYear]-taxes[projectYear];
+        }else {
+            taxes[projectYear] = 0;
+            netIncome[projectYear] = 0;
+        }
+    }
+
+
+   // Working Capital
+   accountsReceivable =[];
+   valueOfInventory =[];
+   accountsPayable =[];
+   netWorkingCapital =[];
+   changeInNetWorkingCapital =[];
+
+    for (let projectYear=0; projectYear<paybackPeriod;  projectYear++){
+        accountsReceivable[projectYear] = annualRevenue[projectYear]*(accountsReceivableDelay/365);
+        valueOfInventory[projectYear] = Opex[projectYear]*(inventoryHoldingPeriod/365);
+        accountsPayable[projectYear]= Opex[projectYear]*(accountsPayableDelay/365);
+        netWorkingCapital[projectYear] =accountsReceivable[projectYear]+valueOfInventory[projectYear]-accountsPayable[projectYear];
+        if (projectYear == 0){
+            changeInNetWorkingCapital[projectYear] = netWorkingCapital[projectYear]-0;
+        }else{
+            changeInNetWorkingCapital[projectYear] = netWorkingCapital[projectYear]-netWorkingCapital[projectYear-1];
+        }
+    }
+
+    // Cash Flow Calculations
+
+    netCashFlow=[];
+    for (let projectYear=0; projectYear<paybackPeriod;  projectYear++){
+       netCashFlow[projectYear] = annualRevenue[projectYear] - totalCapitalInvestment[projectYear] - Opex[projectYear]-annualLoanPayments[projectYear]-taxes[projectYear] ;
+    }
+
+    cumCashFlow=[];
+    cumCashFlow[0] =netCashFlow[0];
+    for (let projectYear=1; projectYear<paybackPeriod;  projectYear++){
+        cumCashFlow[projectYear] = netCashFlow[projectYear] + cumCashFlow[projectYear-1];
+    }
+
+
+   //ROI
+    SumNetCashFlow =0;
+    SumcapitalInvestment =0;
+    for(let projectYear=0; projectYear<paybackPeriod;  projectYear++){
+        SumNetCashFlow = SumNetCashFlow+netCashFlow[projectYear];
+        SumcapitalInvestment = SumcapitalInvestment+totalCapitalInvestment[projectYear];
+    }
+    ROI = SumNetCashFlow/SumcapitalInvestment;
+
+
+
+  //  NPV
+   npv=0;
+   for(let projectYear=0; projectYear<paybackPeriod; projectYear++){
+       npv = npv + (netCashFlow[projectYear]/ Math.pow(discountRate/100 + 1, projectYear + 1));
+    }
+
+    // IRR
+    IRR = calcIRR(netCashFlow,-1.00);
+
+    // MSP assumes you want to hit the target margin in year 4 at full ramp
+    initialCostofProductionOnRampUp =  totalCapitalInvestment[4]+Opex[4]+annualLoanPayments[4];
+    // Margin = (netsales -COGS)/netsales, netsales = MSP*annualProduction
+    // netsales*margin = netsales-COGS
+    // netsales -netsales*margin = COGS
+    // netsales(1-margin) = COGS
+    // nesales = COGS/(1-margin)
+    //  MSP*annualProduction = COGS/(1-margin)
+    //MSP = COGS/((1-margin)*annualProduction)
+    MSP = initialCostofProductionOnRampUp/(annualProduction[4]*(1- margin));
+
+
+
+
+      // Define Time to account for 0 index
+    time = [];
+    for (let projectYear=0; projectYear < paybackPeriod; projectYear++){
+        time[projectYear]=projectYear;
+    }
+
+
+    var DCFOutput = new Object();
+        DCFOutput.ROI = ROI;
+        DCFOutput.MSP = MSP;
+        DCFOutput.NPV = npv;
+        DCFOutput.IRR = IRR;
+        DCFOutput.time = time;
+        DCFOutput.revenue = annualRevenue;
+        DCFOutput.COGS = Opex;
+        DCFOutput.totalDepreciation = totalDepreciation;
+        DCFOutput.EBITDA= EBITDA;
+        DCFOutput.EBIT= EBIT;
+        DCFOutput.PrincipalPaid = annualPrincipal2;
+        DCFOutput.InterestPaid = interestPayment;
+        DCFOutput.TaxesPaid = taxes;
+        DCFOutput.netIncome = netIncome;
+        DCFOutput.netCashFlow = netCashFlow;
+        DCFOutput.cumCashFlow = cumCashFlow;
+
+    return DCFOutput;
+
+    }
+    function calculateLoanPayments(Principal,rate,years){
+// Inputs
+
+//Principal = 100000;// Principal: size of the loan
+//rate = 0.1; // rate: annual rate
+//years = 15; // years: length of loan in years
+
+N=years*12; // number of payments
+r=rate/12; // montlhy rate
+P= Principal*(1+r)/((1-(1/(1+r))**N)/(1-1/(1+r))); //defines monthly payment
+//Initiate variables
+Princs = [];
+In = [];
+Ps = [];
+time =[];
+annualPayments =[];
+annualInterest =[];
+annualPrincipal =[];
+LoanOutput = new Object();
+
+Princs[0]=Principal; //  in year 1 principle is total amount
+In[0]=0;
+Ps[0]=0; //Principal payments
+time[0]=1;
+
+for (let i=1;i<N;i++){
+    time[i] = i+1;
+    In[i]=Princs[i-1]*r;
+    Ps[i]=P-In[i];
+    Princs[i]=Princs[i-1]-Ps[i];
+}
+
+// Total of annual payments
+
+interestSum = 0;
+principalSum = 0;
+
+
+x = 0;
+for (let i=0; i<years; i++){
+    for (j=0;j<12;j++){
+         interestSum = In[x]+interestSum ;
+         x=x+1;
+    }
+    annualInterest[i] =interestSum;
+    annualPayments[i] = 12*P;
+    annualPrincipal[i] = annualPayments[i]-annualInterest[i];
+    interestSum = 0;
+
+}
+
+LoanOutput.annualPrincipal = annualPrincipal;
+LoanOutput.annualInterest = annualInterest;
+
+return LoanOutput;
+}
+function calcIRR(cashFlow, irr) {
+
+     inc =0.0001;
+
+do{
+      irr += inc;
+      NPV_test = 0;
+      for (var i=0; i< cashFlow.length; i++)      {
+            NPV_test += cashFlow[i]/Math.pow((1+irr),i);
+            }
+}while(NPV_test > 0);
+return irr;
+}
