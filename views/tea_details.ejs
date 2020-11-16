@@ -31,8 +31,8 @@
     <p><br></p>
     <p>Financials for a Selling Price of $<%=tea.productSellingPrice %>/kg :</p>
         <li>      NPV: $<%=(tea.productNPV/1000000).toFixed(2) %>M</li>
-        <li>      IRR: <%=tea.productIRR %>%</li>
-        <li>      ROI: <%=tea.productROI %>%</li>
+        <li>      IRR: <%=tea.productIRR*100 %>%</li>
+        <li>      ROI: <%=tea.productROI*100 %>%</li>
         <li>      Total Capital Investment: $<%=tea.productTCI %>M</li>
         <li>      Optimal Capacity: <%=tea.productOptimalPlantCapacity %> kta</li>
     <p><br></p>
@@ -76,8 +76,8 @@
           ["Selling Price", "<%=tea.productSellingPrice %>", "$/kg"],
           ["Total Capital Investment (TCI)", "<%=tea.productTCI %>", "$ Million"],
           ["NPV", "<%=tea.productNPV %>", "$"],
-          ["IRR", "<%=tea.productIRR %>", "%"],
-          ["ROI", "<%=tea.productROI %>", "%"],
+          ["IRR", "<%=tea.productIRR*100 %>", "%"],
+          ["ROI", "<%=tea.productROI*100 %>", "%"],
           [""],
           ["Process Outputs"],
           ["Optimal Plant Capacity", "<%=tea.productOptimalPlantCapacity %>", "kta"],
@@ -102,7 +102,7 @@
           ["Loan Term", "<%=tea.productLoanTerm %>", "years"],
           [""],
           ["Process Inputs"],
-          ["Annual Uptime", "<%=tea.productAnnualUptime %>", "hrs"],
+          ["Annual Uptime", "<%=tea.productAnnualUptime %>", "%"],
           ["Batches On-Spec", "<%=tea.productBatchOnSpec %>", "%"],
           ["Main Fermenter Size", "<%=tea.productVesselSize %>", "Liters"],
           ["Working Volume", "<%=tea.productVesselSize*0.85 %>", "Liters"],
