@@ -38,7 +38,7 @@ function bioprocessopexcapex(Input){
 
    // Advanced Inputs
     AmmoniaSourceMW = 17.031;//(g/mole) for NH3
-    MicrobeMW  =  95.37; // (g/mole) for E. coli
+    MicrobeMW  =  95.37; // (g/mole) for E. coli/bacteria
     FeedstockMW = 180.156; // (g/mole) for glucose
     biomassYieldCoefficientGlucose = (MicrobeMW)/(0.84*FeedstockMW); // based on ideal formula 0.84 Glucose + 1 NH3 + 1.212 O2 --> 1 E. coli(C3.85H6.69O1.78N)+ 3.212 H2O + 1.212 CO2
     biomassYieldCoefficientNH3 = (MicrobeMW)/(1*AmmoniaSourceMW); // based on ideal formula 0.84 Glucose + 1 NH3 + 1.212 O2 --> 1 E. coli(C3.85H6.69O1.78N)+ 3.212 H2O + 1.212 CO2
@@ -46,14 +46,15 @@ function bioprocessopexcapex(Input){
     byproductYieldCoefficientO2 = (FeedstockMW)/(6*32); // g glucose consumed /g O2 for byproduct, based on ideal formula 1 Glucose + 6  O2 --> 6 H2O + 6 CO2
 
 
-
-    // Advanced variables which are kept as defaults in the analyses
+    // Advanced variables which are kept as defaults in the current  analyses
 
     inoculationFraction = 0.01; // fraction of volume at final biomass concentration used to inoculate production fermenters
     workingVolumeRatio = 0.85; // (L working volume)/(L gross volume)
     BiomassYieldFraction = 0.80; // the actual biomass yield as a fraction of theoretical maximal biomass yield
     FermenterAspectRatio = 2.55; // from Humbird et al.
 
+
+   // Calculations
 
    // The following are Calculations based on the Fermentation Targets
 
@@ -294,7 +295,7 @@ function bioprocessopexcapex(Input){
         prorateableExpenses = 0.1*totalDirectCost;
         fieldExpenses  = 0.1*totalDirectCost;
         officeAndConstructionFee = 0.2*totalDirectCost;
-        // engineerin fees
+        // engineering fees
         projectContingency = 0.2*totalDirectCost;
         otherStartupCosts = 0.1*totalDirectCost; // permitting etc.
         totalIndirectCosts = otherStartupCosts + projectContingency +officeAndConstructionFee +fieldExpenses  + prorateableExpenses ;

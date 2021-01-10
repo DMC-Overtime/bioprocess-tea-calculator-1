@@ -301,7 +301,6 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
 
 
 }
-
 function bioprocessopexcapex(Input){
 //Inputs from User Input
 // Set Up Input Array & Define Initial Baseline Inputs & Outputs.
@@ -531,7 +530,7 @@ function bioprocessopexcapex(Input){
 // 2009-2020 Producers inflation = 1.17
 // 2013-2020 Producers inflation = 1.00
 // 2014-2020 Producers inflation = 1.03
-// 2010-2020 Producers inflation = 1.12
+// 2010-2020 Producers inflation = 1.13
 // 2017-2020 Producers inflation = 1.06
 
 
@@ -608,6 +607,8 @@ function bioprocessopexcapex(Input){
         CIPpipingTIC = 0.045*(CIPTankTIC +CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC);
         CIPTIC = (CIPpipingTIC+CIPTankTIC +CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC);
         CIPEquip = CIPTankCost+CIPTransferPumpsCost + CIPFilterCost +CIPHeaterCost;
+
+
         MainFermAreaEquip = mainFermEquip+glucoseStorageEquip+additionsEquip+mediaPrepEquip+CIPEquip ;
         MainFermAreaTIC = mainFermTIC+glucoseStorageTIC+additionsTIC+mediaPrepTIC+ CIPTIC;
 
@@ -758,7 +759,7 @@ function bioprocessopexcapex(Input){
         // Update Media Prep costs
 
                 mediaPiping =  mediaPiping + 0.045*(MediaHeatExchangerTIC);
-                mediaPrepTIC  =mediaPrepTIC + 0.045*(MediaHeatExchangerTIC) + MediaHeatExchangerTIC;
+                mediaPrepTIC  = mediaPrepTIC + 0.045*(MediaHeatExchangerTIC) + MediaHeatExchangerTIC;
                 mediaPrepEquip = mediaPrepTIC + MediaHeatExchanger;
 
 
@@ -801,7 +802,7 @@ function bioprocessopexcapex(Input){
     annualUtilityCosts = annualCostOfHeatKill + annualCostOfSterilization +  annualCostOfCoolingWater + annualCostOfCompressedAir + annualCost0fMassTransfer  + annualCostOfCentrifugation; //
     annualRawMaterialCosts = annualCostOfMedia  + annualCostOfNH3 + annualCostOfGlucose + annualWaterCosts + annualCIPCosts; //
     annualLaborCosts = 1.122*203923*numberOfTanks; //  (includes overhead labor uses cost per tank (NREL2013))x inflation factor);//
-    annualAdditionalFixedCosts = 1.122*0.037*(totalDirectCost); // (per NREL2013 x inflation factor); //
+    annualAdditionalFixedCosts = 1.12*0.037*(totalDirectCost); // (per NREL2013 x inflation factor); //
     annualFixedCosts = annualAdditionalFixedCosts + annualLaborCosts; //
     annualfermOpex = annualUtilityCosts + annualRawMaterialCosts +annualFixedCosts;//
 

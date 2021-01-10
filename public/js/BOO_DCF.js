@@ -9,8 +9,6 @@ function BOO_DCF(Input,bioprocessOutputs){
 //          25-Yield,                     26-turnaroundTime,    27-mediaCost              28-Temperature,         29-overallDSPYield,
 //          30-dspPercentofOpex,          31-dspPercentofCapex ];
 
-
-
     //Inputs from User Input
        sellingPrice = Input[7];
        margin = Input[8]/100;
@@ -41,6 +39,10 @@ function BOO_DCF(Input,bioprocessOutputs){
     accountsReceivableDelay = 45; // days
     inventoryHoldingPeriod = 60; //days
     accountsPayableDelay = 30; // days (currently groups paychecks and raw materials)
+
+
+
+    // Calculations
 
 
     totalFinanced = fractionDebtFinance*totalInitialCapitalInvestment;
