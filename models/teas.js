@@ -598,11 +598,11 @@ const teaSchema = new Schema({
         type: String,
         required: true
     },
-    MunicpalWaterTank: {
+    MunicipalWaterTank: {
         type: String,
         required: true
     },
-    MunicpalWaterTankTIC: {
+    MunicipalWaterTankTIC: {
         type: String,
         required: true
     },
@@ -630,11 +630,11 @@ const teaSchema = new Schema({
         type: String,
         required: true
     },
-   MunipalWaterPump: {
+   MunicipalWaterPump: {
         type: String,
         required: true
     },
-   MunipalWaterPumpTIC: {
+   MunicipalWaterPumpTIC: {
         type: String,
         required: true
     },

@@ -1,4 +1,4 @@
-function BOO_DCF(Input,bioprocessOutputs){
+function BOO_DCF(Input,bioprocessOutputs,AVF){
 
 //Inputs from User Input
 // Input    0-productName,                1-productFormula      2-productMW,              3-theorYield,           4-productYieldCoefficientNH3,
@@ -9,7 +9,7 @@ function BOO_DCF(Input,bioprocessOutputs){
 //          25-Yield,                     26-turnaroundTime,    27-mediaCost              28-Temperature,         29-overallDSPYield,
 //          30-dspPercentofOpex,          31-dspPercentofCapex ];
 
-    //Inputs from User Input
+//Inputs from User Input
        sellingPrice = Input[7];
        margin = Input[8]/100;
        paybackPeriod = Input[9];
@@ -25,26 +25,21 @@ function BOO_DCF(Input,bioprocessOutputs){
     totalInitialCapitalInvestment = bioprocessOutputs.totaCapitalInvestment;  // $
     capexperkg = bioprocessOutputs.capexperkg;  // $
     plantCapacity = bioprocessOutputs.plantCapacity ; // (kg)
+    AVF =  advancedVariablesFinancial();
 
-    // Advanced Financial Variables
-    fractionEquityFinance = 1-fractionDebtFinance;
-    yearsInConstruction = 2;
-    fractionCapitalSpentYearOne = 0.7;
-    fractionCapitalSpentYearTwo = 0.3;
-    bookDepreciationPeriod = 10;  // years
-    ongoingCapitalReinvestmentRate = 0.01;// fraction of TCI
-    yearsToRampToFullProduction = 3;// years
-   
-    // Working capital Assumptions
-    accountsReceivableDelay = 45; // days
-    inventoryHoldingPeriod = 60; //days
-    accountsPayableDelay = 30; // days (currently groups paychecks and raw materials)
-
-
+    //  Advanced Financial Variables
+    fractionEquityFinance = AVF.fractionEquityFinance;
+    yearsInConstruction = AVF.yearsInConstruction;
+    fractionCapitalSpentYearOne =AVF.fractionCapitalSpentYearOne;
+    fractionCapitalSpentYearTwo =AVF.fractionCapitalSpentYearTwo;
+    bookDepreciationPeriod = AVF.bookDepreciationPeriod;
+    ongoingCapitalReinvestmentRate =AVF.ongoingCapitalReinvestmentRate;// fraction of TCI
+    yearsToRampToFullProduction =AVF.yearsToRampToFullProduction;// years
+    accountsReceivableDelay = AVF.accountsReceivableDelay; // days
+    inventoryHoldingPeriod = AVF.inventoryHoldingPeriod; //days
+    accountsPayableDelay = AVF.accountsPayableDelay; // days (currently groups paychecks and raw materials)
 
     // Calculations
-
-
     totalFinanced = fractionDebtFinance*totalInitialCapitalInvestment;
 
     // Expenses
@@ -74,7 +69,6 @@ function BOO_DCF(Input,bioprocessOutputs){
             ongoingCapitalInvestment[projectYear] = ongoingCapitalReinvestmentRate*totalInitialCapitalInvestment;
             totalCapitalInvestment[projectYear] = ongoingCapitalInvestment[projectYear]+InitialCapitalInvestment[projectYear];
         }
-
     }
 //Depreciation
     depreciationYear = yearsInConstruction +bookDepreciationPeriod;
@@ -199,7 +193,6 @@ function BOO_DCF(Input,bioprocessOutputs){
         }
     }
 
-
    // Working Capital
    accountsReceivable =[];
    valueOfInventory =[];
@@ -232,7 +225,6 @@ function BOO_DCF(Input,bioprocessOutputs){
         cumCashFlow[projectYear] = netCashFlow[projectYear] + cumCashFlow[projectYear-1];
     }
 
-
    //ROI
     SumNetCashFlow =0;
     SumcapitalInvestment =0;
@@ -241,8 +233,6 @@ function BOO_DCF(Input,bioprocessOutputs){
         SumcapitalInvestment = SumcapitalInvestment+totalCapitalInvestment[projectYear];
     }
     ROI = SumNetCashFlow/SumcapitalInvestment;
-
-
 
   //  NPV
    npv=0;
@@ -264,15 +254,11 @@ function BOO_DCF(Input,bioprocessOutputs){
     //MSP = COGS/((1-margin)*annualProduction)
     MSP = initialCostofProductionOnRampUp/(annualProduction[4]*(1- margin));
 
-
-
-
-      // Define Time to account for 0 index
+     // Define Time to account for 0 index
     time = [];
     for (let projectYear=0; projectYear < paybackPeriod; projectYear++){
         time[projectYear]=projectYear;
     }
-
 
     var DCFOutput = new Object();
         DCFOutput.ROI = ROI;

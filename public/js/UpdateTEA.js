@@ -17,6 +17,7 @@ pageInput =[];
 
 //Update Vessel Size  & Associated Page Outputs
 vesselSize =  UpdateVesselSize();
+AVP = advancedVariablesProcess();
 Input[6] = parseFloat(vesselSize);
 
 //Update  Chemistry  & Associated Page Outputs
@@ -256,16 +257,16 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
       document.getElementById('AirPiping').value =(bioprocessOutputs.AirPiping).toFixed(2);
       document.getElementById('AirHandlingEquip').value =(bioprocessOutputs.AirHandlingEquip).toFixed(2);
       document.getElementById('AirHandlingTIC').value =(bioprocessOutputs.AirHandlingTIC).toFixed(2);
-      document.getElementById('MunicpalWaterTank').value =(bioprocessOutputs.MunicpalWaterTank).toFixed(2);
-      document.getElementById('MunicpalWaterTankTIC').value =(bioprocessOutputs.MunicpalWaterTankTIC).toFixed(2);
+      document.getElementById('MunicipalWaterTank').value =(bioprocessOutputs.MunicipalWaterTank).toFixed(2);
+      document.getElementById('MunicipalWaterTankTIC').value =(bioprocessOutputs.MunicipalWaterTankTIC).toFixed(2);
       document.getElementById('PotableWaterTank').value =(bioprocessOutputs.PotableWaterTank).toFixed(2);
       document.getElementById('PotableWaterTankTIC').value =(bioprocessOutputs.PotableWaterTankTIC).toFixed(2);
       document.getElementById('SoftenerSystem').value =(bioprocessOutputs.SoftenerSystem).toFixed(2);
       document.getElementById('SoftenerSystemTIC').value =(bioprocessOutputs.SoftenerSystemTIC).toFixed(2);
       document.getElementById('PotableWaterCooler').value =(bioprocessOutputs.PotableWaterCooler).toFixed(2);
       document.getElementById('PotableWaterCoolerTIC').value =(bioprocessOutputs.PotableWaterCoolerTIC).toFixed(2);
-      document.getElementById('MunipalWaterPump').value =(bioprocessOutputs.MunipalWaterPump).toFixed(2);
-      document.getElementById('MunipalWaterPumpTIC').value =(bioprocessOutputs.MunipalWaterPumpTIC).toFixed(2);
+      document.getElementById('MunicipalWaterPump').value =(bioprocessOutputs.MunicipalWaterPump).toFixed(2);
+      document.getElementById('MunicipalWaterPumpTIC').value =(bioprocessOutputs.MunicipalWaterPumpTIC).toFixed(2);
       document.getElementById('WaterPiping').value =(bioprocessOutputs.WaterPiping).toFixed(2);
       document.getElementById('WaterHandlingEquip').value =(bioprocessOutputs.WaterHandlingEquip).toFixed(2);
       document.getElementById('WaterHandlingTIC').value =(bioprocessOutputs.WaterHandlingTIC).toFixed(2);
@@ -301,7 +302,7 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
 
 
 }
-function bioprocessopexcapex(Input){
+function bioprocessopexcapex(Input,AV){
 //Inputs from User Input
 // Set Up Input Array & Define Initial Baseline Inputs & Outputs.
 // Input    0-productName,                1-productFormula      2-productMW,              3-theorYield,           4-productYieldCoefficientNH3,
@@ -336,24 +337,22 @@ function bioprocessopexcapex(Input){
     dspYield = Input[29]/100;
     dspOPEXfraction = Input[30]/100;
     dspCAPEXfraction = Input[31]/100;
-    NaOHCosts = 0.15; // $/kg, based on $150/tonne https://yosemite.epa.gov/sab/sabproduct.nsf/953CCBEB820F0470852577920076316D/$File/NaOH+Practicality+Study.pdf
-    PeraceticAcidCosts = 5; //$/L for CIP % solution
 
 
-   // Advanced Inputs
-    AmmoniaSourceMW = 17.031;//(g/mole) for NH3
-    MicrobeMW  =  95.37; // (g/mole) for E. coli
-    FeedstockMW = 180.156; // (g/mole) for glucose
-    biomassYieldCoefficientGlucose = (MicrobeMW)/(0.84*FeedstockMW); // based on ideal formula 0.84 Glucose + 1 NH3 + 1.212 O2 --> 1 E. coli(C3.85H6.69O1.78N)+ 3.212 H2O + 1.212 CO2
-    biomassYieldCoefficientNH3 = (MicrobeMW)/(1*AmmoniaSourceMW); // based on ideal formula 0.84 Glucose + 1 NH3 + 1.212 O2 --> 1 E. coli(C3.85H6.69O1.78N)+ 3.212 H2O + 1.212 CO2
-    biomassYieldCoefficientO2 = (MicrobeMW)/(1.212*32); // g biomass/g O2 based on ideal formula 0.84 Glucose + 1 NH3 + 1.212 O2 --> 1 E. coli(C3.85H6.69O1.78N)+ 3.212 H2O + 1.212 CO2
-    byproductYieldCoefficientO2 = (FeedstockMW)/(6*32); // g glucose consumed /g O2 for byproduct, based on ideal formula 1 Glucose + 6  O2 --> 6 H2O + 6 CO2
 
-    // Advanced variables which are kept as defaults in the analyses
-    inoculationFraction = 0.01; // fraction of volume at final biomass concentration used to inoculate production fermenters
-    workingVolumeRatio = 0.85; // (L working volume)/(L gross volume)
-    BiomassYieldFraction = 0.80; // the actual biomass yield as a fraction of theoretical maximal biomass yield
-    FermenterAspectRatio = 3.0; // from Humbird et al.
+    NaOHCosts = AVP.NaOHCosts;
+    PeraceticAcidCosts = AVP.PeraceticAcidCosts;
+    AmmoniaSourceMW = AVP.AmmoniaSourceMW;
+    MicrobeMW  = AVP.MicrobeMW;
+    FeedstockMW = AVP.FeedstockMW;
+    biomassYieldCoefficientGlucose = AVP.biomassYieldCoefficientGlucose;
+    biomassYieldCoefficientNH3 = AVP.biomassYieldCoefficientNH3;
+    biomassYieldCoefficientO2 = AVP.biomassYieldCoefficientO2;
+    byproductYieldCoefficientO2 = AVP.byproductYieldCoefficientO2;
+    inoculationFraction = AVP.inoculationFraction;
+    workingVolumeRatio = AVP.workingVolumeRatio;
+    BiomassYieldFraction = AVP.BiomassYieldFraction;
+    FermenterAspectRatio = AVP.FermenterAspectRatio;
 
 
    // The following are Calculations based on the Fermentation Targets
@@ -387,7 +386,7 @@ function bioprocessopexcapex(Input){
     TotalBatchSugarPerLcapacity = ProductBatchSugarPerLcapacity/fractionOftheoreticalMaximalYield ; // Total sugar consumed assuming target yield losses
 
    // Biomass Based Calculations - Final Biomass levels are calculated from Titer, Rate and Yield Requirements
-    MicrobeMW  =  95.37; // (g/mole) for E. coli
+    MicrobeMW = AVP.MicrobeMW ; // (g/mole)
     ProductBatchSugar = (maxProductPerVessel/productYieldCoefficientGlucose); // assumes 100% of theoretical yield
     TotalBatchSugar = ProductBatchSugar/(fractionOftheoreticalMaximalYield); // Total sugar consumed assuming biomass yield losses
     MaxBiomassSugar =  TotalBatchSugar -  ProductBatchSugar;
@@ -498,22 +497,25 @@ function bioprocessopexcapex(Input){
 
     //CIP Costs  // https://www.chemengonline.com/large-scale-fermentation-systems-hygienic-design-principles/
     // Assumes NAOH at 2wt% treatment after each batch
-    annualNaOHCosts = (numberOfBatchesPerYearPerTank*numberOfTanks*vesselSize)*.02*NaOHCosts;
+    annualNaOHCosts = (numberOfBatchesPerYearPerTank*numberOfTanks*vesselSize)*0.02*NaOHCosts;
     // Assumes Peracetic Acid used at final concentratio of 200ppm  or 0.02%
-    annualPeraceticCosts = (numberOfBatchesPerYearPerTank*numberOfTanks*vesselSize)*.002*PeraceticAcidCosts; //Assumes PA at 15-20%
+    annualPeraceticCosts = (numberOfBatchesPerYearPerTank*numberOfTanks*vesselSize)*0.002*PeraceticAcidCosts; //
     annualCIPCosts = annualNaOHCosts+annualPeraceticCosts;
 
     // Primary Cell Removal Calculations (Centrifugation)
-        // Sigma = Q/2uo e coli uo=6.81X10-9 m/s
-    CentrifugeFlowRate = 10000; //L/hour = 10m3/hr = 0.0028 m3/s) doable with disc stacked centrifuge
+    // Sigma = Q/2uo e coli uo=6.81X10-9 m/s
+    CentrifugeFlowRate = AVP.centrifugeFlowRate; //L/hour
     annualCentrifugeVolume = totalAnnualFermWorkingVolume; // Liters
-    hoursOfCentrifugationRequired = annualCentrifugeVolume/10000;
-    numberOfCentrifuges = Math.ceil(hoursOfCentrifugationRequired/annualUpTime);
+    CentrifugeUptime = AVP.centrifugeUptime;
+    neededTotalCentrifugeFlowRate = annualCentrifugeVolume/CentrifugeUptime;
+    numberOfCentrifuges = Math.ceil(neededTotalCentrifugeFlowRate/CentrifugeFlowRate);
     actualAnnualCentrifugeUptime = annualCentrifugeVolume/(numberOfCentrifuges*CentrifugeFlowRate)
     powerConsumptionPerCentrifuge = 3.0 ;// kW  https://onlinelibrary.wiley.com/doi/10.1002/ceat.201800292
     annualCostOfCentrifugation = numberOfCentrifuges*powerConsumptionPerCentrifuge*actualAnnualCentrifugeUptime*ElectricityCost;// $/year
+    console.log(numberOfCentrifuges);
+    console.log(CentrifugeFlowRate);
 
-    // Biomass Heat Kill
+    // Biomass Heat Kill - To disinfect any waster biomass
     heatKillVolume = (totalAnnualFermWorkingVolume*finalBiomassConcentration)*1.6/1000;//(Liters)
     heatKillTemperature = 60 ; // (degrees Celsius) assumes E. coli process
     ambientTemperature = 25; // (degrees Celsius)
@@ -523,120 +525,113 @@ function bioprocessopexcapex(Input){
 
 
 // Capex Estimations
+
+AVC = advancedVariablesCapital();
+
 // Major Equipment
-// For all major equipment
-// purchase cost  = (# of units)* Quoted Cost *(Actual Size / Quoted Size)^ Scaling Factor
-// TIC = (Inflation Factor)(purchase cost)(Installation Factor)
-// 2009-2020 Producers inflation = 1.17
-// 2013-2020 Producers inflation = 1.00
-// 2014-2020 Producers inflation = 1.03
-// 2010-2020 Producers inflation = 1.13
-// 2017-2020 Producers inflation = 1.06
 
 
-         if (vesselSize == 1000000){      // %% NREL 2013, quote year 2010 , inflation - 1.12
-             fermenterUnitCost = (176000)*(Math.pow((1000000/76000),0.7));
+         if (vesselSize == 1000000){
+             fermenterUnitCost = (AVC.Fermenter_quote)*(Math.pow((1000000/AVC.Fermenter_quotesize),AVC.Fermenter_SF));
             }else if (vesselSize = 500000){
-             fermenterUnitCost = (176000)*(Math.pow((500000/76000),0.7));
+             fermenterUnitCost = (AVC.Fermenter_quote)*(Math.pow((500000/AVC.Fermenter_quotesize),AVC.Fermenter_SF));
             }else if (vesselSize = 200000){
-             fermenterUnitCost = (176000)*(Math.pow((200000/76000),0.7));
+             fermenterUnitCost = (AVC.Fermenter_quote)*(Math.pow((200000/AVC.Fermenter_quotesize),AVC.Fermenter_SF));
           }
 
 // Main Fermenter Area including Air Handling
         fermenterCost = numberOfTanks*(fermenterUnitCost); // NREL 2013 , Quote year 2010
-        fermenterTIC = 1.12*fermenterCost*2;
-        fermenterAgitatorCost = numberOfTanks*36000*(Math.pow((vesselSize/75708),0.5)); // NREL 2013 , Quote year 2013
-        fermenterAgitatorTIC = 1.00*fermenterAgitatorCost*1.5;
-        TransferPumpsCost = 2*numberOfTanks*3933*(Math.pow((vesselSize/950000),0.8)); //NREL 2009
-        TransferPumpsTIC = 1.17*TransferPumpsCost*2.3;
-        fermentationCoolersCost = 0 ; // included in fermenter cost
-        fermentationCoolersTIC = 0 ; // included in fermenter cost
-        mainFermPiping = 0.045*(fermenterTIC+fermenterAgitatorTIC +TransferPumpsTIC);
+        fermenterTIC = fermenterCost*AVC.Fermenter_IF;
+        fermenterAgitatorCost = numberOfTanks*AVC.Agitator_quote*(Math.pow((vesselSize/AVC.Agitator_quotesize),AVC.Agitator_SF));
+        fermenterAgitatorTIC = fermenterAgitatorCost*AVC.Agitator_IF;
+        TransferPumpsCost = 2*numberOfTanks*AVC.TransferPumps_quote*(Math.pow((vesselSize/AVC.TransferPumps_quotesize),AVC.TransferPumps_SF)); //NREL 2009
+        TransferPumpsTIC = TransferPumpsCost*AVC.TransferPumps_IF;
+        fermentationCoolersCost = AVC.fermentationCoolersCost ;
+        fermentationCoolersTIC = AVC.fermentationCoolersTIC ;
+        mainFermPiping = AVC.piping_F*(fermenterTIC+fermenterAgitatorTIC +TransferPumpsTIC);
         mainFermTIC = (mainFermPiping+fermenterTIC+fermenterAgitatorTIC +TransferPumpsTIC);
         mainFermEquip = fermenterCost + fermenterAgitatorCost +TransferPumpsCost+ fermentationCoolersCost;
+        //console.log(mainFermTIC);
 
 // Sugar Storage
-        glucoseStorageTankCost = 70000*(Math.pow(((averageGlucoseConsumptionRate*12)/264978),0.7)); // NREL 2013 , Quote year 2009, holds 12 hrs of feed.
-        glucoseStorageTankTIC = 1.17*glucoseStorageTankCost*2.6; //
-        glucoseStorageTransferPumpsCost = numberOfTanks*3933*(Math.pow(((averageGlucoseConsumptionRate*12)/950000),0.8)); //NREL 2009
-        glucoseStorageTransferPumpsTIC= 1.17*glucoseStorageTransferPumpsCost*2.3;
-        glucoseStoragepiping = 0.045*(glucoseStorageTankTIC+glucoseStorageTransferPumpsTIC);
+        glucoseStorageTankCost = AVC.GlucoseStorageTank_quote*(Math.pow(((averageGlucoseConsumptionRate*AVC.GlucoseStorageTank_hold_time)/AVC.GlucoseStorageTank_quotesize),AVC.GlucoseStorageTank_SF)); // NREL 2013 , Quote year 2009, holds 12 hrs of feed.
+        glucoseStorageTankTIC = AVC.PI2009_INF*glucoseStorageTankCost*AVC.GlucoseStorageTank_IF; //
+        glucoseStorageTransferPumpsCost = numberOfTanks*AVC.TransferPumps_quote*(Math.pow(((averageGlucoseConsumptionRate*AVC.GlucoseStorageTank_hold_time)/AVC.TransferPumps_quotesize),AVC.TransferPumps_SF)); //NREL 2009
+        glucoseStorageTransferPumpsTIC= glucoseStorageTransferPumpsCost*AVC.TransferPumps_IF;
+        glucoseStoragepiping = AVC.piping_F*(glucoseStorageTankTIC+glucoseStorageTransferPumpsTIC);
         glucoseStorageTIC = (glucoseStoragepiping+glucoseStorageTankTIC+glucoseStorageTransferPumpsTIC);
         glucoseStorageEquip = glucoseStorageTankCost+glucoseStorageTransferPumpsCost;
-
+        //console.log(glucoseStorageTIC);
 
 // Titrant Prep & Storage
-        ammoniaStorageTankCost = 196000*(Math.pow(((averageNH3ConsumptionRate*12)/105991),0.7)); // NREL 2013 , Quote year 2010, holds 12 hrs of feed.
-        ammoniaStorageTankTIC = 1.13*ammoniaStorageTankCost*2;//
-        acidStorageTankCost = 96000*(Math.pow(((averageNH3ConsumptionRate*12)/45000),0.7)); // NREL 2013 , Quote year 2010, holds 12 hrs of feed.
-        acidStorageTankTIC = 1.13*acidStorageTankCost*1.5;//
-        ammoniaTransferPumpsCost = numberOfTanks*3933*(Math.pow(((averageNH3ConsumptionRate*12)/950000),0.8)); //NREL 2009
-        ammoniaTransferPumpsCostTIC = 1.17*ammoniaTransferPumpsCost*2.3;
-        acidTransferPumpsCost = numberOfTanks*3933*(Math.pow(((averageNH3ConsumptionRate*12)/950000),0.8)); //NREL 2009
-        acidTransferPumpsCostTIC  = 1.17*ammoniaTransferPumpsCost*2.3;
-        additionPiping = 0.045*(ammoniaStorageTankTIC+acidStorageTankTIC +ammoniaTransferPumpsCostTIC+acidTransferPumpsCostTIC);
+        ammoniaStorageTankCost = AVC.AmmoniaStorageTank_quote*(Math.pow(((averageNH3ConsumptionRate*AVC.AmmoniaStorageTank_hold_time)/AVC.AmmoniaStorageTank_quotesize),AVC.AmmoniaStorageTank_SF)); // NREL 2013 , Quote year 2010, holds 12 hrs of feed.
+        ammoniaStorageTankTIC = ammoniaStorageTankCost*AVC.AmmoniaStorageTank_IF;//
+        acidStorageTankCost = AVC.AcidStorageTank_quote*(Math.pow(((averageNH3ConsumptionRate*AVC.AcidStorageTank_hold_time)/AVC.AcidStorageTank_quotesize),AVC.AcidStorageTank_SF)); // NREL 2013 , Quote year 2010, holds 12 hrs of feed.
+        acidStorageTankTIC = acidStorageTankCost*AVC.AcidStorageTank_IF;//
+        ammoniaTransferPumpsCost = numberOfTanks*AVC.TransferPumps_quote*(Math.pow(((averageNH3ConsumptionRate*AVC.AmmoniaStorageTank_hold_time)/AVC.TransferPumps_quotesize),AVC.TransferPumps_SF)); //NREL 2009
+        ammoniaTransferPumpsCostTIC = ammoniaTransferPumpsCost*AVC.TransferPumps_IF;
+        acidTransferPumpsCost = numberOfTanks*AVC.TransferPumps_quote*(Math.pow(((averageNH3ConsumptionRate*AVC.AcidStorageTank_hold_time)/AVC.AcidStorageTank_quotesize),AVC.TransferPumps_SF)); //NREL 2009
+        acidTransferPumpsCostTIC  = acidTransferPumpsCost*AVC.TransferPumps_IF;
+        additionPiping = AVC.piping_F*(ammoniaStorageTankTIC+acidStorageTankTIC +ammoniaTransferPumpsCostTIC+acidTransferPumpsCostTIC);
         additionsTIC = (additionPiping+ammoniaStorageTankTIC+acidStorageTankTIC +ammoniaTransferPumpsCostTIC+acidTransferPumpsCostTIC);
         additionsEquip =  ammoniaStorageTankCost+acidStorageTankCost +ammoniaTransferPumpsCost+ acidTransferPumpsCost ;
+        //console.log(ammoniaStorageTankCost);
 
 // Agitated Media Prep & Storage
-        agitatedMediaPrepTankCost = 91200*(Math.pow((vesselSize/264978),0.7)); // NREL 2013 , Quote year 2009
-        agitatedMediaPrepTankTIC = 1.17*agitatedMediaPrepTankCost*2.6;//
-        mediaTransferPumpsCost = (numberOfTanks+1)*(3933*(Math.pow((vesselSize/950000),0.8))); //NREL 2009 + 1 for RO water addition
-        mediaTransferPumpsCostTIC  = 1.17*mediaTransferPumpsCost*2.3;
-
-
+        agitatedMediaPrepTankCost = AVC.AgitatedMediaPrepTank_quote*(Math.pow((vesselSize/AVC.AgitatedMediaPrepTank_quotesize),AVC.AgitatedMediaPrepTank_SF)); // NREL 2013 , Quote year 2009
+        agitatedMediaPrepTankTIC = agitatedMediaPrepTankCost*AVC.AgitatedMediaPrepTank_IF;//
+        mediaTransferPumpsCost = (numberOfTanks+1)*(AVC.TransferPumps_quote*(Math.pow((vesselSize/AVC.TransferPumps_quotesize),AVC.TransferPumps_SF))); //NREL 2009 + 1 for RO water addition
+        mediaTransferPumpsCostTIC  = mediaTransferPumpsCost*AVC.TransferPumps_IF;
 
 // Dry Chemicals
-       DryChemicalAddition  = 100000;
-       DryChemicalAdditionTIC = 2*DryChemicalAddition; // 2020 Estimate Lynch
-
-        mediaPiping = 0.045*(agitatedMediaPrepTankTIC+mediaTransferPumpsCostTIC);
-        mediaPrepTIC = (mediaPiping+agitatedMediaPrepTankTIC+mediaTransferPumpsCostTIC +DryChemicalAdditionTIC );
-        mediaPrepEquip = agitatedMediaPrepTankCost +mediaTransferPumpsCost +DryChemicalAddition;
+       DryChemicalAddition  = AVC.DryChemicalAddition;
+       DryChemicalAdditionTIC = AVC.DryChemicalAddition_IF*DryChemicalAddition; // 2020 Estimate Lynch
+       mediaPiping = AVC.piping_F*(agitatedMediaPrepTankTIC+mediaTransferPumpsCostTIC);
+       mediaPrepTIC = (mediaPiping+agitatedMediaPrepTankTIC+mediaTransferPumpsCostTIC +DryChemicalAdditionTIC );
+       mediaPrepEquip = agitatedMediaPrepTankCost +mediaTransferPumpsCost +DryChemicalAddition;
 
 
 // CIP
-        CIPTankCost = 3*(98000*(Math.pow((vesselSize/100)/105991),0.7)); // NREL 2013 , Quote year 2010, holds 1/100 volume of concentrated
-        CIPTankTIC = 1.17*CIPTankCost*1.8;//
-        CIPTransferPumpsCost = numberOfTanks*(3933*(Math.pow((vesselSize/100)/950000),0.8)); //NREL 2009
-        CIPTransferPumpsCostTIC  = 1.17*CIPTransferPumpsCost*2.3;
-        CIPFilterCost = 35000; // 2020 Estimate Lynch
-        CIPFilterCostTIC = CIPFilterCost *1.8; // 2020 Estimate Lynch
-        CIPHeaterCost = 30000;
-        CIPHeaterCostTIC = CIPHeaterCost*1.8; // 2020 Estimate Lynch
-        CIPpipingTIC = 0.045*(CIPTankTIC +CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC);
+        CIPTankCost = 3*(AVC.CIPvesselquote*(Math.pow((vesselSize*AVC.CIPvesselSize)/AVC.CIPvesselquotesize),AVC.CIPvessel_SF)); // NREL 2013 , Quote year 2010, holds 1/100 volume of concentrated
+        CIPTankTIC = CIPTankCost*AVC.CIPvessel_IF;//
+        CIPTransferPumpsCost = numberOfTanks*(AVC.TransferPumps_quote*(Math.pow((vesselSize*AVC.CIPvesselSize)/AVC.TransferPumps_quotesize),AVC.TransferPumps_SF)); //NREL 2009
+        CIPTransferPumpsCostTIC  = CIPTransferPumpsCost*AVC.TransferPumps_IF;
+        CIPFilterCost = AVC.CIPFilterCost;
+        CIPFilterCostTIC = AVC.CIPFilterCost_IF*CIPFilterCost;
+        CIPHeaterCost = AVC.CIPHeaterCost;
+        CIPHeaterCostTIC = AVC.CIPHeaterCost_IF*CIPHeaterCost;
+        CIPpipingTIC = AVC.piping_F*(CIPTankTIC +CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC);
         CIPTIC = (CIPpipingTIC+CIPTankTIC +CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC+CIPTransferPumpsCostTIC);
         CIPEquip = CIPTankCost+CIPTransferPumpsCost + CIPFilterCost +CIPHeaterCost;
 
+
+// Summary of Main Ferm
 
         MainFermAreaEquip = mainFermEquip+glucoseStorageEquip+additionsEquip+mediaPrepEquip+CIPEquip ;
         MainFermAreaTIC = mainFermTIC+glucoseStorageTIC+additionsTIC+mediaPrepTIC+ CIPTIC;
 
 
 // Area 100: Seed Fermenter Area
-        seedEquipment  = 0.27*MainFermAreaEquip;
-        seedEquipmentTIC = 0.27*MainFermAreaTIC;  // Assume 0.27 * production fermentation equipment cost per NREL_2013
+        seedEquipment  = AVC.seed_F*MainFermAreaEquip;
+        seedEquipmentTIC = AVC.seed_F*MainFermAreaTIC;  // Assume 0.27 * production fermentation equipment cost per NREL_2013
 
 // Area 400 : Primary Cell Removal Capex
 
 // Centrifugation
 
-        // Sigma = Q/2uo e coli uo=6.81X10-9 m/s
-        CentrifugeFlowRate2 = 0.0028; // m3/sec or 10000L/hour ) doable with disc stacked centrifuge
-        Sigma = 205580; // needed sigama in m2, at 10000L/hr flow rate
-        // cost of 200 X 1000 m2 Cenrifuge is $325,000, 1998 https://www.cheric.org/files/education/cyberlecture/d200301/d200301-1801.pdf
-        CentrifugeCost = numberOfCentrifuges*325000*1.59;// 1.59 to correct for time
-        CentrifugeTIC = CentrifugeCost*1.8;//
-        Centrifugepiping = 0.045*CentrifugeTIC;
+        CentrifugeCost = numberOfCentrifuges*AVC.CentrifugeCost;
+        CentrifugeTIC = CentrifugeCost*AVC.CentrifugeCost_IF;//
+        Centrifugepiping = AVC.piping_F*CentrifugeTIC;
         CentrifugeEquip = CentrifugeCost;
         CentrifugeEquipTIC = CentrifugeTIC + Centrifugepiping;
 
+
 // Broth Storage
-        brothStorageTankCost = (1317000*(Math.pow((vesselSize*numberOfTanks*0.5)/4542000),0.7)); // NREL 2013 , Quote year 2011, sized to 1/2 of fermentation capacity
-        brothStorageTankTIC = 1.0*brothStorageTankCost*1.8;
-        brothStorageTransferPumpCost= (3933*(Math.pow((vesselSize*numberOfTanks*0.5)/950000),0.8)); //NREL 2009
-        brothStorageTransferPumpTIC= 1.17*brothStorageTransferPumpCost*2.3;
-        brothStoragePiping = 0.045*(brothStorageTankTIC +brothStorageTransferPumpTIC);
+        brothStorageTankCost = (AVC.brothStorageTankquote*(Math.pow((vesselSize*numberOfTanks*AVC.brothStorageTankSize)/AVC.brothStorageTankquotesize),AVC.brothStorageTank_SF)); // NREL 2013 , Quote year 2011, sized to 1/2 of fermentation capacity
+        brothStorageTankTIC = brothStorageTankCost*AVC.brothStorageTank_IF;
+        brothStorageTransferPumpCost= (AVC.TransferPumps_quote*(Math.pow((vesselSize*numberOfTanks*AVC.brothStorageTankSize)/AVC.TransferPumps_quotesize),AVC.TransferPumps_SF)); //NREL 2009
+        brothStorageTransferPumpTIC= brothStorageTransferPumpCost*AVC.TransferPumps_IF;
+        brothStoragePiping = AVC.piping_F*(brothStorageTankTIC +brothStorageTransferPumpTIC);
         brothStorageEquip = brothStorageTankCost+ brothStorageTransferPumpCost;
         brothStorageTIC = (brothStoragePiping+brothStorageTankTIC +brothStorageTransferPumpTIC);
 
@@ -647,15 +642,17 @@ function bioprocessopexcapex(Input){
 // Area 0: Utilities
 
 // Process Utilities
+
         // Cooling Water
            averageCoolingWaterFlowRateGPM = averageCoolingWaterFlowRate*1000*60*0.264172;  // m3/sec --> gpm
-           coolingTowerEquip = 1.17*1375000*(Math.pow((averageCoolingWaterFlowRateGPM/44200),0.6));//NREL 2010
-           coolingTowerTIC = 1.5*coolingTowerEquip; //$/ton NREL 2011
-           coolingTowerPumps = 1.17*283671*(Math.pow((averageCoolingWaterFlowRateGPM/16120),0.8));//NREL 2010
-           coolingTowerPumpsTIC = 3.1*coolingTowerPumps;
-           coolingTowerPiping = 0.045*(coolingTowerTIC+coolingTowerPumpsTIC);
+           coolingTowerEquip = AVC.coolingTowerEquipquote*(Math.pow((averageCoolingWaterFlowRateGPM/AVC.coolingTowerEquipquotesize),AVC.coolingTowerEquip_SF));
+           coolingTowerTIC = AVC.coolingTowerEquip_IF*coolingTowerEquip;
+           coolingTowerPumps = AVC.coolingTowerPumpsquote*(Math.pow((averageCoolingWaterFlowRateGPM/AVC.coolingTowerPumpsquotesize),AVC.coolingTowerPumps_SF));
+           coolingTowerPumpsTIC = AVC.coolingTowerPumps_IF*coolingTowerPumps;
+           coolingTowerPiping = AVC.piping_F*(coolingTowerTIC+coolingTowerPumpsTIC);
            coolingEquip = coolingTowerEquip +coolingTowerPumps;
            coolingTIC = (coolingTowerPiping+coolingTowerTIC+coolingTowerPumpsTIC);
+
 
         // Boiler
                  TimeTransfer1 = 3600*annualUpTime/20; // sec.
@@ -670,9 +667,9 @@ function bioprocessopexcapex(Input){
                  SteamHEATKILL  =2.2046*qHeatKill/1910; // (lb/sec)
                  TotalSteamRate =(SteamSTERILIZATION +SteamHEATKILL)*3600; // (lb/hr)
 
-            BoilerPackageCosts = 1.6*100000*(Math.pow((TotalSteamRate/10000),0.6)); // https://www.osti.gov/servlets/purl/797810/
-            BoilerPackageTIC = 1.8*BoilerPackageCosts;
-            //console.log(BoilerPackageCosts);
+            BoilerPackageCosts = AVC.BoilerPackageCostsquote*(Math.pow((TotalSteamRate/AVC.BoilerPackageCostsquotesize),AVC.BoilerPackageCosts_SF));
+            BoilerPackageTIC = AVC.BoilerPackageCosts_SF*BoilerPackageCosts;
+
 
         // AirHandling
             airDensity = 1.225; // 𝑘𝑔/𝑚3
@@ -686,65 +683,57 @@ function bioprocessopexcapex(Input){
             ReceiverVolume = holdTime*airflowSCFM*14.7/(50-1.2*maxFermenterPressurePsi); // cubic feet
             ReceiverVolumeGal = ReceiverVolume*7.48; // gallons
             //console.log("receiver Volume Gal" + ReceiverVolumeGal );
-            AirReceiver  = 1.11*104600*(Math.pow((ReceiverVolumeGal/25000),1));//NREL 2010
-            AirReceiverTIC = AirReceiver*2.0;
-           // console.log("Air Receiver" + AirReceiver);
+            AirReceiver  = AVC.AirReceiverquote*(Math.pow((ReceiverVolumeGal/AVC.AirReceiverquotesize),AVC.AirReceiver_SF));//NREL 2010
+            AirReceiverTIC = AirReceiver*AVC.AirReceiver_IF;
+            //console.log("Air Receiver" + AirReceiver);
 
-          //Compressor Calculations
+        //Compressor Calculations
             compressorOutletP = 3.4; // bar -
-            //console.log(compressorOutletP);
             compressorInletP = 1.013; // bar - atmospheric Pressure
             compressorInletT = 25+273; // ambient temperature
-            // for air : y = 1.4;
-            //z = (1.4-1)/1.4 = 0.286;
             compressorOutletT = compressorInletT*(Math.pow((compressorOutletP/compressorInletP),0.286));
-            //console.log(compressorOutletT-273);
-            compressorPower = ((2.31*(3.5)*0.7/28.96)*(compressorOutletT-compressorInletT)*airflowQ)/1000; // kW //https://powderprocess.net/Tools_html/Compressors/Tools_Compressor_Power.html
-            //AirCompressor = 1.47*5820*(Math.pow(compressorPower,0.82)); // Douglas 1988
-            AirCompressor = 1.03*1318600*(Math.pow((airflowSCFM/25000),0.8)); // NREL https://www.nrel.gov/docs/fy19osti/71949.pdf
-           // console.log("Air Compressor " + AirCompressor);
-            AirCompressorTIC =1.6*AirCompressor;
-            AirDryer = 1.17*(15000)*(Math.pow((airflowQ/83333),0.6));//NREL 2018
-            AirDryingTIC = AirDryer*1.8;
-            //console.log(AirDryer);
-
-            AirPiping=0.045*(AirDryingTIC+AirReceiverTIC+AirCompressorTIC);
+            AirCompressor = AVC.AirCompressorquote*(Math.pow((airflowSCFM/AVC.AirCompressorquotesize),AVC.AirCompressor_SF)); // NREL https://www.nrel.gov/docs/fy19osti/71949.pdf
+            AirCompressorTIC = AVC.AirCompressor_IF*AirCompressor;
+            AirDryer = AVC.AirDryerquote*(Math.pow((airflowQ/AVC.AirDryerquotesize),AVC.AirDryer_SF));//NREL 2018
+            AirDryingTIC = AVC.AirDryer_IF*AirDryer;
+            AirPiping=AVC.piping_F*(AirDryingTIC+AirReceiverTIC+AirCompressorTIC);
             AirHandlingEquip = AirDryer + AirReceiver +AirCompressor;
             AirHandlingTIC =(AirPiping+AirDryingTIC+AirReceiverTIC+AirCompressorTIC);
+            //console.log(AirHandlingTIC);
 
         // Water Handling & Purification
         //from opex - averageWaterDemandRate // m3/sec
-            averageWaterDemandRateKgperhr = averageWaterDemandRate*1000*3600
-            MunicpalWaterTank = 1.17*250000*(Math.pow((averageWaterDemandRateKgperhr/451555),0.6));//NREL 2018
-            MunicpalWaterTankTIC = MunicpalWaterTank*1.7;
-            MunipalWaterPump = 1.17*(15292+6864)*(Math.pow((averageWaterDemandRateKgperhr/518924),0.6));//NREL 2018
-            MunipalWaterPumpTIC  = MunipalWaterPump*3.1;
-            SoftenerSystem = 1.17*78000*(Math.pow((averageWaterDemandRateKgperhr/235803),0.6));//NREL 2010
-            SoftenerSystemTIC  = SoftenerSystem*1.8;
-            PotableWaterTank =50000; // Lynch 2020 Estimate
-            PotableWaterTankTIC  = PotableWaterTank*1.7;
-            PotableWaterCooler = 25000; // Lynch 2020 Estimate
-            PotableWaterCoolerTIC  = PotableWaterCooler*1.7;
-            WaterPiping  = 0.045*(MunicpalWaterTankTIC+PotableWaterTankTIC+SoftenerSystemTIC+ PotableWaterCoolerTIC+MunipalWaterPumpTIC);
-            WaterHandlingEquip = (MunicpalWaterTank+PotableWaterTank+SoftenerSystem+PotableWaterCooler+MunipalWaterPump);
-            WaterHandlingTIC= (WaterPiping+MunicpalWaterTankTIC+PotableWaterTankTIC+SoftenerSystemTIC+ PotableWaterCoolerTIC+MunipalWaterPumpTIC);
+            averageWaterDemandRateKgperhr = averageWaterDemandRate*1000*3600;
+            MunicipalWaterTank = AVC.MunicipalWaterTankquote*(Math.pow((averageWaterDemandRateKgperhr/AVC.MunicipalWaterTankquotesize),AVC.MunicipalWaterTank_SF));//NREL 2018
+            MunicipalWaterTankTIC = AVC.MunicipalWaterTank_IF*MunicipalWaterTank;
+            MunicipalWaterPump = AVC.MunicipalWaterPumpquote *(Math.pow((averageWaterDemandRateKgperhr/AVC.MunicipalWaterPumpquotesize),AVC.MunicipalWaterPump_SF));//NREL 2018
+            MunicipalWaterPumpTIC  = AVC.MunicipalWaterPump_IF*MunicipalWaterPump
+            SoftenerSystem = AVC.SoftenerSystemquote*(Math.pow((averageWaterDemandRateKgperhr/AVC.SoftenerSystemquotesize),AVC.SoftenerSystem_SF));//NREL 2010
+            SoftenerSystemTIC  = AVC.SoftenerSystem_IF *SoftenerSystem;
+            PotableWaterTank =AVC.PotableWaterTankquote; // Lynch 2020 Estimate
+            PotableWaterTankTIC  = PotableWaterTank*AVC.PotableWaterTank_IF;
+            PotableWaterCooler = AVC.PotableWaterCoolerquote;
+            PotableWaterCoolerTIC  = PotableWaterCooler*AVC.PotableWaterCooler_IF;
+            WaterPiping  = AVC.piping_F*(MunicipalWaterTankTIC+PotableWaterTankTIC+SoftenerSystemTIC+ PotableWaterCoolerTIC+MunicipalWaterPumpTIC);
+            WaterHandlingEquip = (MunicipalWaterTank+PotableWaterTank+SoftenerSystem+PotableWaterCooler+MunicipalWaterPump);
+            WaterHandlingTIC= (WaterPiping+MunicipalWaterTankTIC+PotableWaterTankTIC+SoftenerSystemTIC+ PotableWaterCoolerTIC+MunicipalWaterPumpTIC);
+            console.log(WaterHandlingTIC);
 
        // Waste Disposal
             WasteWaterTankSize = (heatKillVolume/totalAnnualFermWorkingVolume)*vesselSize*numberOfTanks;
-            //console.log(WasteWaterTankSize);
-            WasteWaterTank = 1317000*(Math.pow((WasteWaterTankSize/4542000),0.7)); //
-            //console.log(WasteWaterTank);
-            WasteWaterTankTIC = 1.8*WasteWaterTank;
-            WasteWaterPump = (3933*(Math.pow((WasteWaterTankSize)/950000),0.8)); //NREL 2009
-            WasteWaterPumpTIC= 1.17*WasteWaterPump*2.3;
+            WasteWaterTank = AVC.WasteWaterTankquote *(Math.pow((WasteWaterTankSize/AVC.WasteWaterTankquotesize),AVC.WasteWaterTank_SF)); //
+            WasteWaterTankTIC = AVC.WasteWaterTank_IF*WasteWaterTank;
+            WasteWaterPump = (AVC.TransferPumps_quote*(Math.pow((WasteWaterTankSize)/AVC.TransferPumps_quotesize),AVC.TransferPumps_SF)); //NREL 2009
+            WasteWaterPumpTIC= WasteWaterPump*AVC.TransferPumps_IF;
+
             //  Heat Kill exchanger Calcs
                  ldT1 = ((201-60)-(60-25))/(Math.log((201-60)/(60-25)));
                  U1 = 1; // kW/m2-K
                  HeatKillExchangerArea = qHeatKill/(U1*ldT1);
-                 HeatKillExchanger = 1.59*15000*(Math.pow((HeatKillExchangerArea/140),0.5)); //
-                 HeatKillExchangerTIC = HeatKillExchanger*3.1;
+                 HeatKillExchanger = AVC.HeatKillExchangerquote*(Math.pow((HeatKillExchangerArea/AVC.HeatKillExchangerquotesize),AVC.HeatKillExchanger_SF)); //
+                 HeatKillExchangerTIC = HeatKillExchanger*AVC.HeatKillExchanger_IF;
 
-            WasteWaterPiping  = 0.045*(WasteWaterTankTIC+HeatKillExchangerTIC+WasteWaterPumpTIC);
+            WasteWaterPiping  = AVC.piping_F*(WasteWaterTankTIC+HeatKillExchangerTIC+WasteWaterPumpTIC);
             WasteWaterEquip = (WasteWaterPiping +WasteWaterTank+WasteWaterPump+HeatKillExchanger);
             WasteWaterTIC = (WasteWaterPiping +WasteWaterTankTIC+HeatKillExchangerTIC+WasteWaterPumpTIC);
 
@@ -753,13 +742,13 @@ function bioprocessopexcapex(Input){
                  ldT0 = ((201-120)-(120-25))/(Math.log((201-120)/(120-25)));
                  U0 = 1; // kW/m2-K
                  MediaHeatExchangerArea = qSterilization/(U0*ldT0);
-                 MediaHeatExchanger = 1.59*15000*(Math.pow((MediaHeatExchangerArea/140),0.5)); //
-                 MediaHeatExchangerTIC = MediaHeatExchanger*3.1;
+                 MediaHeatExchanger = AVC.MediaHeatExchangerquote*(Math.pow((MediaHeatExchangerArea/AVC.MediaHeatExchangerquotesize),AVC.MediaHeatExchanger_SF)); //
+                 MediaHeatExchangerTIC = MediaHeatExchanger*AVC.MediaHeatExchanger_IF;
 
         // Update Media Prep costs
 
-                mediaPiping =  mediaPiping + 0.045*(MediaHeatExchangerTIC);
-                mediaPrepTIC  = mediaPrepTIC + 0.045*(MediaHeatExchangerTIC) + MediaHeatExchangerTIC;
+                mediaPiping =  mediaPiping + AVC.piping_F*(MediaHeatExchangerTIC);
+                mediaPrepTIC  = mediaPrepTIC + AVC.piping_F*(MediaHeatExchangerTIC) + MediaHeatExchangerTIC;
                 mediaPrepEquip = mediaPrepTIC + MediaHeatExchanger;
 
 
@@ -770,7 +759,7 @@ function bioprocessopexcapex(Input){
 
 
 // Area 600 : Instruments & Control
-        controlSystems =0.10*(MainFermAreaTIC + seedEquipmentTIC+ PrimaryCellRemovalTIC+ processUtilitiesTIC);
+        controlSystems =AVC.controlSystem_F*(MainFermAreaTIC + seedEquipmentTIC+ PrimaryCellRemovalTIC+ processUtilitiesTIC);
         fermtotalInstalledEquipmentCost = MainFermAreaTIC + seedEquipmentTIC+ PrimaryCellRemovalTIC+ processUtilitiesTIC +controlSystems ;
 
 // DSP
@@ -778,31 +767,31 @@ function bioprocessopexcapex(Input){
         dspTIC = dspCAPEXfraction*totalInstalledEquipmentCost;
 
 //  Buildings: administration, Warehousing etc
-        warehousing = 0.04*totalInstalledEquipmentCost;
-        administrativeBuildings = 0.05*totalInstalledEquipmentCost; //Office
-        siteDevelopment = 0.09*totalInstalledEquipmentCost;
+        warehousing = AVC.warehousing_F*totalInstalledEquipmentCost;
+        administrativeBuildings = AVC.administrativeBuildings_F*totalInstalledEquipmentCost; //Office
+        siteDevelopment = AVC.siteDevelopment_F*totalInstalledEquipmentCost;
 
 // Total Direct Costs
         totalDirectCost =siteDevelopment+warehousing+administrativeBuildings +totalInstalledEquipmentCost;
 
 // Indirect Costs
 
-        HomeOffice = 0.2*totalDirectCost; // Engineering &  https://www.sciencedirect.com/topics/engineering/minimum-ethanol-selling-price
-        prorateableExpenses = 0.1*totalDirectCost;
-        fieldExpenses  = 0.1*totalDirectCost;
-        projectContingency = 0.2*totalDirectCost;
-        otherStartupCosts = 0.1*totalDirectCost; // permitting etc.
+        HomeOffice = AVC.HomeOffice_F*totalDirectCost; // Engineering &  https://www.sciencedirect.com/topics/engineering/minimum-ethanol-selling-price
+        prorateableExpenses = AVC.prorateableExpenses_F*totalDirectCost;
+        fieldExpenses  = AVC.fieldExpenses_F*totalDirectCost;
+        projectContingency = AVC.projectContingency_F*totalDirectCost;
+        otherStartupCosts = AVC.otherStartupCosts_F*totalDirectCost; // permitting etc.
         totalIndirectCosts = otherStartupCosts + projectContingency +HomeOffice +fieldExpenses  + prorateableExpenses ;
         fixedCapitalInvestment = totalDirectCost + totalIndirectCosts;
-        workingCapital = 0.05*fixedCapitalInvestment;
-        realEstate= 0.06*fixedCapitalInvestment;
+        workingCapital = AVC.workingCapital_F*fixedCapitalInvestment;
+        realEstate= AVC.realEstate_F*fixedCapitalInvestment;
         totaCapitalInvestment  = fixedCapitalInvestment + workingCapital + realEstate;
 
    // Fermentation Opex Cost Summary
     annualUtilityCosts = annualCostOfHeatKill + annualCostOfSterilization +  annualCostOfCoolingWater + annualCostOfCompressedAir + annualCost0fMassTransfer  + annualCostOfCentrifugation; //
     annualRawMaterialCosts = annualCostOfMedia  + annualCostOfNH3 + annualCostOfGlucose + annualWaterCosts + annualCIPCosts; //
-    annualLaborCosts = 1.122*203923*numberOfTanks; //  (includes overhead labor uses cost per tank (NREL2013))x inflation factor);//
-    annualAdditionalFixedCosts = 1.12*0.037*(totalDirectCost); // (per NREL2013 x inflation factor); //
+    annualLaborCosts = AVP.annualLaborCosts_F*numberOfTanks; //  (includes overhead labor uses cost per tank (NREL2013))x inflation factor);//
+    annualAdditionalFixedCosts = AVP.annualAdditionalFixedCosts_F*(totalDirectCost); // (per NREL2013 x inflation factor); //
     annualFixedCosts = annualAdditionalFixedCosts + annualLaborCosts; //
     annualfermOpex = annualUtilityCosts + annualRawMaterialCosts +annualFixedCosts;//
 
@@ -972,16 +961,16 @@ function bioprocessopexcapex(Input){
             bioprocessOutputs.AirPiping=AirPiping;
             bioprocessOutputs.AirHandlingEquip = AirHandlingEquip;
             bioprocessOutputs.AirHandlingTIC =AirHandlingTIC;
-            bioprocessOutputs.MunicpalWaterTank =MunicpalWaterTank;
-            bioprocessOutputs.MunicpalWaterTankTIC = MunicpalWaterTankTIC;
+            bioprocessOutputs.MunicipalWaterTank =MunicipalWaterTank;
+            bioprocessOutputs.MunicipalWaterTankTIC = MunicipalWaterTankTIC;
             bioprocessOutputs.PotableWaterTank = PotableWaterTank ;
             bioprocessOutputs.PotableWaterTankTIC  = PotableWaterTankTIC;
             bioprocessOutputs.SoftenerSystem = SoftenerSystem;
             bioprocessOutputs.SoftenerSystemTIC  = SoftenerSystemTIC;
             bioprocessOutputs.PotableWaterCooler = PotableWaterCooler;
             bioprocessOutputs.PotableWaterCoolerTIC  = PotableWaterCoolerTIC;
-            bioprocessOutputs.MunipalWaterPump = MunipalWaterPump;
-            bioprocessOutputs.MunipalWaterPumpTIC  = MunipalWaterPumpTIC;
+            bioprocessOutputs.MunicipalWaterPump = MunicipalWaterPump;
+            bioprocessOutputs.MunicipalWaterPumpTIC  = MunicipalWaterPumpTIC;
             bioprocessOutputs.WaterPiping  = WaterPiping;
             bioprocessOutputs.WaterHandlingEquip = WaterHandlingEquip;
             bioprocessOutputs.WaterHandlingTIC= WaterHandlingTIC;
