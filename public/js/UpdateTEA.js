@@ -332,7 +332,7 @@ function bioprocessopexcapex(Input,AV){
     finalTiter  = Input[24];
     fractionOftheoreticalMaximalYield = Input[25]/100;
     turnAroundTime = Input[26];
-    mediaCost = Input[27]/1000;
+    mediaCost = Input[27];
     fermentationTemperature = Input[28];
     dspYield = Input[29]/100;
     dspOPEXfraction = Input[30]/100;
