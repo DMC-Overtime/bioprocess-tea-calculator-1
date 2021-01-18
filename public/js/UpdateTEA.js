@@ -437,7 +437,7 @@ function bioprocessopexcapex(Input,AV){
     averageNH3ConsumptionRate = cumulativeAnnualNH3/annualFermentationUpTime ;// kg/hr
     annualCostOfGlucose = cumulativeAnnualGlucose*(glucoseCost*2.20462);  //year
     annualCostOfNH3 = cumulativeAnnualNH3*(ammoniaCost*2.20462); // $/year
-    annualCostOfMedia = totalAnnualFermWorkingVolume*finalBiomassConcentration*mediaCost/1000; // $/year (media cost input is $/kg, need to divide by 1000 to conver to $/g)
+    annualCostOfMedia = totalAnnualFermWorkingVolume*finalBiomassConcentration*mediaCost/1000; // $/year (media cost input is $/kg, need to divide by 1000 to convert biomass from g to kg )
 
     // Oxygen/Air Requirements & Costs
 
