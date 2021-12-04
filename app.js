@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+//Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose
 const mongoose = require('mongoose');
 const passportSetup = require('./config/passport-setup');
 const keys = require('./config/keys');
@@ -16,6 +17,12 @@ const fastCSV = require('fast-csv');
 
 //register view engine
 const app = express();
+
+//https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction
+//You can add a middleware function to the processing chain for all responses with app.use(), 
+//or for a specific HTTP verb using the associated method: app.get(), app.post(), etc. Routes 
+//are specified in the same way for both cases, though the route is optional when calling app.use().
+
 
 //Set view engine
 app.set('view engine', 'ejs');
@@ -35,7 +42,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Connect to MongoDB & Listen to Port
-mongoose.connect(keys.mongodb.dbURI,{useNewUrlParser: true, useUnifiedTopology: true}).then((result) => app.listen(process.env.PORT || 8000)).catch((err) => console.log(err));
+//PW original:
+//mongoose.connect(keys.mongodb.dbURI,{useNewUrlParser: true, useUnifiedTopology: true}).then((result) => app.listen(process.env.PORT || 8000)).catch((err) => console.log(err));
+//Revised:
+app.listen(process.env.PORT || 8080);
 
 //Middleware static files
 //app.use(express.static('public'));

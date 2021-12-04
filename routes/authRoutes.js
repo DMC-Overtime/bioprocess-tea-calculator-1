@@ -1,5 +1,5 @@
 const express = require('express');
-const authRouter =express.Router();
+const authRouter = express.Router();
 const passport = require('passport');
 
 //const User = require('../models/user');
@@ -15,7 +15,7 @@ authRouter.get('/logout', (req,res) =>{
     res.redirect('/main');
 });
 
-//auth with google
+//PW: originally was auth with google
 authRouter.get('/google', passport.authenticate('google',{
     scope: ['profile','email']})
 );
