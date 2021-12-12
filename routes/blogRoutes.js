@@ -3,15 +3,18 @@ const blogRouter =express.Router();
 const passport = require('passport');
 const Blog = require('../models/blog');
 
-const authCheck = (req,res,next) => {
-    if(!req.user){
-        //executes if the user is not logged in
-        res.redirect('/auth/login');
-    }else {
-        //if logged in
-        next();
-    }
-};
+// const authCheck = (req,res,next) => {
+//     if(!req.user){
+//         //executes if the user is not logged in
+//         res.redirect('/auth/login');
+//     }else {
+//         //if logged in
+//         next();
+//     }
+// };
+
+//PW Short-circuit the login:
+const authCheck = (req,res,next) => {next();}
 
 blogRouter.get('/newblog', authCheck, (req,res) =>{
      res.render('newblog', {user: req.user});

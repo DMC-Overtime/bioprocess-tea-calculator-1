@@ -13,6 +13,7 @@
 
      let myCapexPieChart= document.getElementById("myCapexPieChart1").getContext('2d');
      let myCapexPieChart1 = new Chart(myCapexPieChart, {
+    //  let myCapexPieChart = new Chart(myCapexPieChart, {
         type:'doughnut',
         data:{
             labels:["Main Fermentation ","Seed Fermentation","Primary Cell Removal","Process Utilities","Control Systems","DSP"],

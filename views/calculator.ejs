@@ -17,7 +17,7 @@
             UpdateTEA();
             $('#radios').change(function(){
              //alert('Radio Box has been changed!');
-               vesselSize =  UpdateVesselSize();
+               vesselSize = UpdateVesselSize();
                UpdateTEA();
             });
             $('.price').change(function(){
@@ -309,7 +309,7 @@
             </div>
              <div class="user_tn">
                  <a href="/profile">
-                       <div class="icon"><img src="<%= user.thumbnail %>" width="40" height="40"></div>
+                       <div class="icon"></div>
                   </a>
             </div>
 
@@ -432,9 +432,7 @@
 <br>
 </div>
 <br>
-
-            <form method="POST" action="/calculator/tea_log">
-            <input type="hidden" id="uid" value="<%= user._id %>" name="uid" required>
+            <!--<form method="POST" action="">-->
             <input type="hidden" id="productName"  name="productName"  required>
             <input type="hidden" id="productFormula" name="productFormula" required>
             <input type="hidden" id="productMW" name="productMW"  required>
@@ -625,13 +623,267 @@
             <input type="hidden" id="workingCapital" name="workingCapital"  required>
             <input type="hidden" id="totaCapitalInvestment" name="totaCapitalInvestment"  required>
 
-            <button class="submit" id="saveTEA">Save TEA</button>
-            </form>
+
+            <button class="submit" id="saveTEA">Save TEA as .csv</button>
+            
+            <!--</form>-->
 
 
 <%- include('./partials/nav2.ejs') %>
+</body>
+</html>
 
 <!--Scripts-->
+
+<!--PW This is a new script (Dec 2021) to directly save the results to .csv when the "Save TEA" button is clicked-->
+
+ <script>
+
+   const download = function(data){
+       const blob = new Blob([data],{type: 'text/csv'});
+       var url = URL.createObjectURL(blob);
+       const a = document.createElement('a');
+       a.setAttribute('hidden', '');
+       a.href =url;
+       a.download ='download.csv';
+       document.body.appendChild(a);
+       a.click();
+       document.body.removeChild(a);
+   };
+
+    <!--const exportTEA = async function(){-->
+    const saveTEA = async function(){
+        alert('Export Started');
+        UpdateTEA();
+        <!--const thisProduct = document.getElementById('productName');-->
+        console.log('Export started...');
+
+        const rows = [
+          ["Product Name", document.getElementById('productName').value],
+          ["MSP", document.getElementById('productMSP').innerHTML, "$/kg"],
+          [""],
+          ["Chemistry Outputs"],
+          ["Formula", document.getElementById('productFormula').value],
+          ["Molecular Weight", document.getElementById('productMW').value, "gram/mole"],
+          ["Theoretical Yield", document.getElementById('productTheorYield').value, "gram product/g glucose"],
+          ["NH3 Yield Coefficient", document.getElementById('productYieldCoefficientNH3').value, "gram product/g NH3"],
+          ["O2 Yield Coefficient", document.getElementById('productYieldCoefficientNH3').value, "gram product/g O2"],
+          [""],
+          ["Financial Outputs"],
+          ["Selling Price", document.getElementById('productSellingPrice').value, "$/kg"],
+          ["Total Capital Investment (TCI)", document.getElementById('productTCI').value, "$ Million"],
+          ["NPV", document.getElementById('productNPV').innerHTML, "$"],
+          ["IRR", document.getElementById('productIRR').innerHTML, "Frac"],
+          ["ROI", document.getElementById('productROI').innerHTML, "Frac"],
+          [""],
+          ["Process Outputs"],
+          ["Optimal Plant Capacity", document.getElementById('productOptimalPlantCapacity').value, "kta"],
+          ["OPEX", document.getElementById('productOPEX').innerHTML, "$/kg"],
+          ["CAPEX", document.getElementById('productCAPEX').innerHTML, "$/kg"],
+          ["Overall Process Yield", document.getElementById('productOverallYield').value, "% MOD"],  
+          ["Fermentation Time", document.getElementById('productFermTime').value, "hrs"],
+          ["Specific Rate", document.getElementById('productSpRate').value, "g/gCDW-hr"],
+          ["Final Biomass Levels", document.getElementById('productFinalBiomass').value, "gCDW/L"],
+          ["Maximal Mass Transfer Needed",document.getElementById('productMaxOTR').value, "mmoles O2/L-hr" ],
+          ["Maximal Kla Needed",document.getElementById('productMaxKLA').value, "per sec" ],
+          ["Maximal Cooling Needed",document.getElementById('productMaxCoolingRate').value, "kJ/hr" ],
+          [""],[""],
+          ["Financial Inputs"],
+          ["Selling Price", document.getElementById('productSellingPrice').value, "$/kg"],
+          ["Target Margin", document.getElementById('productMargin').value, "%"],
+          ["Payback Period", document.getElementById('productPaybackPeriod').value, "years"],
+          ["Discount Rate", document.getElementById('productDiscountRate').value, "%"],
+          ["Tax Rate", document.getElementById('productTaxRate').value, "%"],
+          ["Percent Debt Financed", document.getElementById('productPercentDebtFinanced').value, "%"],
+          ["Debt Interest Rate", document.getElementById('productDebtInterestRate').value, "%"],
+          ["Loan Term", document.getElementById('productLoanTerm').value, "years"],
+          [""],
+          ["Process Inputs"],
+          ["Annual Uptime", document.getElementById('productAnnualUptime').value, "%"],
+          ["Batches On-Spec", document.getElementById('productBatchOnSpec').value, "%"],
+          ["Main Fermenter Size", document.getElementById('productVesselSize').value, "Liters"],
+          ["Working Volume Fraction", "0.85", "Fraction of fermenter volume"],
+          [""],
+          ["Raw Materials"],
+          ["Glucose Costs", document.getElementById('productGlucoseCost').value, "$/lb"],
+          ["Ammonia Costs", document.getElementById('productAmmoniaCost').value, "$/lb"],
+          ["Natural Gas Costs", document.getElementById('productNaturalGasCost').value, "$/MMBtu"],
+          ["Electricity Costs", document.getElementById('productElectricityCost').value, "$/KWh"],
+          ["CEPCI", document.getElementById('productCEPCI').value, "cost units"],
+          [""],
+          ["Fermentation Inputs"],
+          ["Average Volumetric Rate", document.getElementById('productAveVolumtericRate').value, "g/L-hr"],
+          ["Titer", document.getElementById('productTiter').value, "g/L"],
+          ["Fermentation Yield", document.getElementById('productYield').value, "% of Theoretical"],
+          ["Titer", document.getElementById('productTiter').value, "g/L"],
+          ["Turnaround Time", document.getElementById('productTurnaroundTime').value, "hrs"],
+          ["Media Cost", document.getElementById('productMediaCost').value, "$/kgCDW"],
+          ["Temperature", document.getElementById('productTemperature').value, "degrees Celsius"],
+          [""],
+          ["Downstream Purification Inputs"],
+          ["Percent of OPEX allocated for DSP ", document.getElementById('productDspPercentofOpex').value, "%"],
+          ["Percent of CAPEX allocated  for DSP ", document.getElementById('productDspPercentofCapex').value, "%"],
+          ["Titer", document.getElementById('productTiter').value, "g/L"],
+          ["Turnaround Time", document.getElementById('productTurnaroundTime').value, "hrs"],
+          ["Media Cost", document.getElementById('productMediaCost').value, "$/kgCDW"],
+          ["Temperature", document.getElementById('productTemperature').value, "degrees Celsius"],
+          [""],[""],
+          ["Fermentation Time Course "],
+          ["Time (hours)",document.getElementById('productFermTimeCourseTime').value ],
+          ["Biomass (gCDW/L)",document.getElementById('productFermTimeCourseBiomass').value ],
+          ["Product Titer (g/L)", document.getElementById('productFermTimeCourseProductTiter').value ],
+          [""],[""],
+          ["Pro Forma "],
+          ["Time (years)",document.getElementById('productProFormaTime').value ],
+          ["Revenue ($)",document.getElementById('productProFormaRevenue').value ],
+          ["COGS ($)", document.getElementById('productProFormaCOGS').value ],
+          ["Depreciation ($)", document.getElementById('productProFormaDepreciation').value ],
+          ["EBITDA ($)",document.getElementById('productProFormaEBITDA').value ],
+          ["EBIT ($)",document.getElementById('productProFormaEBIT').value ],
+          ["Loan Principal ($)",document.getElementById('productProFormaPrincipal').value ],
+          ["Loan Interest ($)",document.getElementById('productProFormaInterest').value ],
+          ["Taxes ($)",document.getElementById('productProFormaTaxes').value ],
+          ["Net Income ($)",document.getElementById('productProFormaNetIncome').value ],
+          ["Net Cash Flow ($)",document.getElementById('productProFormaNetCashFlow').value ],
+          ["Cumulative Cash Flow ($)",document.getElementById('productProFormaCumCashFlow').value ],
+          [""],[""],
+          ["Capital Cost BreakDown by Area  "],
+          [""],[""],
+          ["Main Fermentation","Equipment: ", document.getElementById('MainFermAreaEquip').value,"Total Installed Costs (TIC): ", document.getElementById('MainFermAreaTIC').value ],
+          ["Production Tanks"],
+          ["","Equipment", "Cost","Total Installed Costs (TIC)"],
+          ["","Production Fermenters :", "", document.getElementById('fermenterCost').value,"", document.getElementById('fermenterTIC').value ],
+          ["","Agitators :", "", document.getElementById('fermenterAgitatorCost').value,"", document.getElementById('fermenterAgitatorTIC').value ],
+          ["","Transfer Pumps :", "", document.getElementById('FermTransferPumpsCost').value,"", document.getElementById('FermTransferPumpsTIC').value ],
+          ["","Piping :", "NA","", document.getElementById('mainFermPiping').value ],
+          ["","Total for Production Tanks:", "", document.getElementById('mainFermTanksEquip').value,"", document.getElementById('mainFermTanksTIC').value ],
+          ["Glucose Storage"],
+          ["","Equipment", "Cost","Total Installed Costs (TIC)"],
+          ["","Tank :", "", document.getElementById('glucoseStorageTankCost').value,"", document.getElementById('glucoseStorageTankTIC').value ],
+          ["","Transfer Pumps :", "", document.getElementById('glucoseStorageTransferPumpsCost').value,"", document.getElementById('glucoseStorageTransferPumpsTIC').value ],
+          ["","Piping :", "NA","", document.getElementById('glucoseStoragepiping').value ],
+          ["","Total for Glucose Storage:", "", document.getElementById('glucoseStorageEquip').value,"", document.getElementById('glucoseStorageTIC').value ],
+          ["Acid/Base(NH3) Storage & Delivery"],
+          ["","Equipment", "Cost","Total Installed Costs (TIC)"],
+          ["","Acid Tank :", "", document.getElementById('acidStorageTankCost').value,"", document.getElementById('acidStorageTankTIC').value ],
+          ["","Base Tank :", "", document.getElementById('ammoniaStorageTankCost').value,"", document.getElementById('ammoniaStorageTankTIC').value ],
+          ["","Acid Transfer Pump :", "", document.getElementById('acidTransferPumpsCost').value,"", document.getElementById('acidTransferPumpsCostTIC').value ],
+          ["","Base Transfer Pump :", "", document.getElementById('ammoniaTransferPumpsCost').value,"", document.getElementById('ammoniaTransferPumpsCostTIC').value ],
+          ["","Piping :", "NA","", document.getElementById('additionPiping').value ],
+          ["","Total for Acid/Base Storage & Delivery:", "", document.getElementById('additionsEquip').value,"", document.getElementById('additionsTIC').value ],
+          ["Media Preparation"],
+          ["","Equipment", "Cost","Total Installed Costs (TIC)"],
+          ["","Agitated Tank :", "", document.getElementById('agitatedMediaPrepTankCost').value,"", document.getElementById('agitatedMediaPrepTankTIC').value ],
+          ["","Transfer Pumps :", "", document.getElementById('mediaTransferPumpsCost').value,"", document.getElementById('mediaTransferPumpsCostTIC').value ],
+          ["","Heat Exchanger:", "", document.getElementById('MediaHeatExchanger').value,"", document.getElementById('MediaHeatExchangerTIC').value ],
+          ["","Piping :", "NA","", document.getElementById('mediaPiping').value ],
+          ["","Dry Chemical Skid :", "", document.getElementById('DryChemicalAdditionSkid').value,"", document.getElementById('DryChemicalAdditionSkidTIC').value ],
+          ["","Total for Media Preparation:", "", document.getElementById('mediaPrepEquip').value,"", document.getElementById('mediaPrepTIC').value ],
+          ["Clean in Place (CIP)"],
+          ["","Equipment", "Cost","Total Installed Costs (TIC)"],
+          ["","Tanks :", "", document.getElementById('CIPTankCost').value,"", document.getElementById('CIPTankTIC').value ],
+          ["","Transfer Pumps :", "", document.getElementById('CIPTransferPumpsCost').value,"", document.getElementById('CIPTransferPumpsCostTIC').value ],
+          ["","Filters:", "", document.getElementById('CIPFilterCost').value,"", document.getElementById('CIPFilterCostTIC').value ],
+          ["","Heater:", "", document.getElementById('CIPHeaterCost').value,"", document.getElementById('CIPHeaterCostTIC').value ],
+          ["","Piping :", "NA","", document.getElementById('CIPpipingTIC').value ],
+          ["","Total for CIP:", "", document.getElementById('CIPEquip').value,"", document.getElementById('CIPTIC').value ],
+          [""],[""],
+          ["Seed Fermentation","Equipment: ", document.getElementById('seedEquipment').value,"Total Installed Costs (TIC): ", document.getElementById('seedEquipmentTIC').value ],
+          [""],[""],
+          ["Primary Cell Removal:","Equipment: ", document.getElementById('PrimaryCellRemovalEquip').value,"Total Installed Costs (TIC): ", document.getElementById('PrimaryCellRemovalTIC').value ],
+          ["Centrifugation"],
+          ["","Equipment", "Cost","Total Installed Costs (TIC)"],
+          ["","Centrifuges:", "", document.getElementById('CentrifugeCost').value,"", document.getElementById('CentrifugeTIC').value ],
+          ["","Piping :", "NA","", document.getElementById('Centrifugepiping').value ],
+          ["","Total for Centrifuges:", "", document.getElementById('CentrifugeEquip').value,"", document.getElementById('CentrifugeEquipTIC').value ],
+          ["Broth Storage"],
+          ["","Equipment", "Cost","Total Installed Costs (TIC)"],
+          ["","Tanks:", "", document.getElementById('brothStorageTankCost').value,"", document.getElementById('brothStorageTankTIC').value ],
+          ["","Transfer Pumps:", "", document.getElementById('brothStorageTransferPumpCost').value,"", document.getElementById('brothStorageTransferPumpTIC').value ],
+          ["","Piping :", "NA","", document.getElementById('brothStoragePiping').value ],
+          ["","Total for Broth Storage:", "", document.getElementById('brothStorageEquip').value,"", document.getElementById('brothStorageTIC').value ],
+          [""],[""],
+          ["Process Utilities:","Equipment: ", document.getElementById('processUtilitiesEquip').value,"Total Installed Costs (TIC): ", document.getElementById('processUtilitiesTIC').value ],
+          ["Cooling"],
+          ["","Equipment", "Cost","Total Installed Costs (TIC)"],
+          ["","Cooling Tower:", "", document.getElementById('coolingTowerEquip').value,"", document.getElementById('coolingTowerTIC').value ],
+          ["","Pumps :", "", document.getElementById('coolingTowerPumps').value ,"", document.getElementById('coolingTowerPumpsTIC').value ],
+          ["","Piping :", "NA","", document.getElementById('coolingTowerPiping').value ],
+          ["","Total for Cooling:", "", document.getElementById('coolingEquip').value,"", document.getElementById('coolingTIC').value ],
+          ["Boiler/Steam"],
+          ["","Equipment", "Cost","Total Installed Costs (TIC)"],
+          ["","Boiler Package:", "", document.getElementById('BoilerPackageCosts').value,"", document.getElementById('BoilerPackageTIC').value ],
+          ["Air Handling"],
+          ["","Equipment", "Cost","Total Installed Costs (TIC)"],
+          ["","Air Dryer:", "", document.getElementById('AirDryer').value,"", document.getElementById('AirDryingTIC').value ],
+          ["","Air Compressor :", "", document.getElementById('AirCompressor').value ,"", document.getElementById('AirCompressorTIC').value ],
+          ["","Air Receiver :", "", document.getElementById('AirReceiver').value ,"", document.getElementById('AirReceiverTIC').value ],
+          ["","Piping :", "NA","", document.getElementById('AirPiping').value ],
+          ["","Total for Air Handling:", "", document.getElementById('AirHandlingEquip').value,"", document.getElementById('AirHandlingTIC').value ],
+          ["Water Supply"],
+          ["","Equipment", "Cost","Total Installed Costs (TIC)"],
+          ["","Municpal Water Tank:", "", document.getElementById('MunicipalWaterTank').value,"", document.getElementById('MunicipalWaterTankTIC').value ],
+          ["","Softener System:", "", document.getElementById('SoftenerSystem').value,"", document.getElementById('SoftenerSystemTIC').value ],
+          ["","Potable Water Tank :", "", document.getElementById('PotableWaterTank').value ,"", document.getElementById('PotableWaterTankTIC').value ],
+          ["","Potable Water Cooler:", "", document.getElementById('PotableWaterCooler').value,"", document.getElementById('PotableWaterCoolerTIC').value ],
+          ["","Pumps :", "", document.getElementById('MunicipalWaterPump').value ,"", document.getElementById('MunicipalWaterPumpTIC').value ],
+          ["","Piping :", "NA","", document.getElementById('WaterPiping').value ],
+          ["","Total for Water Supply:", "", document.getElementById('WaterHandlingEquip').value,"", document.getElementById('WaterHandlingTIC').value ],
+          ["Waste Water Pretreatment"],
+          ["","Equipment", "Cost","Total Installed Costs (TIC)"],
+          ["","Tank:", "", document.getElementById('WasteWaterTank').value,"", document.getElementById('WasteWaterTankTIC').value ],
+          ["","Heat Exchanger:", "", document.getElementById('HeatKillExchanger').value,"", document.getElementById('HeatKillExchangerTIC').value ],
+          ["","Pumps :", "", document.getElementById('WasteWaterPump').value ,"", document.getElementById('WasteWaterPumpTIC').value ],
+          ["","Piping :", "NA","", document.getElementById('WasteWaterPiping').value ],
+          ["","Total for Waste Water Pretreatment:", "", document.getElementById('WasteWaterEquip').value,"", document.getElementById('WasteWaterTIC').value ],
+          [""],[""],
+          ["Control Systems:","Total Installed Costs (TIC): ", document.getElementById('controlSystems').value ],
+          [""],[""],
+          ["Downstream Purification:","Total Installed Costs (TIC): ", document.getElementById('dspTIC').value ],
+          [""],[""],
+          ["Direct Costs"],
+          ["Total Installed Equipment Costs :","", document.getElementById('totalInstalledEquipmentCost').value ],
+          ["Warehousing :","", document.getElementById('warehousing').value ],
+          ["Administrative Buildings :","", document.getElementById('administrativeBuildings').value ],
+          ["Site Development :","", document.getElementById('siteDevelopment').value ],
+          ["Total Direct Costs :","", document.getElementById('totalDirectCost').value ],
+          [""],[""],
+          ["Indirect Costs"],
+          ["HomeOffice :","", document.getElementById('HomeOffice').value ],
+          ["Prorateable Expenses :","", document.getElementById('prorateableExpenses').value ],
+          ["Field Expenses :","", document.getElementById('fieldExpenses').value ],
+          ["Project Contingency:","", document.getElementById('projectContingency').value ],
+          ["Other Start Up Costs:","", document.getElementById('otherStartupCosts').value ],
+          ["Total Indirect Costs:","", document.getElementById('totalIndirectCosts').value ],
+          [""],[""],
+          ["Fixed Capital Investment (FCI) :","", document.getElementById('fixedCapitalInvestment').value ],
+          ["Working Capital (WC) :","", document.getElementById('workingCapital').value ],
+          ["Total Capital Investment (TCI) :","", document.getElementById('totaCapitalInvestment').value ],      
+    
+
+        ];
+
+        let csvContent =[];
+        rows.forEach(function(rowArray) {
+            let row = rowArray.join(",");
+            csvContent += row + "\r\n";
+        });
+    
+        download(csvContent);
+    };
+
+    //main app
+    (function(){
+    //button click
+       const saveTEAButton = document.getElementById('saveTEA');
+       saveTEAButton.addEventListener('click', saveTEA);
+       })();
+
+ </script>
+
+
+<!--PW end new script -->
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
@@ -653,7 +905,7 @@
   <script src="/js/ProFormaChart.js"></script>
   <script src="/js/OpexPieChart.js"></script>
   <script src="/js/CapexPieChart1.js"></script>
-   <script src="/js/UpdateTEA.js"></script>
+  <script src="/js/UpdateTEA.js"></script>
   <!-- Dynamic Scripts for Process Inputs-->
 
 <script>
@@ -705,18 +957,17 @@ function UpdateVesselSize(){
        }
 </script>
 
- <script>
-    const saveTEA = async function(){
-        alert('Saving');
-    };
-    //main app
-    (function(){
-    //button click
-       const saveTEAButton = document.getElementById('saveTEA');
-       saveTEAButton.addEventListener('click', saveTEA);
-       })();
+<script>
+ <!--   const saveTEA = async function(){-->
+ <!--       alert('Saving =D');-->
+ <!--   };-->
+    
+<!--//main app-->
+<!--(function(){-->
+<!--    //button click-->
+<!--   const saveTEAButton = document.getElementById('saveTEA');-->
+<!--   saveTEAButton.addEventListener('click', saveTEA);-->
+<!--})();-->
+ 
+</script>
 
- </script>
-
-</body>
-</html>

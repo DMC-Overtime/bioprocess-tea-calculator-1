@@ -10,10 +10,10 @@ function UpdateTEA(){
 //          25-Yield,                     26-turnaroundTime,    27-mediaCost              28-Temperature,         29-overallDSPYield,
 //          30-dspPercentofOpex,          31-dspPercentofCapex ];
 
-slider = [];
-pageInput=[];
-Input = [];
-pageInput =[];
+var slider = [];
+var pageInput=[];
+var Input = [];
+var pageInput =[];
 
 //Update Vessel Size  & Associated Page Outputs
 vesselSize =  UpdateVesselSize();
