@@ -410,7 +410,7 @@
 
 
         <div class ="item2" id ="myOpexdiv">
-                <h3>OPEX Breakdown</h3>
+                <h3>OPEX Breakdown, $/kg</h3>
                 <div class=output">
                 <canvas id="myOpexPieChart"></canvas>
                 </div>
@@ -623,7 +623,20 @@
             <input type="hidden" id="workingCapital" name="workingCapital"  required>
             <input type="hidden" id="totaCapitalInvestment" name="totaCapitalInvestment"  required>
 
-
+            <!--PW - New outputs for .csv, added Dec2021 per Rusty's request-->
+            <input type="hidden" id="opexperkg" name="opexperkg"  required>
+            <input type="hidden" id="costOfGlucoseperkg" name="costOfGlucoseperkg"  required>
+            <input type="hidden" id="costOfAmmoniaperkg" name="costOfAmmoniaperkg"  required>
+            <input type="hidden" id="costOfMediaperkg" name="costOfMediaperkg"  required>
+            <input type="hidden" id="costOfAerationperkg" name="costOfAerationperkg"  required>
+            <input type="hidden" id="costOfCoolingperkg" name="costOfCoolingperkg"  required>
+            <input type="hidden" id="costOfBiomassDisposalperkg" name="costOfBiomassDisposalperkg"  required>
+            <input type="hidden" id="costOfSterilizationperkg" name="costOfSterilizationperkg"  required>
+            <input type="hidden" id="costOfLaborperkg" name="costOfLaborperkg"  required>
+            <input type="hidden" id="costOfCentrifugationperkg" name="costOfCentrifugationperkg"  required>
+            <input type="hidden" id="otherFixedCostsperkg" name="otherFixedCostsperkg"  required>
+            <input type="hidden" id="dspOPEXperkg" name="dspOPEXperkg"  required>
+            
             <button class="submit" id="saveTEA">Save TEA as .csv</button>
             
             <!--</form>-->
@@ -660,7 +673,7 @@
 
         const rows = [
           ["Product Name", document.getElementById('productName').value],
-          ["MSP", document.getElementById('productMSP').innerHTML, "$/kg"],
+          ["MSP", document.getElementById('productMSP').value, "$/kg"],
           [""],
           ["Chemistry Outputs"],
           ["Formula", document.getElementById('productFormula').value],
@@ -672,14 +685,14 @@
           ["Financial Outputs"],
           ["Selling Price", document.getElementById('productSellingPrice').value, "$/kg"],
           ["Total Capital Investment (TCI)", document.getElementById('productTCI').value, "$ Million"],
-          ["NPV", document.getElementById('productNPV').innerHTML, "$"],
-          ["IRR", document.getElementById('productIRR').innerHTML, "Frac"],
-          ["ROI", document.getElementById('productROI').innerHTML, "Frac"],
+          ["NPV", document.getElementById('productNPV').value, "$"],
+          ["IRR", document.getElementById('productIRR').value, "Frac"],
+          ["ROI", document.getElementById('productROI').value, "Frac"],
           [""],
           ["Process Outputs"],
           ["Optimal Plant Capacity", document.getElementById('productOptimalPlantCapacity').value, "kta"],
-          ["OPEX", document.getElementById('productOPEX').innerHTML, "$/kg"],
-          ["CAPEX", document.getElementById('productCAPEX').innerHTML, "$/kg"],
+          ["OPEX", document.getElementById('productOPEX').value, "$/kg"],
+          ["CAPEX", document.getElementById('productCAPEX').value, "$/kg"],
           ["Overall Process Yield", document.getElementById('productOverallYield').value, "% MOD"],  
           ["Fermentation Time", document.getElementById('productFermTime').value, "hrs"],
           ["Specific Rate", document.getElementById('productSpRate').value, "g/gCDW-hr"],
@@ -859,7 +872,20 @@
           ["Fixed Capital Investment (FCI) :","", document.getElementById('fixedCapitalInvestment').value ],
           ["Working Capital (WC) :","", document.getElementById('workingCapital').value ],
           ["Total Capital Investment (TCI) :","", document.getElementById('totaCapitalInvestment').value ],      
-    
+        [""],[""],
+        ["Opex Breakdown, in $/kg"],
+        ["Glucose (DE95)", "", document.getElementById('costOfGlucoseperkg').value],
+        ["Ammonia", "", document.getElementById('costOfAmmoniaperkg').value],
+        ["Media", "", document.getElementById('costOfMediaperkg').value],
+        ["Aeration", "", document.getElementById('costOfAerationperkg').value],
+        ["Cooling", "", document.getElementById('costOfCoolingperkg').value],
+        ["Biomass disposal", "", document.getElementById('costOfBiomassDisposalperkg').value],
+        ["Sterilization", "", document.getElementById('costOfSterilizationperkg').value ],
+        ["Centrifugation", "", document.getElementById('costOfCentrifugationperkg').value ],
+        ["DSP", "", document.getElementById('dspOPEXperkg').value ],
+        ["Labor", "", document.getElementById('costOfLaborperkg').value], 
+        ["Other Fixed Costs", "", document.getElementById('otherFixedCostsperkg').value],
+        ["Total OPEX per kg", "", document.getElementById('opexperkg').value],
 
         ];
 

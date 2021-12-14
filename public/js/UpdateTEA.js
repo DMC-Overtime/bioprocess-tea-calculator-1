@@ -300,6 +300,21 @@ document.getElementById("sellingPrice2").innerHTML =Input[7];
       document.getElementById('totaCapitalInvestment').value =(bioprocessOutputs.totaCapitalInvestment).toFixed(2);
       document.getElementById('bioprocessoutputsTIC').innerHTML = (bioprocessOutputs.totalInstalledEquipmentCost).toFixed(0);
 
+    //PW New December 2021, per Rusty's request
+    document.getElementById('opexperkg').value =(bioprocessOutputs.opexperkg).toFixed(5);
+    document.getElementById('costOfGlucoseperkg').value =(bioprocessOutputs.costOfGlucoseperkg).toFixed(5);
+    document.getElementById('costOfAmmoniaperkg').value =(bioprocessOutputs.costOfAmmoniaperkg).toFixed(5);
+    document.getElementById('costOfMediaperkg').value =(bioprocessOutputs.costOfMediaperkg).toFixed(5);
+    document.getElementById('costOfAerationperkg').value =(bioprocessOutputs.costOfAerationperkg).toFixed(5);
+    document.getElementById('costOfCoolingperkg').value =(bioprocessOutputs.costOfCoolingperkg).toFixed(5);
+    document.getElementById('costOfBiomassDisposalperkg').value =(bioprocessOutputs.costOfBiomassDisposalperkg).toFixed(5);
+    document.getElementById('costOfSterilizationperkg').value =(bioprocessOutputs.costOfSterilizationperkg).toFixed(5);
+    document.getElementById('costOfLaborperkg').value =(bioprocessOutputs.costOfLaborperkg).toFixed(5);
+    document.getElementById('costOfCentrifugationperkg').value =(bioprocessOutputs.costOfCentrifugationperkg).toFixed(5);
+    document.getElementById('otherFixedCostsperkg').value =(bioprocessOutputs.otherFixedCostsperkg).toFixed(5);
+    document.getElementById('dspOPEXperkg').value =(bioprocessOutputs.dspOPEXperkg).toFixed(5);
+
+
 
 }
 function bioprocessopexcapex(Input,AV){
@@ -818,6 +833,7 @@ AVC = advancedVariablesCapital();
     costOfSterilizationperkg = annualCostOfSterilization/plantCapacity;
     costOfLaborperkg = annualLaborCosts/plantCapacity;
     otherFixedCostsperkg =  annualAdditionalFixedCosts/plantCapacity;
+    costOfCentrifugationperkg = annualCostOfCentrifugation/plantCapacity;
     dspOPEXperkg = dspOPEXfraction*opexperkg;
 
 
@@ -854,6 +870,7 @@ AVC = advancedVariablesCapital();
     bioprocessOutputs.costOfSterilizationperkg =costOfSterilizationperkg;
     bioprocessOutputs.costOfLaborperkg =costOfLaborperkg;
     bioprocessOutputs.otherFixedCostsperkg =otherFixedCostsperkg;
+    bioprocessOutputs.costOfCentrifugationperkg =costOfCentrifugationperkg;
     bioprocessOutputs.dspOPEXperkg = dspOPEXperkg ;
 
 // CAPEX Outputs
